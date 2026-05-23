@@ -598,5 +598,386 @@ const routes = [
         soundscape: { name: "山脊孤风", search: "mountain ridge wind solitude" },
         coords: { lon: 114.13, lat: 38.04 },
         lastUpdated: "2026-05-09"
+    },
+
+    /* ===========================================================
+       五岳 · 远望志(type: remote)
+       与古人同游的文化拜谒,chronicle 字段记录历代登临
+       =========================================================== */
+    {
+        id: 10,
+        name: "东岳泰山",
+        region: "wuyue",
+        type: "remote",
+        location: "山东 · 泰安",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 9 km(红门—南天门—玉皇顶)",
+        elevation: "海拔 1545 m",
+        bestSeason: "春秋(避盛夏暴雨)",
+        seasonTags: ["spring", "autumn"],
+        theme: { sky: ["#f5d8a8", "#d4a878"], far: "#7a6850", mid: "#5a4838", near: "#2a2018", accent: "ridge", sun: "sunrise", primary: "#7a4f2c", soft: "#f0e0c8" },
+        ratings: { stamina: 3, technical: 1, exposure: 2, retreat: 5, signal: 5 },
+        techGrade: "T1",
+        epithet: "五岳独尊",
+        poem: {
+            title: "望岳",
+            author: "杜甫",
+            dynasty: "唐 · 开元二十四年(736)",
+            lines: ["岱宗夫如何", "齐鲁青未了", "造化钟神秀", "阴阳割昏晓", "荡胸生曾云", "决眦入归鸟", "会当凌绝顶", "一览众山小"],
+            note: "杜甫二十四岁游齐赵望岳而作。'会当凌绝顶'一句千载之下犹烈,中国少年精神之绝唱。"
+        },
+        description: "五岳之首,中华民族精神图腾。自秦汉以来七十二代帝王封禅于此,无数文人写过它。它不只是山,是中国人心里那座必须登的山。",
+        features: [
+            "中国第一座入选世界双遗产的名山(1987)",
+            "七十二帝王封禅地 · 自秦皇汉武至宋真宗",
+            "孔子'登泰山而小天下' · 杜甫'会当凌绝顶'",
+            "石刻博物馆:历代摩崖石刻 1800 余处",
+            "看日出有'十回九不见'之说,反更动人"
+        ],
+        chronicle: [
+            { year: "约前 500", dynasty: "春秋", person: "孔子",   event: "登泰山",                   legacy: "「登东山而小鲁,登泰山而小天下」 · 君子格局之始" },
+            { year: "前 219",   dynasty: "秦",   person: "秦始皇", event: "首次封禅泰山",              legacy: "立无字碑 · 焚书前最后一道光" },
+            { year: "前 110",   dynasty: "汉",   person: "汉武帝", event: "登泰山八次封禅",            legacy: "高呼万岁三声,山亦三应,'万岁山'之名始此" },
+            { year: "736",      dynasty: "唐",   person: "杜甫",   event: "二十四岁游齐赵望岳",        legacy: "《望岳》「会当凌绝顶,一览众山小」" },
+            { year: "742",      dynasty: "唐",   person: "李白",   event: "登泰山六首",                legacy: "「天门一长啸,万里清风来」 · 道家飞升之姿" },
+            { year: "1009",     dynasty: "宋",   person: "宋真宗", event: "封禅泰山",                  legacy: "最后一位封禅的帝王,此后再无人配登" },
+            { year: "1684",     dynasty: "清",   person: "康熙",   event: "御驾登山",                  legacy: "题「云峰」二字立于碑亭" },
+            { year: "1748",     dynasty: "清",   person: "乾隆",   event: "十次登泰山",                legacy: "题字一百三十余处 · 文人皇帝的执念" }
+        ],
+        waypoints: [
+            { time: "05:00", name: "红门宫起步", elev: "230m", scene: "🌌", vista: "天未明,松柏含露,香客与登山者同行", note: "传统登山起点" },
+            { time: "06:30", name: "斗母宫·经石峪", elev: "400m", scene: "📜", vista: "北齐《金刚经》摩崖,字大如斗", note: "中华大字鼻祖" },
+            { time: "08:00", name: "中天门", elev: "847m", scene: "🛕", vista: "上下分界,可乘缆车亦可徒步", note: "可选缆车节力" },
+            { time: "10:00", name: "十八盘·南天门", elev: "1460m", scene: "🪜", vista: "石阶 1600 余级直插云霄,陡如登天", note: "泰山精魂所在" },
+            { time: "11:00", name: "天街", elev: "1480m", scene: "🏯", vista: "云中市集,客栈酒幡随风", note: "可午餐补给" },
+            { time: "12:00", name: "玉皇顶", elev: "1545m", scene: "🌄", vista: "极顶刻'五岳独尊',望齐鲁苍茫", note: "登顶 · 默念望岳一遍" }
+        ],
+        hiddenSpots: [
+            "经石峪《金刚经》摩崖,清晨无人时最有禅意",
+            "南天门夜宿(住天街客栈)看星空+日出,记得带羽绒服",
+            "孔子登临处·望吴圣迹,大多数游客错过的孔子专属角落"
+        ],
+        photography: "南天门下十八盘逆光剪影最具张力;玉皇顶日出抢机位,4:30 就要占位。",
+        food: "泰山豆腐宴、赤鳞鱼、煎饼卷大葱、女儿茶。",
+        cuisine: {
+            tagline: "封禅之山,饮食极简,与岱宗素朴相应",
+            signature: { name: "泰山豆腐宴", icon: "🥢", price: "¥80-180", desc: "源自秦汉宫廷,泰山水做豆腐细如脂、白如玉。乾隆赞:'吃豆腐脑,润玉皇顶'" },
+            snack:     { name: "煎饼卷大葱", icon: "🌯", price: "¥10", desc: "山东登山者的'压缩饼干',粗粮、抗饿、轻便。一卷在手,登顶不愁" },
+            drink:     { name: "泰山女儿茶", icon: "🍵", price: "¥30/壶", desc: "泰山高山黄精嫩芽,清苦回甘,似饮山色一杯" },
+            shop:      "推荐:天街·神憩宾馆素斋 / 红门路·泰安老豆腐",
+            seasonal:  { spring: "春宜:山菇豆腐汤 + 香椿煎饼", autumn: "秋宜:泰山栗子粥 + 赤鳞鱼汤" },
+            tea:       "宜配:女儿茶清饮,登顶后一杯,胸中再生一回风云",
+            verse:     "「岱宗夫如何,齐鲁青未了」 — 望岳之初,先有一茶"
+        },
+        route: "红门 → 中天门 → 南天门 → 玉皇顶",
+        access: "石家庄至泰安高铁约 2 小时,泰山站打车至红门 15 分钟。",
+        tips: "盛夏多雷雨勿夜登;冬季有冰阶需冰爪。门票淡 100 / 旺 115。",
+        gear: ["登山鞋", "充足饮水", "头灯(若夜登)", "羽绒服(山顶低温)", "雨衣"],
+        emergency: { local: "泰山景区 0538-9669388", rescue: "泰山救援 0538-8066114", general: "110 / 120" },
+        gpxNote: "全程石阶有标识,但岔路繁多,建议下载两步路'泰山经典线'。",
+        soundscape: { name: "封禅古风·松涛", search: "taishan ancient wind pine" },
+        coords: { lon: 117.13, lat: 36.25 },
+        lastUpdated: "2026-05-23"
+    },
+
+    {
+        id: 11,
+        name: "西岳华山",
+        region: "wuyue",
+        type: "remote",
+        location: "陕西 · 渭南",
+        difficulty: "hard", difficultyLabel: "困难",
+        duration: "full", durationLabel: "一日",
+        distance: "约 12 km(玉泉院—北峰—南峰)",
+        elevation: "海拔 2160 m",
+        bestSeason: "春秋",
+        seasonTags: ["spring", "autumn"],
+        theme: { sky: ["#dceaf0", "#a8c8d8"], far: "#7080a0", mid: "#4a5878", near: "#1a2030", accent: "ridge", sun: "noon", primary: "#3e4a6e", soft: "#e0e8f0" },
+        ratings: { stamina: 5, technical: 4, exposure: 5, retreat: 2, signal: 4 },
+        techGrade: "T4",
+        epithet: "奇险天下第一",
+        poem: {
+            title: "咏华山",
+            author: "寇准(七岁作)",
+            dynasty: "宋",
+            lines: ["只有天在上", "更无山与齐", "举头红日近", "回首白云低"],
+            note: "宋相寇准七岁登华山口占,'举头红日近'已见王相之器。中国童诗第一神品。"
+        },
+        description: "五岳最险,自古一条道,长空栈道、鹞子翻身闻名天下。道教全真派祖庭,陈抟、王重阳俱在此修真。",
+        features: [
+            "中国最险五岳,登顶有铁链可拽",
+            "长空栈道:挂壁 30 cm 木板,下临千仞",
+            "鹞子翻身:近垂直岩壁,需手脚并用",
+            "金庸笔下'华山论剑'原型出处",
+            "可夜爬看日出,'自古华山一条道'"
+        ],
+        chronicle: [
+            { year: "约前 600", dynasty: "周",   person: "老子",     event: "西出函谷,传为登华山静修",       legacy: "「道法自然」 · 道教之源" },
+            { year: "759",      dynasty: "唐",   person: "李白",     event: "登华山",                        legacy: "「西上太白峰,夕阳穷登攀」 · 仙人之姿" },
+            { year: "约 900",   dynasty: "五代", person: "陈抟",     event: "隐居华山修道四十年",             legacy: "睡仙陈抟,留《无极图》《先天图》" },
+            { year: "约 985",   dynasty: "宋",   person: "寇准",     event: "七岁随父登华山口占",             legacy: "《咏华山》 · 中国童诗神品" },
+            { year: "1167",     dynasty: "金",   person: "王重阳",   event: "华山论道",                       legacy: "全真教初祖,武侠'华山论剑'原型" },
+            { year: "约 803",   dynasty: "唐",   person: "韩愈",     event: "登华山苍龙岭",                   legacy: "脊薄如刀,韩愈痛哭遗书,后人传为笑谈" },
+            { year: "1748",     dynasty: "清",   person: "袁枚",     event: "登华山记长空栈道",               legacy: "《随园诗话》记其'步步皆险,心胆俱裂'" }
+        ],
+        waypoints: [
+            { time: "03:00", name: "玉泉院起步", elev: "400m", scene: "🌃", vista: "夜爬出发,头灯如星,'自古华山一条道'", note: "夜爬不烈日,推荐" },
+            { time: "06:00", name: "北峰云台", elev: "1614m", scene: "🌄", vista: "日出第一观,云海漫顶,峰如孤台", note: "看日出最佳" },
+            { time: "08:00", name: "苍龙岭", elev: "1850m", scene: "🐉", vista: "脊薄如刀,两侧深谷,韩愈痛哭处", note: "曾让韩愈写下绝命书" },
+            { time: "10:00", name: "金锁关·东峰", elev: "2100m", scene: "🔒", vista: "万千锁挂石栏,情侣山盟", note: "可下鹞子翻身去下棋亭" },
+            { time: "11:30", name: "南峰长空栈道", elev: "2160m", scene: "🪵", vista: "脚下千仞绝壁,身侧悬空栈板", note: "全程系扣,谨慎" },
+            { time: "13:00", name: "西峰莲花", elev: "2080m", scene: "🌸", vista: "巨石如莲瓣,沉香救母传说处", note: "可缆车下山" }
+        ],
+        hiddenSpots: [
+            "陈抟睡洞·北峰东侧,半小时无人徒步",
+            "下棋亭·鹞子翻身后绝壁悬棋盘,赵匡胤输华山典故",
+            "东峰看日出比北峰更孤绝,但需夜宿东峰宾馆"
+        ],
+        photography: "长空栈道挂壁人像、苍龙岭脊背剪影、西峰巨石压顶——华山是用广角镜的山。",
+        food: "陕西凉皮、肉夹馍、华山酸辣粉、岩耳鸡汤。",
+        cuisine: {
+            tagline: "西岳之险,饮食以浓烈对应",
+            signature: { name: "岩耳老母鸡", icon: "🍲", price: "¥120-180", desc: "华山崖壁上采的岩耳与散养老母鸡同炖,鲜如山雾化汤,补登山疲劳" },
+            snack:     { name: "潼关肉夹馍", icon: "🥙", price: "¥10", desc: "腊汁肉酥而不腻,饼烤得起层。爬华山的标准燃料,一口顶半小时" },
+            drink:     { name: "华阴老腔黄酒", icon: "🍶", price: "¥35", desc: "关中小米酿,温饮去寒。配老腔吼歌,陕西人的硬核" },
+            shop:      "推荐:山顶·东峰宾馆 / 山下·华山玉泉院街",
+            seasonal:  { winter: "冬宜:岩耳鸡汤 + 烫黄酒", autumn: "秋宜:陕西燃面 + 凉皮" },
+            tea:       "宜配:商南泡花茶,登顶后清舌",
+            verse:     "「只有天在上,更无山与齐」 — 寇准七岁,看天近"
+        },
+        route: "玉泉院 → 北峰 → 苍龙岭 → 金锁关 → 东/南/西峰",
+        access: "石家庄至西安高铁约 6 小时,西安至华山高铁 30 分钟。",
+        tips: "夜爬必备头灯/手套;冬季封山或局部封;西峰索道可救命。",
+        gear: ["专业登山鞋", "手套(铁链磨手)", "头灯", "保暖", "充足饮水"],
+        emergency: { local: "华山景区 0913-4362692", rescue: "华山救援 0913-4368799", general: "110 / 120" },
+        gpxNote: "夜爬路线明确,但鹞子翻身/长空栈道需有人陪同。",
+        soundscape: { name: "苍龙脊风", search: "huashan cliff wind" },
+        coords: { lon: 110.08, lat: 34.49 },
+        lastUpdated: "2026-05-23"
+    },
+
+    {
+        id: 12,
+        name: "南岳衡山",
+        region: "wuyue",
+        type: "remote",
+        location: "湖南 · 衡阳",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 11 km(南岳大庙—祝融峰)",
+        elevation: "海拔 1300 m",
+        bestSeason: "春秋",
+        seasonTags: ["spring", "autumn"],
+        theme: { sky: ["#e8d4d0", "#c8a8a0"], far: "#807060", mid: "#5a4040", near: "#2a1818", accent: "ridge", sun: "sunset", primary: "#8a4838", soft: "#f0d8d0" },
+        ratings: { stamina: 3, technical: 2, exposure: 2, retreat: 4, signal: 4 },
+        techGrade: "T2",
+        epithet: "南岳独秀",
+        poem: {
+            title: "谒衡岳庙",
+            author: "韩愈",
+            dynasty: "唐 · 元和十四年(819)",
+            lines: ["五岳祭秩皆三公", "四方环镇嵩当中", "火维地荒足妖怪", "天假神柄专其雄"],
+            note: "韩愈贬潮州过衡岳,'潜心默祷若有应,岂非正直能感通'被誉为千古衡岳第一诗。"
+        },
+        description: "五岳唯一在江南,云雾终年,被称'文明奥区'。佛教南宗、道教福地、儒家书院汇聚一山,是中国宗教文化最丰厚的山。",
+        features: [
+            "南岳大庙 · 唯一一座祭五岳全制的庙",
+            "祝融万丈拔地起 · 韩愈名句出处",
+            "南台寺为日本曹洞宗祖庭",
+            "石鼓书院 · 宋四大书院,周敦颐讲学",
+            "祝融峰看日出,云海如棉絮万顷"
+        ],
+        chronicle: [
+            { year: "约前 11 世纪", dynasty: "周",   person: "周天子",      event: "南巡望祭",                    legacy: "《尚书》「南岳」之名定" },
+            { year: "约 711",       dynasty: "唐",   person: "怀让禅师",    event: "般若寺收马祖道一为徒",        legacy: "禅宗南岳一系,'磨砖作镜'公案" },
+            { year: "768",          dynasty: "唐",   person: "杜甫",        event: "晚年漂泊登衡山",              legacy: "《望岳·南岳》「祝融万里南海风」" },
+            { year: "819",          dynasty: "唐",   person: "韩愈",        event: "贬潮州过衡山",                legacy: "《谒衡岳庙》潜心默祷云开 · 千古名篇" },
+            { year: "1167",         dynasty: "宋",   person: "朱熹/张栻",   event: "南岳同行讲学",                legacy: "理学'湖湘学派'核心,与岳麓书院齐名" },
+            { year: "约 1265",      dynasty: "宋",   person: "文天祥",      event: "登祝融峰祭天",                legacy: "兵败前最后一次望江山,孤臣孽子心" },
+            { year: "1644",         dynasty: "明清", person: "王船山",      event: "明亡后避居衡山",              legacy: "《船山遗书》三百卷 · 中国哲学的暗夜星" }
+        ],
+        waypoints: [
+            { time: "06:00", name: "南岳大庙", elev: "100m", scene: "🛕", vista: "中国唯一祭五岳全制的大庙,香火不绝", note: "敬山先敬神" },
+            { time: "07:30", name: "忠烈祠", elev: "300m", scene: "🕯️", vista: "祭抗战英烈,松柏森然", note: "近代史一站" },
+            { time: "09:00", name: "南台寺·磨镜台", elev: "700m", scene: "🪞", vista: "日本曹洞宗祖庭,怀让磨砖处", note: "禅宗公案现场" },
+            { time: "10:30", name: "半山亭", elev: "900m", scene: "🍵", vista: "云雾袅袅,可饮南岳云雾茶", note: "传统茶寮" },
+            { time: "12:30", name: "祝融峰", elev: "1300m", scene: "🌅", vista: "登顶,'祝融万丈拔地起'韩愈处", note: "南岳之巅" }
+        ],
+        hiddenSpots: [
+            "藏经殿后山·小路一条到磨镜台,人少景幽",
+            "石鼓书院在衡阳市内,可顺路一访周敦颐讲学处",
+            "祝融峰夜观星空,湖南光污染少,银河清晰"
+        ],
+        photography: "祝融峰云海日出,需在峰顶寺住一夜。",
+        food: "湖南腊味、南岳素斋(全国闻名)、衡阳鱼粉。",
+        cuisine: {
+            tagline: "佛山禅厨,素斋一席胜过山珍",
+            signature: { name: "南岳素全席", icon: "🥬", price: "¥80-200", desc: "祝圣寺、南台寺传承千年素斋,豆腐做出鱼形、香菇做出鸭味,色香味形俱足而无杀生" },
+            snack:     { name: "衡阳鱼粉", icon: "🍜", price: "¥15", desc: "湘江野生鱼现熬汤,米粉滑过舌尖。下山进城第一碗" },
+            drink:     { name: "南岳云雾茶", icon: "🍃", price: "¥40/壶", desc: "海拔 800m 雾中茶园,带板栗香、兰花韵" },
+            shop:      "推荐:祝圣寺香积厨 / 半山亭茶寮 / 衡阳·彭记鱼粉",
+            seasonal:  { spring: "春宜:春笋素烧 + 云雾新茶", summer: "夏宜:荷叶素粉 + 绿豆汤" },
+            tea:       "宜配:云雾茶,茶中亦有'拈花一笑'意",
+            verse:     "「祝融万丈拔地起,欲见不见轻烟里」 — 韩愈所见,亦你所见"
+        },
+        route: "南岳大庙 → 忠烈祠 → 南台寺 → 半山亭 → 祝融峰",
+        access: "石家庄至衡山高铁约 8 小时,衡山西站打车至大庙 20 分钟。",
+        tips: "湿润多雨备雨具;素斋需提前预订(尤其全席)。",
+        gear: ["登山鞋", "雨衣", "登山杖", "充足饮水"],
+        emergency: { local: "南岳景区 0734-5666188", rescue: "南岳救援 0734-5673199", general: "110 / 120" },
+        gpxNote: "山路修整完好,标识清晰,可放心徒步。",
+        soundscape: { name: "南岳松涛禅钟", search: "hengshan temple bell pine" },
+        coords: { lon: 112.71, lat: 27.30 },
+        lastUpdated: "2026-05-23"
+    },
+
+    {
+        id: 13,
+        name: "北岳恒山",
+        region: "wuyue",
+        type: "remote",
+        location: "山西 · 大同浑源",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "half", durationLabel: "半日",
+        distance: "约 6 km(山门—天峰岭)",
+        elevation: "海拔 2016 m",
+        bestSeason: "春夏秋",
+        seasonTags: ["spring", "summer", "autumn"],
+        theme: { sky: ["#dac8a8", "#b09870"], far: "#7a7058", mid: "#5a5038", near: "#2a2418", accent: "ridge", sun: "noon", primary: "#6e5638", soft: "#ebe0c8" },
+        ratings: { stamina: 3, technical: 2, exposure: 3, retreat: 5, signal: 4 },
+        techGrade: "T2",
+        epithet: "塞外神京 · 太行余脉",
+        poem: {
+            title: "登恒山",
+            author: "贾岛",
+            dynasty: "唐",
+            lines: ["岩峦叠万重", "诡怪浩难测", "安能假羽翼", "聊一登绝顶"],
+            note: "贾岛苦吟一生,登恒山见'岩峦叠万重',方知山势奇险胜过苦吟之难。"
+        },
+        description: "五岳中纬度最北,**与太行山系同根**。悬空寺挂崖一千五百年,'天下巨观'李白题字。塞外古战场,边塞诗之骨。",
+        features: [
+            "🌟 与太行同脉 — 北岳即太行山系最北一峰,你脚下的山,亦是它",
+            "悬空寺 · 全世界唯一三教合一悬空寺",
+            "李白题'壮观'二字,误多一点成'壮'",
+            "明清以前北岳在河北曲阳,清顺治改恒山",
+            "塞北边塞,杨家将传说处"
+        ],
+        chronicle: [
+            { year: "前 110",   dynasty: "汉",   person: "汉武帝",   event: "封禅恒山(时在曲阳)",         legacy: "首次以国家名义祭北岳" },
+            { year: "491",      dynasty: "北魏", person: "悬空寺始建", event: "三教合一悬空寺动工",         legacy: "挂崖千五百年不坠" },
+            { year: "735",      dynasty: "唐",   person: "李白",     event: "登悬空寺",                    legacy: "题'壮观'二字,加一点显赞叹" },
+            { year: "约 815",   dynasty: "唐",   person: "贾岛",     event: "登恒山",                      legacy: "《登恒山》「岩峦叠万重,诡怪浩难测」" },
+            { year: "986",      dynasty: "宋",   person: "杨业",     event: "陈家谷恒山下战死",            legacy: "杨家将事迹原型,北宋抗辽之痛" },
+            { year: "1654",     dynasty: "清",   person: "顺治帝",   event: "改祭山西恒山",                legacy: "北岳从此由曲阳移至浑源,千年定位重写" },
+            { year: "1633",     dynasty: "明",   person: "徐霞客",   event: "登恒山记",                    legacy: "《徐霞客游记·游恒山日记》一卷" }
+        ],
+        waypoints: [
+            { time: "07:00", name: "悬空寺", elev: "1500m", scene: "🛕", vista: "悬空寺挂壁,木栈架在虚无中", note: "李白题'壮观'处" },
+            { time: "09:00", name: "停旨岭", elev: "1700m", scene: "📜", vista: "古碑'恒宗'二字,皇帝祭山驻跸", note: "下马敬山" },
+            { time: "10:30", name: "朝殿·寝宫", elev: "1900m", scene: "🏯", vista: "北岳神祠,殿宇背山而立", note: "古祭祀核心" },
+            { time: "11:30", name: "天峰岭顶", elev: "2016m", scene: "🌄", vista: "登顶,塞外苍茫,云冈相望", note: "北岳之巅" }
+        ],
+        hiddenSpots: [
+            "悬空寺 6 点开门前到,无人独享",
+            "恒山玄空寺侧脊小路,可远眺云冈石窟方向",
+            "浑源县城内·永安寺壁画,辽金遗风,极少游客"
+        ],
+        photography: "悬空寺仰拍最具张力;天峰岭日落时回望塞外,可拍到层峦如海。",
+        food: "山西刀削面、浑源凉粉、莜面栲栳栳、黄酒。",
+        cuisine: {
+            tagline: "塞北饮食,粗粝而真,与北岳同性",
+            signature: { name: "莜面栲栳栳", icon: "🍙", price: "¥38", desc: "莜麦面卷成蜂窝状蒸熟,蘸羊肉臊子。山西人登北岳的硬核早餐" },
+            snack:     { name: "浑源凉粉", icon: "🥗", price: "¥10", desc: "土豆淀粉做成,加恒山盐、本地辣油。下山进县城第一口" },
+            drink:     { name: "北岳黄酒", icon: "🍶", price: "¥28", desc: "浑源县小米黄酒,温饮如棉,配莜面正合" },
+            shop:      "推荐:浑源县城·李家凉粉 / 恒山脚下·北岳人家",
+            seasonal:  { winter: "冬宜:羊汤莜面 + 烫黄酒", autumn: "秋宜:刀削面 + 浑源凉粉" },
+            tea:       "宜配:山西边塞苦荞茶,粗粝而真",
+            verse:     "「岩峦叠万重,诡怪浩难测」 — 贾岛见此,你亦见此"
+        },
+        route: "悬空寺 → 停旨岭 → 朝殿 → 天峰岭",
+        access: "石家庄至大同高铁约 4 小时,大同至浑源汽车 1 小时。",
+        tips: "塞北早晚温差大,夏季也需薄外套;悬空寺登道另收费。",
+        gear: ["登山鞋", "薄外套", "雨衣", "充足饮水"],
+        emergency: { local: "恒山景区 0352-8322142", rescue: "浑源应急 0352-8322110", general: "110 / 120" },
+        gpxNote: "景区路径明确,无需 GPX,但建议提前看悬空寺开放时间。",
+        soundscape: { name: "塞外古风", search: "frontier wind temple bell" },
+        coords: { lon: 113.74, lat: 39.67 },
+        lastUpdated: "2026-05-23"
+    },
+
+    {
+        id: 14,
+        name: "中岳嵩山",
+        region: "wuyue",
+        type: "remote",
+        location: "河南 · 登封",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 10 km(少林—二祖庵—连天峰)",
+        elevation: "海拔 1492 m",
+        bestSeason: "春秋",
+        seasonTags: ["spring", "autumn"],
+        theme: { sky: ["#e8d8b0", "#c8a878"], far: "#807058", mid: "#5a4838", near: "#2a2218", accent: "ridge", sun: "noon", primary: "#6a5028", soft: "#f0e0c0" },
+        ratings: { stamina: 3, technical: 2, exposure: 2, retreat: 5, signal: 5 },
+        techGrade: "T2",
+        epithet: "天地之中",
+        poem: {
+            title: "送杨山人归嵩阳",
+            author: "李白",
+            dynasty: "唐",
+            lines: ["归来桃花岩", "得憩云窗眠", "对岭人共语", "饮潭猿相连"],
+            note: "李白送友归嵩,'对岭人共语,饮潭猿相连'——嵩山是隐士山,不在登,在归。"
+        },
+        description: "中岳居天地之中,儒释道三家在此交汇。少林寺、嵩阳书院、中岳庙各开一脉,是中华文化心脏。",
+        features: [
+            "**天地之中** · 历史建筑群入选世界遗产(2010)",
+            "少林寺 · 禅宗祖庭、武术发源",
+            "嵩阳书院 · 程颢程颐讲学,理学摇篮",
+            "中岳庙 · 道教第六小洞天",
+            "观星台 · 元代郭守敬测出回归年 365.2425 日"
+        ],
+        chronicle: [
+            { year: "前 110",   dynasty: "汉",   person: "汉武帝", event: "登嵩山三呼万岁",                legacy: "「嵩高维岳,峻极于天」始为定" },
+            { year: "527",      dynasty: "北魏", person: "达摩",   event: "少林寺面壁九年",                legacy: "禅宗东土初祖,'一苇渡江'传说" },
+            { year: "约 700",   dynasty: "唐",   person: "武则天", event: "登嵩岳封禅",                    legacy: "唯一封中岳的帝王(避封泰山)" },
+            { year: "约 770",   dynasty: "唐",   person: "李白",   event: "送友归嵩阳",                    legacy: "《送杨山人归嵩阳》「归来桃花岩」" },
+            { year: "约 1070",  dynasty: "宋",   person: "程颢程颐", event: "嵩阳书院讲学",                legacy: "「程门立雪」典故出此,理学正脉" },
+            { year: "1276",     dynasty: "元",   person: "郭守敬", event: "嵩山观星台测回归年",            legacy: "365.2425 日,比西方早三百年" },
+            { year: "1639",     dynasty: "明",   person: "徐霞客", event: "登嵩山记",                      legacy: "《徐霞客游记·游嵩山日记》一卷" }
+        ],
+        waypoints: [
+            { time: "07:00", name: "少林寺", elev: "350m", scene: "🛕", vista: "禅宗祖庭,塔林森立", note: "看僧人晨课" },
+            { time: "09:00", name: "二祖庵", elev: "800m", scene: "🌿", vista: "慧可断臂处,清幽无人", note: "禅宗心法所在" },
+            { time: "10:30", name: "三皇寨", elev: "1100m", scene: "🪜", vista: "栈道挂壁,'嵩山天险'", note: "嵩山看景最佳一线" },
+            { time: "12:00", name: "连天峰", elev: "1492m", scene: "🌄", vista: "登顶,望嵩阳书院方向", note: "中岳之巅" },
+            { time: "14:00", name: "嵩阳书院", elev: "400m", scene: "📖", vista: "三千年大将军柏,程颢程颐讲学处", note: "「程门立雪」典故现场" }
+        ],
+        hiddenSpots: [
+            "塔林深处 · 历代少林高僧墓塔,清晨无人时如入古林",
+            "观星台 · 在登封城内,郭守敬测年遗迹,大多数人略过",
+            "二祖庵后山小径,通向少林寺另一侧出口,人迹罕至"
+        ],
+        photography: "塔林晨雾、嵩阳书院古柏、三皇寨栈道——嵩山影像层次最丰富。",
+        food: "河南烩面、登封烧饼、少林素斋、洛阳水席。",
+        cuisine: {
+            tagline: "中州之味,儒释道三家口味同在一席",
+            signature: { name: "少林素斋", icon: "🥬", price: "¥60-120", desc: "少林寺千年传承,'山中四宝'(松、香、竹、菌)入馔,清淡中见禅意" },
+            snack:     { name: "登封烧饼", icon: "🥯", price: "¥3", desc: "面饼贴炉烤至焦黄,芝麻香满口,登山者最爱的'轻装行粮'" },
+            drink:     { name: "嵩山黄盖酒", icon: "🍶", price: "¥30", desc: "登封小米酿造,微甜回酸,饮后通气活血" },
+            shop:      "推荐:少林寺香积厨 / 登封市·烩面馆 / 嵩阳书院旁茶寮",
+            seasonal:  { spring: "春宜:野菜烩面 + 嵩山新茶", autumn: "秋宜:菇笋素斋 + 烧饼" },
+            tea:       "宜配:嵩山高山茶,饮后再读《传习录》一页",
+            verse:     "「嵩高维岳,峻极于天」 — 《诗经》古韵,与你同在此山下"
+        },
+        route: "少林寺 → 二祖庵 → 三皇寨 → 连天峰 → 嵩阳书院",
+        access: "石家庄至郑州高铁 2 小时,郑州至登封大巴 1.5 小时。",
+        tips: "嵩山景区有多个入口,建议买联票(少林+三皇寨+嵩阳);夏季蚊虫多。",
+        gear: ["登山鞋", "薄外套", "防蚊液", "充足饮水"],
+        emergency: { local: "嵩山景区 0371-62749016", rescue: "登封应急 0371-62872110", general: "110 / 120" },
+        gpxNote: "景区路径明确,但三皇寨—连天峰段建议下载离线轨迹。",
+        soundscape: { name: "禅院钟鸣", search: "shaolin temple bell zen" },
+        coords: { lon: 113.05, lat: 34.45 },
+        lastUpdated: "2026-05-23"
     }
 ];

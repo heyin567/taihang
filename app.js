@@ -3,6 +3,7 @@
    ============================================================ */
 
 const state = {
+    region: "all",
     difficulty: "all",
     duration: "all",
     keyword: "",
@@ -234,6 +235,10 @@ function skyForTime(timeStr) {
    ============================================================ */
 function getFiltered() {
     return routes.filter(r => {
+        if (state.region !== "all") {
+            const rRegion = r.region || "taihang";
+            if (rRegion !== state.region) return false;
+        }
         if (state.difficulty !== "all" && r.difficulty !== state.difficulty) return false;
         if (state.duration !== "all" && r.duration !== state.duration) return false;
         if (state.keyword) {
@@ -263,13 +268,15 @@ function render() {
         const visited = state.visited.has(r.id);
         const isFeatured = r.id === featuredId && filtered.length > 1;
         const inSeason = r.seasonTags && r.seasonTags.includes(season.key);
+        const isRemote = r.type === "remote";
         const poemSnippet = r.poem ? `<div class="card-poem-snippet">${r.poem.lines[r.poem.lines.length - 1]}<span class="author">— ${r.poem.author}</span></div>` : "";
-        return `<div class="route-card ${isFeatured ? "featured" : ""}" data-id="${r.id}"
+        return `<div class="route-card ${isFeatured ? "featured" : ""} ${isRemote ? "is-remote" : ""}" data-id="${r.id}"
                     style="--route-primary: ${r.theme.primary}; --route-soft: ${r.theme.soft};">
             <div class="card-image">
                 ${buildLandscape(r.theme, r.id)}
                 ${r.epithet ? `<span class="epithet">${r.epithet}</span>` : ""}
                 ${inSeason ? `<span class="season-badge">${season.label}正当时</span>` : ""}
+                ${isRemote ? `<span class="remote-seal" title="文化拜谒,非实地指南">远望志</span>` : ""}
                 <div class="card-badges">
                     <span class="difficulty-badge ${r.difficulty}">${r.difficultyLabel}</span>
                     <span class="tech-grade">${r.techGrade}</span>
@@ -455,6 +462,38 @@ function buildFeastBlock(r) {
 }
 
 /* ============================================================
+   古人登临谱 · 时间卷轴
+   ============================================================ */
+function buildChronicleScroll(chronicle, mountainName) {
+    if (!chronicle || chronicle.length === 0) return "";
+    const items = chronicle.map((c, i) => `
+        <div class="chron-item" style="--chron-i:${i}">
+            <div class="chron-dot"></div>
+            <div class="chron-card">
+                <div class="chron-head">
+                    <span class="chron-year">${c.year || ""}</span>
+                    <span class="chron-dynasty">${c.dynasty || ""}</span>
+                </div>
+                <div class="chron-person">${c.person || ""}</div>
+                <div class="chron-event">${c.event || ""}</div>
+                ${c.legacy ? `<div class="chron-legacy">「${c.legacy}」</div>` : ""}
+            </div>
+        </div>
+    `).join("");
+    return `
+    <div class="chronicle-scroll">
+        <div class="chron-title-row">
+            <span class="chron-title">古人登临谱</span>
+            <span class="chron-sub">与历代登${mountainName ? mountainName.replace(/^[东西南北中]岳/, "") : "山"}者同游</span>
+        </div>
+        <div class="chron-rail">
+            <div class="chron-line"></div>
+            ${items}
+        </div>
+    </div>`;
+}
+
+/* ============================================================
    诗轴(立轴竖排,落朱印)
    ============================================================ */
 function buildPoemScroll(poem, epithet) {
@@ -508,6 +547,8 @@ function openModal(id) {
         </div>
         <div class="modal-body">
             ${buildPoemScroll(r.poem, r.epithet)}
+
+            ${r.chronicle && r.chronicle.length ? buildChronicleScroll(r.chronicle, r.name) : ""}
 
             <div class="radar-block">
                 <div>${buildRadar(r.ratings, 200, r.theme.primary, true)}</div>
