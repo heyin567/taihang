@@ -123,7 +123,7 @@
                 发现错的电话/价格?有想加的路线?或单纯想聊聊?
             </p>
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <a class="share-btn" href="mailto:feedback@example.com?subject=太行徒步志%20反馈" style="flex:1;text-align:center;text-decoration:none;">✉️ 邮件反馈</a>
+                <a class="share-btn" href="mailto:5738514@qq.com?subject=太行徒步志%20反馈" style="flex:1;text-align:center;text-decoration:none;">✉️ 邮件反馈</a>
                 <button class="share-btn" id="copyDebug" style="flex:1;">🐛 复制调试信息</button>
             </div>
             <p style="font-size:0.72rem;color:var(--text-mute);margin-top:6px;line-height:1.5;">
@@ -222,7 +222,7 @@
         fb.id = "footerFb";
         fb.style.cssText = "margin-top:10px;font-size:0.78rem;letter-spacing:0.15em;";
         fb.innerHTML = `
-            <a href="mailto:feedback@example.com?subject=太行徒步志%20反馈" style="color:rgba(255,245,214,0.6);text-decoration:none;margin:0 8px;">📮 反馈</a>
+            <a href="mailto:5738514@qq.com?subject=太行徒步志%20反馈" style="color:rgba(255,245,214,0.6);text-decoration:none;margin:0 8px;">📮 反馈</a>
             <span style="color:rgba(255,245,214,0.3);">|</span>
             <a href="https://github.com/heyin567/taihang" target="_blank" rel="noopener" style="color:rgba(255,245,214,0.6);text-decoration:none;margin:0 8px;">⌥ 源码</a>
             <span style="color:rgba(255,245,214,0.3);">|</span>
