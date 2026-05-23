@@ -1,12 +1,12 @@
 /* ============================================================
-   太行徒步志 · Service Worker
+   行山志 · Service Worker
    - 离线优先策略:本站静态资源用 cache-first
    - 字体 CDN:stale-while-revalidate
    - 天气 API:network-only(不缓存,实时性重要)
    - 版本号变更即触发更新
    ============================================================ */
 
-const VERSION = "th-v1.2.1";
+const VERSION = "th-v1.3.0";
 const CORE_CACHE = `${VERSION}-core`;
 const FONT_CACHE = `${VERSION}-font`;
 
@@ -22,6 +22,7 @@ const CORE_ASSETS = [
     "./data.js",
     "./changelog.js",
     "./app.js",
+    "./atlas.js",
     "./admin.js",
     "./manifest.json"
 ];

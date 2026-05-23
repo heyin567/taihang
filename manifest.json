@@ -1,7 +1,7 @@
 {
-    "name": "太行徒步志 · Taihang Trails",
-    "short_name": "太行徒步志",
-    "description": "石家庄周边徒步路线指南 · 与古人同游太行",
+    "name": "行山志 · Xingshan",
+    "short_name": "行山志",
+    "description": "自太行至五岳 · 与古人同游中华名山",
     "start_url": "./",
     "scope": "./",
     "display": "standalone",

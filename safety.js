@@ -1,5 +1,5 @@
 /* ============================================================
-   太行徒步志 · 兜底层(safety.js)
+   行山志 · 兜底层(safety.js)
    - 全局错误捕获
    - localStorage 备份与还原
    - 反馈入口
@@ -123,7 +123,7 @@
                 发现错的电话/价格?有想加的路线?或单纯想聊聊?
             </p>
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <a class="share-btn" href="mailto:5738514@qq.com?subject=太行徒步志%20反馈" style="flex:1;text-align:center;text-decoration:none;">✉️ 邮件反馈</a>
+                <a class="share-btn" href="mailto:5738514@qq.com?subject=行山志%20反馈" style="flex:1;text-align:center;text-decoration:none;">✉️ 邮件反馈</a>
                 <button class="share-btn" id="copyDebug" style="flex:1;">🐛 复制调试信息</button>
             </div>
             <p style="font-size:0.72rem;color:var(--text-mute);margin-top:6px;line-height:1.5;">
@@ -150,7 +150,7 @@
     function exportBackup() {
         const data = {
             v: 1,
-            t: "taihang-trails-backup",
+            t: "xingshan-backup",
             exportedAt: new Date().toISOString(),
             localStorage: collectLocalStorage()
         };
@@ -159,7 +159,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         const stamp = new Date().toISOString().slice(0, 10);
-        a.href = url; a.download = `taihang-backup-${stamp}.json`; a.click();
+        a.href = url; a.download = `xingshan-backup-${stamp}.json`; a.click();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
         if (window.toast) toast("备份已导出,妥善保存");
     }
@@ -171,7 +171,7 @@
         reader.onload = ev => {
             try {
                 const data = JSON.parse(ev.target.result);
-                if (data.t !== "taihang-trails-backup") {
+                if (data.t !== "xingshan-backup" && data.t !== "taihang-trails-backup") {
                     alert("文件格式不对,不是有效备份文件");
                     return;
                 }
@@ -203,7 +203,7 @@
             })(),
             storage: Object.keys(collectLocalStorage())
         };
-        const text = "太行徒步志 · 调试信息\n\n" + JSON.stringify(info, null, 2);
+        const text = "行山志 · 调试信息\n\n" + JSON.stringify(info, null, 2);
         if (navigator.clipboard) {
             navigator.clipboard.writeText(text).then(() => {
                 if (window.toast) toast("调试信息已复制,可粘贴到邮件");
@@ -222,7 +222,7 @@
         fb.id = "footerFb";
         fb.style.cssText = "margin-top:10px;font-size:0.78rem;letter-spacing:0.15em;";
         fb.innerHTML = `
-            <a href="mailto:5738514@qq.com?subject=太行徒步志%20反馈" style="color:rgba(255,245,214,0.6);text-decoration:none;margin:0 8px;">📮 反馈</a>
+            <a href="mailto:5738514@qq.com?subject=行山志%20反馈" style="color:rgba(255,245,214,0.6);text-decoration:none;margin:0 8px;">📮 反馈</a>
             <span style="color:rgba(255,245,214,0.3);">|</span>
             <a href="https://github.com/heyin567/taihang" target="_blank" rel="noopener" style="color:rgba(255,245,214,0.6);text-decoration:none;margin:0 8px;">⌥ 源码</a>
             <span style="color:rgba(255,245,214,0.3);">|</span>

@@ -1,4 +1,4 @@
-# 太行徒步志 · Taihang Trails
+# 行山志 · Xingshan · Walking the Mountains
 
 > 行到水穷处,坐看云起时
 > —— 王摩诘

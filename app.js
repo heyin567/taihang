@@ -1,5 +1,5 @@
 /* ============================================================
-   太行徒步志 · Application Logic
+   行山志 · Application Logic
    ============================================================ */
 
 const state = {
@@ -737,7 +737,7 @@ ${r.poem.lines.join(",")}` : "";
 【山下美食】
 ${r.food}` : "");
 
-    return `🥾 太行徒步志推荐:${r.name}${r.epithet ? "(" + r.epithet + ")" : ""}
+    return `🥾 行山志推荐:${r.name}${r.epithet ? "(" + r.epithet + ")" : ""}
 📍 位置:${r.location}
 ⛰️ 难度:${r.difficultyLabel} · ${r.techGrade} · ${r.distance} · 海拔差${r.elevation}
 🗓️ 最佳季节:${r.bestSeason}${poemBlock}
@@ -754,7 +754,7 @@ ${(r.hiddenSpots || []).map(h => "• " + h).join("\n")}${feastBlock}
 【出行提示】
 ${r.tips}
 
-—— 来自《太行徒步志》`;
+—— 来自《行山志》`;
 }
 
 function closeModal() {
@@ -1132,7 +1132,7 @@ function openChangelog(opts) {
             </div>
             ${updateAction}
             <div class="cl-stack">${scrolls}</div>
-            <div class="cl-tail">—— 太行徒步志 · 山门主人 谨识</div>
+            <div class="cl-tail">—— 行山志 · 山门主人 谨识</div>
             <div class="cl-cap cl-cap-bottom"></div>
         </div>`;
 
@@ -1147,6 +1147,7 @@ function openChangelog(opts) {
 }
 
 if (typeof window !== "undefined") window.openChangelog = openChangelog;
+if (typeof window !== "undefined") window.openModalById = openModal;
 
 function openPassport() {
     const visitedCount = state.visited.size;
@@ -1464,11 +1465,11 @@ function drawPostcard(r, signer) {
         ctx.fillText(`山下三味:${r.cuisine.signature.name} · ${r.cuisine.tea || ""}`, W / 2, H - 240);
     }
 
-    // 太行徒步志 logo
+    // 行山志 logo
     ctx.fillStyle = "rgba(60, 50, 30, 0.4)";
     ctx.font = "20px 'LXGW WenKai Screen', serif";
     ctx.textAlign = "right";
-    ctx.fillText("— 太行徒步志 —", W - 100, H - 60);
+    ctx.fillText("— 行山志 —", W - 100, H - 60);
 }
 
 function drawMountains(ctx, theme, W, H) {
@@ -2693,7 +2694,7 @@ function refreshNotifyButton() {
     $("notifyToggleBtn").addEventListener("click", async () => {
         if (!("Notification" in window)) { toast("此浏览器不支持通知"); return; }
         if (Notification.permission === "granted") {
-            new Notification("太行徒步志", { body: "通知已启用,有预警时会自动提醒。" });
+            new Notification("行山志", { body: "通知已启用,有预警时会自动提醒。" });
             return;
         }
         const p = await Notification.requestPermission();
