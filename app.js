@@ -595,14 +595,14 @@ function openModal(id) {
             <h3 class="section-title">🍶 山行三餐 · 山下烟火</h3>
             ${buildFeastBlock(r)}
 
-            <h3 class="section-title">🏛️ 燕赵九风 · 山的性格</h3>
+            <h3 class="section-title">${r.type === "remote" ? `🏛️ ${(LOCAL_SPIRIT_BY_ROUTE[r.id] || {}).region || ""}气性 · 山的性格` : "🏛️ 燕赵九风 · 山的性格"}</h3>
             ${buildSpiritSeal(r)}
             ${buildCohortBlock(r)}
 
             <h3 class="section-title">🎨 诗书画琴 · 一山一意</h3>
             ${buildCultureGrid(r)}
 
-            <h3 class="section-title">📖 燕赵成语 · 与山有缘</h3>
+            <h3 class="section-title">${r.type === "remote" ? `📖 ${(LOCAL_SPIRIT_BY_ROUTE[r.id] || {}).region || "本地"}典故 · 与山有缘` : "📖 燕赵成语 · 与山有缘"}</h3>
             ${buildIdiomBlock(r)}
 
             <h3 class="section-title">🚗 交通方式</h3>
@@ -1862,13 +1862,14 @@ function initFestivalBanner() {
    性格印 · 燕赵九风
    ============================================================ */
 function buildSpiritSeal(r) {
-    const s = YANZHAO_SPIRIT_BY_ROUTE[r.id];
+    const s = (typeof getSpiritForRoute === "function") ? getSpiritForRoute(r.id) : YANZHAO_SPIRIT_BY_ROUTE[r.id];
     if (!s) return "";
     const wuxing = WUXING_BY_ROUTE[r.id];
     return `<div class="spirit-seal-line">
         <div class="spirit-seal">${s.icon}</div>
         <div class="spirit-info">
             <div class="name">${s.name}
+                ${s.region ? `<span class="wuxing-pill" style="background:rgba(140,40,24,0.12);color:#8a2818;">${s.region}</span>` : ""}
                 ${wuxing ? `<span class="wuxing-pill wuxing-${wuxing.e}">五行属${wuxing.e}</span>` : ""}
             </div>
             <div class="person">人格映照 · ${s.refPerson}</div>
@@ -1913,8 +1914,10 @@ function buildCultureGrid(r) {
    燕赵成语
    ============================================================ */
 function buildIdiomBlock(r) {
-    const idioms = getIdiomForRoute(r.id);
-    if (idioms.length === 0) return '<p style="color:var(--text-mute);font-size:0.86rem;">此山未与成语典故相涉,然其本身,正待入典。</p>';
+    const yanzhao = getIdiomForRoute(r.id);
+    const local = (typeof getLocalIdiomsForRoute === "function") ? getLocalIdiomsForRoute(r.id) : [];
+    const idioms = yanzhao.length > 0 ? yanzhao : local;
+    if (idioms.length === 0) return '<p style="color:var(--text-mute);font-size:0.86rem;">此山未与典故相涉,然其本身,正待入典。</p>';
     return idioms.map(i => `<div class="idiom-card">
         <div><span class="word">${i.word}</span><span class="origin">出处 · ${i.origin}</span></div>
         <div class="story">${i.story}</div>

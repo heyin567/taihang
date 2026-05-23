@@ -4220,7 +4220,7 @@ body.admin-on { padding-top: 56px; }
 /* 远望志卡片印章 */
 .remote-seal {
     position: absolute;
-    top: 14px;
+    bottom: 14px;
     left: 14px;
     background: linear-gradient(135deg, #c9402a 0%, #8a2818 100%);
     color: #fff5e0;
@@ -4245,6 +4245,7 @@ body.admin-on { padding-top: 56px; }
 .route-card.is-remote {
     border: 1px solid rgba(201, 64, 42, 0.18);
 }
+.route-card.is-remote .visited-mark { bottom: 44px; }
 
 /* 时间卷轴 */
 .chronicle-scroll {
