@@ -623,7 +623,10 @@ body {
     background: rgba(0,0,0,0.6);
     z-index: 100;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     padding: 30px 16px;
+    padding-bottom: max(30px, env(safe-area-inset-bottom));
     backdrop-filter: blur(4px);
 }
 
@@ -4117,7 +4120,6 @@ body.admin-on { padding-top: 56px; }
     .compare-modal-content {
         width: 96vw !important;
         max-width: 96vw !important;
-        max-height: 92vh !important;
         padding: 16px 14px !important;
         border-radius: 12px !important;
     }
