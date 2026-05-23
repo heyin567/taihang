@@ -6,7 +6,7 @@
    - 版本号变更即触发更新
    ============================================================ */
 
-const VERSION = "th-v1.1.0";
+const VERSION = "th-v1.2.0";
 const CORE_CACHE = `${VERSION}-core`;
 const FONT_CACHE = `${VERSION}-font`;
 
@@ -20,6 +20,7 @@ const CORE_ASSETS = [
     "./friends.js",
     "./weather.js",
     "./data.js",
+    "./changelog.js",
     "./app.js",
     "./admin.js",
     "./manifest.json"
@@ -29,7 +30,6 @@ self.addEventListener("install", e => {
     e.waitUntil(
         caches.open(CORE_CACHE)
             .then(c => c.addAll(CORE_ASSETS).catch(() => {}))
-            .then(() => self.skipWaiting())
     );
 });
 

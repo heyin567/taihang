@@ -967,6 +967,7 @@ initSolarTermPill();
 initTrivia();
 initCountdownBar();
 initPassportBtn();
+initChangelogBtn();
 initPlannerBtn();
 initPostcardClose();
 initPostcardActions();
@@ -1069,6 +1070,83 @@ function initPassportBtn() {
     $("passportClose").addEventListener("click", () => $("passportModal").classList.remove("active"));
     $("passportModal").addEventListener("click", e => { if (e.target.id === "passportModal") $("passportModal").classList.remove("active"); });
 }
+
+/* ============================================================
+   山志补遗 · 版本史
+   ============================================================ */
+function initChangelogBtn() {
+    const btn = document.getElementById("changelogBtn");
+    if (btn) btn.addEventListener("click", () => openChangelog());
+    const close = document.getElementById("changelogClose");
+    if (close) close.addEventListener("click", () => document.getElementById("changelogModal").classList.remove("active"));
+    const modal = document.getElementById("changelogModal");
+    if (modal) modal.addEventListener("click", e => { if (e.target.id === "changelogModal") modal.classList.remove("active"); });
+}
+
+function openChangelog(opts) {
+    opts = opts || {};
+    const list = (typeof CHANGELOG !== "undefined" && CHANGELOG) ? CHANGELOG : [];
+    const body = document.getElementById("changelogBody");
+    const modal = document.getElementById("changelogModal");
+    if (!body || !modal) return;
+
+    const pendingSw = opts.pendingSw || null;
+
+    const scrolls = list.map((c, i) => {
+        const changeRows = (c.changes || []).map(ch => `
+            <li class="cl-change cl-${ch.type === "新增" ? "add" : ch.type === "修订" ? "fix" : "note"}">
+                <span class="cl-tag">${ch.type}</span>
+                <span class="cl-text">${ch.text}</span>
+            </li>`).join("");
+        return `
+            <article class="cl-scroll" style="--cl-i:${i}">
+                <header class="cl-head">
+                    <div class="cl-meta">
+                        <span class="cl-version">${c.version}</span>
+                        <span class="cl-date">${c.date}</span>
+                        ${c.season ? `<span class="cl-season">${c.season}</span>` : ""}
+                    </div>
+                    <h3 class="cl-title">${c.title || ""}</h3>
+                </header>
+                <div class="cl-prose">${c.prose || ""}</div>
+                <ul class="cl-changes">${changeRows}</ul>
+                ${c.verse ? `<div class="cl-verse">「 ${c.verse} 」</div>` : ""}
+            </article>`;
+    }).join('<div class="cl-divider"><span>※</span></div>');
+
+    const updateAction = pendingSw
+        ? `<div class="cl-update-row">
+                <button class="share-btn primary" id="clUpdateNow">📥 看完了 · 立即翻新</button>
+                <button class="share-btn" id="clUpdateLater">📂 留卷再读</button>
+            </div>`
+        : "";
+
+    body.innerHTML = `
+        <div class="cl-paper">
+            <div class="cl-cap cl-cap-top"></div>
+            <h2 class="cl-main-title">山志补遗</h2>
+            <div class="cl-preface">
+                山志非一日成,亦非一人书。<br>
+                每经一岁,辄添一卷;每补一处,辄记一笔。<br>
+                此卷专为留心之人,以见山志增删之迹、补遗之由。
+            </div>
+            ${updateAction}
+            <div class="cl-stack">${scrolls}</div>
+            <div class="cl-tail">—— 太行徒步志 · 山门主人 谨识</div>
+            <div class="cl-cap cl-cap-bottom"></div>
+        </div>`;
+
+    if (pendingSw) {
+        const goBtn = document.getElementById("clUpdateNow");
+        const laterBtn = document.getElementById("clUpdateLater");
+        if (goBtn) goBtn.onclick = () => pendingSw.postMessage("skipWaiting");
+        if (laterBtn) laterBtn.onclick = () => modal.classList.remove("active");
+    }
+
+    modal.classList.add("active");
+}
+
+if (typeof window !== "undefined") window.openChangelog = openChangelog;
 
 function openPassport() {
     const visitedCount = state.visited.size;

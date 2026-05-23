@@ -69,6 +69,7 @@
         <button id="societyBtn" class="icon-btn" title="山社 · 山友帖">🏮</button>
         <button id="ringBtn" class="icon-btn" title="节气年轮 · 七十二候">☯</button>
         <button id="passportBtn" class="icon-btn" title="我的徒步护照">📔</button>
+        <button id="changelogBtn" class="icon-btn" title="山志补遗 · 版本史">📜</button>
         <button id="plannerBtn" class="icon-btn" title="周末计划器">🗓️</button>
         <button id="themeToggle" class="icon-btn" title="切换主题(浅/深)">🌓</button>
         <button id="safetyToggle" class="icon-btn" title="出行准备 · 应急">🛡️</button>
@@ -326,6 +327,14 @@
     </div>
 </div>
 
+<!-- 山志补遗 · 版本史 -->
+<div class="modal" id="changelogModal">
+    <div class="changelog-content">
+        <span class="close-btn" id="changelogClose">&times;</span>
+        <div id="changelogBody"></div>
+    </div>
+</div>
+
 <footer>
     <div class="footer-poem">且放白鹿青崖间 · 须行即骑访名山</div>
     <div>&copy; 2026 太行徒步志 · 林泉之约,与古人同游</div>
@@ -338,13 +347,66 @@
 <script src="friends.js"></script>
 <script src="weather.js"></script>
 <script src="data.js"></script>
+<script src="changelog.js"></script>
 <script src="app.js"></script>
 <script src="admin.js"></script>
 <script>
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
     window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js").catch(() => {});
+        navigator.serviceWorker.register("./sw.js").then(reg => {
+            // 装好后:每 30 分钟自动后台 check 一次
+            setInterval(() => reg.update().catch(() => {}), 30 * 60 * 1000);
+
+            // 已经有 waiting 的 sw(可能上次没刷)— 立刻提示
+            if (reg.waiting) showUpdateBanner(reg.waiting);
+
+            // 监听新版下载
+            reg.addEventListener("updatefound", () => {
+                const sw = reg.installing;
+                if (!sw) return;
+                sw.addEventListener("statechange", () => {
+                    if (sw.state === "installed" && navigator.serviceWorker.controller) {
+                        showUpdateBanner(sw);
+                    }
+                });
+            });
+        }).catch(() => {});
+
+        // 新 sw 接管后自动刷新一次
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (refreshing) return;
+            refreshing = true;
+            location.reload();
+        });
     });
+
+    function showUpdateBanner(waitingSw) {
+        if (document.getElementById("updateBanner")) return;
+        const bar = document.createElement("div");
+        bar.id = "updateBanner";
+        bar.className = "update-banner";
+        bar.innerHTML = `
+            <span class="update-msg">🌿 新版山志已到 · 翻新内容已为你备好</span>
+            <button class="update-btn" id="updateBtnPreview">📜 先看补遗</button>
+            <button class="update-btn" id="updateBtnGo">立即查看</button>
+            <button class="update-btn ghost" id="updateBtnLater">稍后</button>`;
+        document.body.appendChild(bar);
+        document.getElementById("updateBtnGo").onclick = () => {
+            waitingSw.postMessage("skipWaiting");
+        };
+        document.getElementById("updateBtnPreview").onclick = () => {
+            if (typeof window.openChangelog === "function") {
+                window.openChangelog({ pendingSw: waitingSw });
+            } else {
+                waitingSw.postMessage("skipWaiting");
+            }
+        };
+        document.getElementById("updateBtnLater").onclick = () => {
+            bar.classList.add("hide");
+            setTimeout(() => bar.remove(), 300);
+        };
+    }
 }
 </script>
 </body>
