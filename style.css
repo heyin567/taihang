@@ -1,0 +1,4212 @@
+/* =================================================================
+   太行 · Taihang Trails 设计系统
+   - 8 种太行调色板(每条路线独有主色)
+   - 衬线标题 + 黑体正文
+   - 浅 / 深 双模式
+   ================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+:root {
+    --font-serif: "LXGW WenKai Screen", "LXGW WenKai", "Noto Serif SC", "FangSong", "STKaiti", "KaiTi", serif;
+    --font-sans: "LXGW WenKai Screen", "Noto Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif;
+    --font-poem: "LXGW WenKai", "LXGW WenKai Screen", "STKaiti", "KaiTi", "FangSong", serif;
+
+    /* 太行调色板 */
+    --c-cinnabar: #c9402a;       /* 丹霞赤 */
+    --c-pine: #3d6e5a;           /* 松石青 */
+    --c-jade: #5a8c7a;           /* 玉绿 */
+    --c-imperial: #d4a017;       /* 皇家朱黄 */
+    --c-stone: #6e6e5a;          /* 岩灰 */
+    --c-sunset: #d97a4f;         /* 夕阳金 */
+    --c-mist: #e8eef0;           /* 山雾白 */
+    --c-ink: #2c3e2d;            /* 墨绿 */
+
+    /* 语义变量(浅色) */
+    --bg: #f5ecd9;
+    --bg-alt: #fbf7ed;
+    --bg-paper: #f5ecd9;
+    --bg-hero: linear-gradient(160deg, #f5ecd9 0%, #e8d8b8 50%, #d4b88a 100%);
+    --text: #2c2818;
+    --text-soft: #5a4f3a;
+    --text-mute: #8a7c5c;
+    --line: #d4c8a8;
+    --shadow-card: 0 6px 24px rgba(80, 60, 30, 0.1);
+    --shadow-up: 0 14px 36px rgba(80, 60, 30, 0.18);
+    --route-primary: var(--c-pine);
+    --route-soft: #e8e0c8;
+    --seal-red: #b73228;
+
+    /* 难度色 */
+    --diff-easy: #5a8c4a;
+    --diff-medium: #d49a18;
+    --diff-hard: #c9402a;
+}
+
+[data-theme="dark"] {
+    --bg: #1a1814;
+    --bg-alt: #232017;
+    --bg-paper: #1a1814;
+    --bg-hero: linear-gradient(160deg, #0d0c0a 0%, #2a2418 50%, #3a3220 100%);
+    --text: #e8dfcc;
+    --text-soft: #b8ad94;
+    --text-mute: #7a7058;
+    --line: #3a3428;
+    --shadow-card: 0 6px 24px rgba(0, 0, 0, 0.4);
+    --shadow-up: 0 14px 36px rgba(0, 0, 0, 0.55);
+    --route-soft: #2d2818;
+    --seal-red: #d94838;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    transition: background 0.3s, color 0.3s;
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(212, 184, 138, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(180, 150, 100, 0.12) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, transparent 0, transparent 2px, rgba(180, 150, 100, 0.025) 2px, rgba(180, 150, 100, 0.025) 4px);
+}
+
+[data-theme="dark"] body {
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(60, 50, 30, 0.5) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(80, 60, 40, 0.3) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, transparent 0, transparent 2px, rgba(255, 240, 200, 0.02) 2px, rgba(255, 240, 200, 0.02) 4px);
+}
+
+/* ============ 品牌头 ============ */
+.brand-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(10px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.brand-logo {
+    width: 36px;
+    height: 36px;
+    display: block;
+}
+
+.brand-name {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 4px;
+}
+
+.brand-name small {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    color: var(--text-mute);
+    letter-spacing: 2px;
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+.brand-tools { display: flex; gap: 10px; align-items: center; }
+
+.icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--bg-alt);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    background: var(--route-soft);
+    border-color: var(--route-primary);
+    color: var(--route-primary);
+}
+
+/* ============ 英雄区(山脉剪影) ============ */
+.hero {
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+    background: var(--bg-hero);
+}
+
+.hero-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cloud-layer .cloud {
+    animation: cloudDrift 60s linear infinite;
+}
+.cloud-layer .cloud-2 { animation-duration: 90s; animation-delay: -15s; }
+
+@keyframes cloudDrift {
+    from { transform: translateX(0); }
+    to { transform: translateX(1400px); }
+}
+
+.bird-layer .bird {
+    animation: birdFly 24s linear infinite;
+    transform-origin: center;
+}
+.bird-layer .b1 { animation-delay: 0s; transform: translate(100px, 180px); }
+.bird-layer .b2 { animation-delay: -8s; transform: translate(80px, 230px); }
+.bird-layer .b3 { animation-delay: -16s; transform: translate(60px, 200px); }
+
+@keyframes birdFly {
+    0% { transform: translate(-50px, 200px) scale(0.8); opacity: 0; }
+    20% { opacity: 0.7; }
+    50% { transform: translate(600px, 160px) scale(1); opacity: 0.7; }
+    80% { opacity: 0.5; }
+    100% { transform: translate(1300px, 140px) scale(0.7); opacity: 0; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #2c2818;
+    padding: 0 20px;
+}
+
+.hero-seal {
+    width: 64px;
+    height: 64px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    font-size: 2.4rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 14px rgba(183, 50, 40, 0.35);
+    border: 2px solid #fff5d6;
+    transform: rotate(-2deg);
+    letter-spacing: 0;
+}
+
+.hero-title {
+    font-family: var(--font-poem);
+    font-size: 4.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    margin-bottom: 18px;
+    color: #2c2818;
+    text-shadow: 0 2px 12px rgba(255, 240, 200, 0.6);
+}
+
+.hero-title .accent { color: var(--c-cinnabar); }
+
+.hero-subtitle {
+    font-family: var(--font-poem);
+    font-size: 1.05rem;
+    letter-spacing: 0.6em;
+    color: #5a4f3a;
+    margin-bottom: 14px;
+}
+
+.hero-poem-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+    position: relative;
+}
+
+.hero-poem-line {
+    font-family: var(--font-poem);
+    font-size: 1.4rem;
+    color: #4a3e26;
+    letter-spacing: 0.4em;
+    line-height: 1.8;
+}
+
+.hero-poem-author {
+    font-family: var(--font-poem);
+    font-size: 0.9rem;
+    color: var(--seal-red);
+    margin-top: 10px;
+    letter-spacing: 0.3em;
+    font-style: italic;
+}
+
+/* ============ 当季推荐 ============ */
+.season-band {
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.season-label {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--c-cinnabar);
+    letter-spacing: 3px;
+    flex-shrink: 0;
+}
+
+.season-label::before {
+    content: "·";
+    margin-right: 8px;
+    color: var(--c-imperial);
+}
+
+.season-cards {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.season-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--route-soft);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.season-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--route-primary);
+}
+
+.season-card .name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.season-card .reason {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+}
+
+/* ============ 筛选栏 ============ */
+.filter-bar {
+    background: var(--bg-alt);
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    margin-right: 4px;
+    letter-spacing: 1px;
+}
+
+.filter-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    background: var(--bg-alt);
+    color: var(--text-soft);
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.filter-btn:hover { border-color: var(--c-pine); color: var(--c-pine); }
+
+.filter-btn.active {
+    background: var(--c-pine);
+    color: white;
+    border-color: var(--c-pine);
+}
+
+.search-group {
+    flex: 1;
+    min-width: 180px;
+    max-width: 280px;
+    margin-left: auto;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 8px 16px;
+    border: 1px solid var(--line);
+    background: var(--bg-alt);
+    color: var(--text);
+    border-radius: 18px;
+    font-size: 0.88rem;
+    outline: none;
+    font-family: inherit;
+}
+
+#searchInput:focus { border-color: var(--c-pine); }
+
+.lottery-trigger {
+    padding: 8px 18px;
+    background: linear-gradient(135deg, var(--c-cinnabar) 0%, #a02818 100%);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.88rem;
+    box-shadow: 0 3px 10px rgba(201, 64, 42, 0.35);
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: inherit;
+    letter-spacing: 1px;
+}
+
+.lottery-trigger:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(201, 64, 42, 0.45); }
+
+/* ============ 路线网格(杂志拼贴) ============ */
+.route-grid {
+    max-width: 1320px;
+    margin: 36px auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.route-grid.has-feature .route-card.featured {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.route-grid.has-feature .route-card.featured .card-image { height: 240px; }
+
+@media (max-width: 720px) {
+    .route-grid.has-feature .route-card.featured { grid-column: span 1; }
+}
+
+.route-card {
+    background: var(--bg-alt);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-top: 3px solid var(--route-primary, var(--c-pine));
+}
+
+.route-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-up);
+}
+
+.card-image {
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+    background: var(--route-soft);
+}
+
+.card-image svg { width: 100%; height: 100%; display: block; }
+
+.card-badges {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-end;
+}
+
+.difficulty-badge {
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.difficulty-badge.easy { background: var(--diff-easy); }
+.difficulty-badge.medium { background: var(--diff-medium); }
+.difficulty-badge.hard { background: var(--diff-hard); }
+
+.tech-grade {
+    background: rgba(0,0,0,0.55);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-family: var(--font-serif);
+    letter-spacing: 1px;
+}
+
+.season-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255,255,255,0.92);
+    color: var(--c-cinnabar);
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.visited-mark {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: var(--c-imperial);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.card-radar {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 64px;
+    height: 64px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 8px;
+    padding: 4px;
+    backdrop-filter: blur(4px);
+}
+
+[data-theme="dark"] .card-radar { background: rgba(31,34,38,0.85); }
+
+.card-body {
+    padding: 16px 18px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: 2px;
+}
+
+.card-location {
+    color: var(--text-mute);
+    font-size: 0.82rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.card-stats {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 10px;
+    color: var(--text-soft);
+    font-size: 0.8rem;
+}
+
+.card-desc {
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.6;
+}
+
+.card-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.compare-toggle {
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--line);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--text-mute);
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.compare-toggle.checked {
+    background: var(--route-primary);
+    border-color: var(--route-primary);
+    color: white;
+}
+
+.compare-label {
+    font-size: 0.78rem;
+    color: var(--text-mute);
+}
+
+.empty-msg {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-mute);
+    font-size: 1rem;
+}
+
+/* ============ Modal 路线详情 ============ */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+    overflow-y: auto;
+    padding: 30px 16px;
+    backdrop-filter: blur(4px);
+}
+
+.modal.active { display: block; }
+
+.modal-content {
+    background: var(--bg-alt);
+    max-width: 760px;
+    margin: 0 auto;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    border-top: 4px solid var(--route-primary);
+}
+
+.close-btn {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: white;
+    z-index: 5;
+    width: 34px;
+    height: 34px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.modal-header {
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-header svg { width: 100%; height: 100%; display: block; }
+
+.modal-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 35%, rgba(0,0,0,0.65));
+}
+
+.modal-title-block {
+    position: absolute;
+    bottom: 22px;
+    left: 24px;
+    right: 24px;
+    color: white;
+    z-index: 1;
+}
+
+.modal-title-block h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 4px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.modal-title-block .meta {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    opacity: 0.92;
+}
+
+.modal-body {
+    padding: 24px 28px 28px;
+}
+
+/* ============ 雷达图 ============ */
+.radar-block {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    background: var(--route-soft);
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+@media (max-width: 540px) {
+    .radar-block { grid-template-columns: 1fr; text-align: center; }
+}
+
+.radar-svg { width: 100%; height: auto; }
+
+.radar-legend { font-size: 0.86rem; }
+
+.radar-legend dt {
+    font-weight: 600;
+    color: var(--route-primary);
+    font-family: var(--font-serif);
+    margin-top: 6px;
+}
+
+.radar-legend dt:first-child { margin-top: 0; }
+
+.radar-legend dd {
+    color: var(--text-soft);
+    margin-bottom: 4px;
+    font-size: 0.82rem;
+}
+
+/* ============ 信息网格 ============ */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 14px;
+    background: var(--route-soft);
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+}
+
+.info-item { text-align: center; }
+
+.info-label { font-size: 0.75rem; color: var(--text-mute); margin-bottom: 4px; letter-spacing: 1px; }
+
+.info-value {
+    font-weight: 700;
+    color: var(--text);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--text);
+    margin: 22px 0 10px;
+    padding-left: 12px;
+    border-left: 4px solid var(--route-primary);
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.modal-body p, .modal-body li { color: var(--text-soft); margin-bottom: 6px; font-size: 0.9rem; }
+.modal-body ul { padding-left: 22px; }
+
+.tip-box {
+    background: rgba(212, 160, 23, 0.08);
+    border-left: 4px solid var(--c-imperial);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-top: 14px;
+    color: var(--text);
+    font-size: 0.88rem;
+}
+
+/* ============ 电影分镜时间轴 ============ */
+.cinema-strip {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 12px 4px 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 12px;
+}
+
+.cinema-cell {
+    flex-shrink: 0;
+    width: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+}
+
+.cinema-sky {
+    height: 70px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.6rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.cinema-time {
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    font-size: 0.7rem;
+    background: rgba(0,0,0,0.4);
+    padding: 1px 6px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+}
+
+.cinema-elev {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 0.7rem;
+    background: rgba(255,255,255,0.85);
+    color: var(--text);
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.cinema-info {
+    padding: 8px 10px 10px;
+    flex: 1;
+}
+
+.cinema-name {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.cinema-vista {
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ============ Waypoint 详情(图片+搜索) ============ */
+.route-map {
+    background: var(--route-soft);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 8px 0 14px;
+}
+
+.photo-tip {
+    background: var(--route-soft);
+    border-left: 3px solid var(--route-primary);
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.photo-tip code {
+    background: var(--bg-alt);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    color: var(--route-primary);
+}
+
+.elev-svg { width: 100%; height: auto; display: block; margin-bottom: 12px; }
+
+.wp-list { list-style: none; padding: 0; margin: 0; }
+
+.wp-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--line);
+    align-items: flex-start;
+}
+
+.wp-item:last-child { border-bottom: none; }
+
+.wp-photo {
+    flex-shrink: 0;
+    width: 110px;
+    height: 110px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background: var(--route-soft);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.wp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.wp-num {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 24px;
+    height: 24px;
+    background: var(--route-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.78rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.wp-info { flex: 1; min-width: 0; }
+
+.wp-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.wp-head strong {
+    color: var(--text);
+    font-size: 1rem;
+    font-family: var(--font-serif);
+    letter-spacing: 1px;
+}
+
+.wp-meta {
+    font-size: 0.75rem;
+    color: var(--text-mute);
+    background: var(--route-soft);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.wp-vista {
+    font-size: 0.85rem;
+    color: var(--route-primary);
+    margin-bottom: 4px;
+    line-height: 1.5;
+}
+
+.wp-note {
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.wp-search { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.search-link {
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    background: var(--bg-alt);
+    color: var(--route-primary);
+    text-decoration: none;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    transition: all 0.15s;
+}
+
+.search-link:hover { background: var(--route-primary); color: white; border-color: var(--route-primary); }
+
+@media (max-width: 540px) {
+    .wp-photo { width: 80px; height: 80px; }
+    .wp-item { gap: 10px; }
+    .search-link { font-size: 0.68rem; padding: 2px 7px; }
+}
+
+/* ============ 隐藏玩法/装备/应急 ============ */
+.hidden-list {
+    background: linear-gradient(135deg, rgba(212,160,23,0.08), rgba(212,160,23,0.02));
+    border-left: 4px solid var(--c-imperial);
+    padding: 14px 18px 14px 38px;
+    border-radius: 4px;
+    list-style: disc;
+}
+
+.hidden-list li { color: var(--text); margin-bottom: 6px; font-size: 0.9rem; }
+
+.gear-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.gear-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--route-soft);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s;
+}
+
+.gear-item:hover { transform: translateX(2px); }
+
+.gear-check {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--text-mute);
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: white;
+}
+
+.gear-item.checked .gear-check {
+    background: var(--route-primary);
+    border-color: var(--route-primary);
+}
+
+.gear-item.checked { text-decoration: line-through; opacity: 0.6; }
+
+.emergency-block {
+    background: rgba(201, 64, 42, 0.06);
+    border: 1px solid rgba(201, 64, 42, 0.2);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+}
+
+.emergency-block h4 {
+    color: var(--c-cinnabar);
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.emergency-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 0.85rem;
+    border-bottom: 1px dashed rgba(201, 64, 42, 0.15);
+}
+
+.emergency-row:last-child { border-bottom: none; }
+
+.emergency-row a {
+    color: var(--c-cinnabar);
+    text-decoration: none;
+    font-weight: 600;
+    font-family: var(--font-serif);
+}
+
+.last-updated {
+    font-size: 0.78rem;
+    color: var(--text-mute);
+    margin-top: 8px;
+    text-align: right;
+    letter-spacing: 1px;
+}
+
+/* ============ 分享 ============ */
+.share-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    flex: 1;
+    min-width: 130px;
+    padding: 10px 16px;
+    border: 1px solid var(--route-primary);
+    background: var(--bg-alt);
+    color: var(--route-primary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    font-family: inherit;
+    letter-spacing: 1px;
+}
+
+.share-btn:hover { background: var(--route-primary); color: white; }
+
+.share-btn.primary { background: var(--route-primary); color: white; }
+.share-btn.primary:hover { background: var(--c-pine); }
+
+.toggle-visited {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    border: 1px dashed var(--c-imperial);
+    background: transparent;
+    color: var(--c-imperial);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-serif);
+    letter-spacing: 2px;
+    transition: all 0.2s;
+    font-size: 0.88rem;
+}
+
+.toggle-visited:hover { background: var(--c-imperial); color: white; }
+.toggle-visited.is-visited { background: var(--c-imperial); color: white; }
+
+/* ============ 抽签 ============ */
+.lottery-modal .lottery-content {
+    background: linear-gradient(160deg, #fff8e6 0%, #ffffff 60%);
+    max-width: 480px;
+    margin: 0 auto;
+    border-radius: 16px;
+    padding: 28px 24px 22px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    border-top: 4px solid var(--c-cinnabar);
+}
+
+[data-theme="dark"] .lottery-modal .lottery-content {
+    background: linear-gradient(160deg, #2a1f15 0%, #1f2226 60%);
+}
+
+.lottery-modal .close-btn { background: rgba(0,0,0,0.15); color: var(--text); }
+
+.lottery-title {
+    text-align: center;
+    color: var(--c-cinnabar);
+    margin-bottom: 18px;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+.lottery-stage {
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.lottery-card {
+    width: 100%;
+    background: var(--bg-alt);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    text-align: center;
+}
+
+.lottery-card.spinning { animation: shake 0.18s ease-in-out; }
+.lottery-card.revealed { animation: revealPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+@keyframes shake {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(0.97) rotate(-1deg); }
+}
+
+@keyframes revealPop {
+    0% { transform: scale(0.6); opacity: 0; }
+    60% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.lottery-img { height: 160px; overflow: hidden; }
+
+.lottery-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    padding: 14px 16px 4px;
+    letter-spacing: 3px;
+}
+
+.lottery-loc { color: var(--text-mute); font-size: 0.85rem; padding: 0 16px 12px; letter-spacing: 1px; }
+
+.lottery-stats { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; padding: 0 16px 12px; }
+
+.lottery-tag {
+    padding: 4px 12px;
+    background: var(--route-soft);
+    color: var(--route-primary);
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.lottery-tag.easy { background: #e8f5e8; color: #3d8b3d; }
+.lottery-tag.medium { background: #fff3d6; color: #b07a1f; }
+.lottery-tag.hard { background: #fce4e2; color: #b03828; }
+
+.lottery-desc { color: var(--text-soft); font-size: 0.88rem; padding: 0 20px 14px; line-height: 1.5; }
+
+.lottery-fortune {
+    background: rgba(212, 160, 23, 0.1);
+    border-top: 2px dashed var(--c-imperial);
+    padding: 14px 20px;
+    color: var(--text);
+    font-size: 0.92rem;
+    font-family: var(--font-serif);
+    line-height: 1.7;
+}
+
+.lottery-fortune .verse {
+    color: var(--c-cinnabar);
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.lottery-status { color: var(--text-mute); font-size: 0.95rem; letter-spacing: 1px; }
+
+.lottery-actions { display: flex; gap: 10px; margin-top: 16px; }
+
+/* ============ 安全侧栏 ============ */
+.safety-fab {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--c-cinnabar);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 6px 20px rgba(201, 64, 42, 0.4);
+    z-index: 40;
+    transition: transform 0.2s;
+}
+
+.safety-fab:hover { transform: scale(1.08); }
+
+.safety-panel {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 340px;
+    max-width: 92vw;
+    background: var(--bg-alt);
+    box-shadow: -10px 0 40px rgba(0,0,0,0.18);
+    z-index: 60;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.safety-panel.open { transform: translateX(0); }
+
+.safety-head {
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--c-cinnabar);
+    color: white;
+}
+
+.safety-head h3 {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.safety-head .close-btn {
+    position: static;
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+.safety-body { padding: 18px 20px; overflow-y: auto; flex: 1; }
+
+.safety-body h4 {
+    font-family: var(--font-serif);
+    color: var(--c-cinnabar);
+    margin: 14px 0 8px;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+}
+
+.safety-body h4:first-child { margin-top: 0; }
+
+.safety-body ul { padding-left: 20px; margin-bottom: 8px; }
+.safety-body li { font-size: 0.86rem; color: var(--text-soft); margin-bottom: 4px; }
+
+.safety-emergency {
+    background: rgba(201, 64, 42, 0.08);
+    border: 1px solid rgba(201, 64, 42, 0.2);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.safety-emergency a {
+    display: block;
+    padding: 6px 0;
+    color: var(--c-cinnabar);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 1px dashed rgba(201, 64, 42, 0.15);
+}
+
+.safety-emergency a:last-child { border-bottom: none; }
+
+/* ============ 对比抽屉 ============ */
+.compare-tray {
+    position: fixed;
+    left: 50%;
+    bottom: -120px;
+    transform: translateX(-50%);
+    background: var(--bg-alt);
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+    padding: 14px 22px;
+    z-index: 45;
+    transition: bottom 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--line);
+    border-bottom: none;
+    max-width: 95vw;
+    flex-wrap: wrap;
+}
+
+.compare-tray.show { bottom: 0; }
+
+.compare-tray .label {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: var(--c-pine);
+    letter-spacing: 2px;
+    font-size: 0.92rem;
+}
+
+.compare-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.compare-pill {
+    padding: 4px 10px;
+    background: var(--route-soft);
+    border-radius: 12px;
+    font-size: 0.82rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.compare-pill .x {
+    cursor: pointer;
+    color: var(--text-mute);
+    font-weight: 700;
+}
+
+.compare-go, .compare-clear {
+    padding: 6px 14px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+}
+
+.compare-go { background: var(--c-pine); color: white; }
+.compare-clear { background: transparent; color: var(--text-mute); border: 1px solid var(--line); }
+
+/* 对比弹窗 */
+.compare-modal-content {
+    background: var(--bg-alt);
+    max-width: 880px;
+    margin: 0 auto;
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+}
+
+.compare-modal-content h2 {
+    font-family: var(--font-serif);
+    margin-bottom: 18px;
+    letter-spacing: 3px;
+    color: var(--text);
+    text-align: center;
+}
+
+.compare-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.compare-card {
+    border-top: 3px solid var(--route-primary);
+    background: var(--route-soft);
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.compare-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: 2px;
+}
+
+.compare-radar { width: 180px; height: 180px; margin: 8px auto; }
+
+.compare-meta { font-size: 0.85rem; color: var(--text-soft); }
+
+.compare-meta div { padding: 3px 0; border-bottom: 1px dashed var(--line); }
+.compare-meta div:last-child { border-bottom: none; }
+
+/* ============ Toast ============ */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--c-ink);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 0.92rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    z-index: 200;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ============ 页脚 ============ */
+footer {
+    text-align: center;
+    padding: 36px 20px 24px;
+    background: var(--c-ink);
+    color: rgba(255,255,255,0.65);
+    margin-top: 40px;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    line-height: 1.8;
+}
+
+footer .footer-poem {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 8px;
+    letter-spacing: 4px;
+}
+
+@media (max-width: 640px) {
+    .hero { height: 380px; }
+    .hero-title { font-size: 2.4rem; letter-spacing: 6px; }
+    .hero-subtitle { font-size: 1rem; letter-spacing: 3px; }
+    .filter-bar, .season-band, .brand-bar { padding: 14px 16px; gap: 10px; }
+    .search-group { margin-left: 0; max-width: 100%; }
+    .route-grid { padding: 0 14px; gap: 14px; margin: 24px auto; }
+    .modal-title-block h2 { font-size: 1.5rem; letter-spacing: 2px; }
+    .safety-fab { width: 48px; height: 48px; font-size: 1.3rem; }
+}
+
+/* ============ 诗轴 · 立轴竖排古意 ============ */
+.poem-scroll {
+    margin: 24px 0 18px;
+    background:
+        linear-gradient(180deg, rgba(245,236,217,0.96) 0%, rgba(232,216,184,0.92) 100%),
+        repeating-linear-gradient(0deg, transparent 0, transparent 18px, rgba(180,150,100,0.04) 18px, rgba(180,150,100,0.04) 19px);
+    border-top: 3px double var(--seal-red);
+    border-bottom: 3px double var(--seal-red);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    padding: 26px 28px 26px;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    min-height: 240px;
+    box-shadow: inset 0 0 40px rgba(180, 150, 100, 0.18), 0 4px 12px rgba(80, 60, 30, 0.06);
+}
+
+[data-theme="dark"] .poem-scroll {
+    background:
+        linear-gradient(180deg, rgba(45,40,28,0.96) 0%, rgba(35,32,23,0.92) 100%),
+        repeating-linear-gradient(0deg, transparent 0, transparent 18px, rgba(255,240,200,0.025) 18px, rgba(255,240,200,0.025) 19px);
+}
+
+.poem-scroll::before,
+.poem-scroll::after {
+    content: '';
+    position: absolute;
+    left: 28px;
+    right: 28px;
+    height: 1px;
+    background: var(--seal-red);
+    opacity: 0.4;
+}
+
+.poem-scroll::before { top: 12px; }
+.poem-scroll::after { bottom: 12px; }
+
+.poem-lines {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.poem-line {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-family: var(--font-poem);
+    font-size: 1.25rem;
+    color: #3a2e18;
+    letter-spacing: 0.35em;
+    line-height: 1.8;
+    padding: 8px 0;
+}
+
+[data-theme="dark"] .poem-line { color: #e8dfcc; }
+
+.poem-meta {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-family: var(--font-poem);
+    color: #6a5230;
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    padding: 8px 0;
+    align-self: flex-start;
+}
+
+[data-theme="dark"] .poem-meta { color: #b8a878; }
+
+.poem-meta .title { font-size: 1rem; color: var(--seal-red); }
+.poem-meta .author { font-size: 0.95rem; }
+
+.poem-seal {
+    position: absolute;
+    right: 30px;
+    bottom: 22px;
+    width: 50px;
+    height: 50px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px rgba(183, 50, 40, 0.3);
+    transform: rotate(-3deg);
+    letter-spacing: 0;
+    line-height: 1.1;
+    padding: 4px;
+}
+
+.poem-seal span {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+.poem-note {
+    margin-top: 12px;
+    font-family: var(--font-poem);
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    text-align: center;
+    letter-spacing: 0.15em;
+    font-style: italic;
+    padding: 0 16px;
+}
+
+.poem-note::before { content: '「 '; color: var(--seal-red); }
+.poem-note::after { content: ' 」'; color: var(--seal-red); }
+
+/* ============ 山门雅号 + 卡片诗签 ============ */
+.epithet {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px 3px 8px;
+    background: rgba(255, 245, 214, 0.92);
+    color: var(--seal-red);
+    border-radius: 10px;
+    font-family: var(--font-poem);
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    backdrop-filter: blur(4px);
+}
+
+.epithet::before {
+    content: '·';
+    color: var(--c-imperial);
+    margin-right: 2px;
+}
+
+[data-theme="dark"] .epithet { background: rgba(30, 26, 18, 0.85); }
+
+.card-poem-snippet {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--line);
+    font-family: var(--font-poem);
+    font-size: 0.85rem;
+    color: var(--route-primary);
+    letter-spacing: 0.12em;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+.card-poem-snippet .author {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.72rem;
+    color: var(--text-mute);
+    text-align: right;
+}
+
+/* ============ 模态头部上的雅号 ============ */
+.modal-title-block .epithet-inline {
+    display: inline-block;
+    background: rgba(255, 245, 214, 0.85);
+    color: var(--seal-red);
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-family: var(--font-poem);
+    font-size: 0.88rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 8px;
+}
+
+.modal-title-block h2 .seal-mark {
+    color: var(--c-imperial);
+    font-size: 0.7em;
+    margin-left: 8px;
+    vertical-align: super;
+    letter-spacing: 0;
+}
+
+/* 让所有标题改用文楷 */
+.hero-title, .hero-subtitle, .hero-poem-line, .hero-poem-author,
+.section-title, .card-title, .info-value, .lottery-name, .lottery-title,
+.lottery-fortune .verse, .brand-name, .footer-poem,
+.modal-title-block h2, .cinema-name, .wp-head strong, .safety-head h3,
+.safety-body h4, .emergency-block h4, .compare-card h3, .compare-modal-content h2,
+.radar-legend dt, .toggle-visited {
+    font-family: var(--font-poem) !important;
+}
+
+/* 主体文字略微提升舒朗感 */
+.card-desc, .modal-body p, .modal-body li, .wp-vista, .wp-note,
+.hero-poem-author, .filter-label, .info-label {
+    font-family: var(--font-sans);
+}
+
+/* 印章式分割线 */
+.section-title {
+    padding-left: 0;
+    border-left: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::before {
+    content: '◈';
+    color: var(--seal-red);
+    font-size: 0.7em;
+    margin-right: 2px;
+}
+
+.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--route-primary), transparent);
+    opacity: 0.4;
+    margin-left: 10px;
+}
+
+@media (max-width: 540px) {
+    .poem-scroll { padding: 20px 16px; min-height: 200px; gap: 16px; }
+    .poem-line { font-size: 1.05rem; }
+    .poem-seal { width: 42px; height: 42px; font-size: 0.75rem; right: 18px; bottom: 16px; }
+    .hero-seal { width: 52px; height: 52px; font-size: 2rem; }
+}
+
+/* ============================================================
+   节气标(品牌头中央)
+   ============================================================ */
+.solar-term-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(201,64,42,0.1));
+    border: 1px solid rgba(212, 160, 23, 0.4);
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--font-poem);
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    max-width: 320px;
+}
+
+.solar-term-pill:hover { transform: scale(1.03); border-color: var(--seal-red); }
+
+.solar-term-pill .term-name {
+    color: var(--seal-red);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+
+.solar-term-pill .term-poem {
+    color: var(--text-soft);
+    font-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.78rem;
+}
+
+@media (max-width: 720px) { .solar-term-pill .term-poem { display: none; } }
+
+/* ============================================================
+   倒计时条(出发前)
+   ============================================================ */
+.countdown-bar {
+    display: none;
+    position: sticky;
+    top: 64px;
+    z-index: 30;
+    padding: 10px 24px;
+    background: linear-gradient(90deg, var(--seal-red), var(--c-sunset));
+    color: white;
+    font-family: var(--font-poem);
+    text-align: center;
+    letter-spacing: 0.2em;
+    box-shadow: 0 2px 8px rgba(201, 64, 42, 0.3);
+    cursor: pointer;
+}
+
+.countdown-bar.show { display: block; }
+.countdown-bar .num { font-size: 1.4rem; font-weight: 700; margin: 0 8px; }
+.countdown-bar .clear-link {
+    margin-left: 12px;
+    color: rgba(255,255,255,0.85);
+    text-decoration: underline;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+/* ============================================================
+   徒步护照
+   ============================================================ */
+.passport-content {
+    background: var(--bg-paper);
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+    border-top: 5px solid var(--seal-red);
+    background-image:
+        linear-gradient(180deg, rgba(245,236,217,0.95) 0%, rgba(232,216,184,0.85) 100%),
+        repeating-linear-gradient(0deg, transparent 0, transparent 22px, rgba(180,150,100,0.06) 22px, rgba(180,150,100,0.06) 23px);
+}
+
+[data-theme="dark"] .passport-content {
+    background-image:
+        linear-gradient(180deg, rgba(45,40,28,0.95) 0%, rgba(35,32,23,0.85) 100%),
+        repeating-linear-gradient(0deg, transparent 0, transparent 22px, rgba(255,240,200,0.04) 22px, rgba(255,240,200,0.04) 23px);
+}
+
+.passport-cover {
+    text-align: center;
+    padding: 24px 0;
+    border-bottom: 2px double var(--seal-red);
+    margin-bottom: 18px;
+}
+
+.passport-cover .seal-big {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 14px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    font-size: 2.2rem;
+    font-weight: 700;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    border-radius: 6px;
+    box-shadow: 0 4px 14px rgba(183, 50, 40, 0.35);
+    border: 3px double #fff5d6;
+    transform: rotate(-2deg);
+    line-height: 1;
+}
+.passport-cover .seal-big span {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+.passport-cover h2 {
+    font-family: var(--font-poem);
+    font-size: 1.8rem;
+    letter-spacing: 0.4em;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.passport-cover .epithet-line {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    letter-spacing: 0.3em;
+    font-size: 1rem;
+    margin: 6px 0;
+}
+
+.passport-cover .meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    margin-top: 14px;
+    font-family: var(--font-poem);
+    color: var(--text-soft);
+}
+.passport-cover .meta-row strong { color: var(--seal-red); font-size: 1.5rem; display: block; }
+.passport-cover .meta-row small { font-size: 0.78rem; letter-spacing: 0.2em; }
+
+.passport-progress {
+    margin: 14px auto;
+    max-width: 480px;
+    height: 8px;
+    background: rgba(0,0,0,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.passport-progress .bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--seal-red), var(--c-imperial));
+    transition: width 0.6s;
+}
+
+.passport-next {
+    font-family: var(--font-poem);
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    letter-spacing: 0.15em;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.passport-pages {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.passport-page {
+    background: var(--bg-alt);
+    border-radius: 10px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--route-primary);
+    position: relative;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.passport-page:hover { transform: translateY(-2px); box-shadow: var(--shadow-up); }
+
+.passport-page.unvisited {
+    opacity: 0.45;
+    background: repeating-linear-gradient(45deg, var(--bg-alt), var(--bg-alt) 6px, var(--route-soft) 6px, var(--route-soft) 7px);
+}
+
+.passport-page h4 {
+    font-family: var(--font-poem);
+    font-size: 1.05rem;
+    color: var(--text);
+    letter-spacing: 0.15em;
+    margin-bottom: 4px;
+}
+
+.passport-page .epithet-tag {
+    display: inline-block;
+    color: var(--seal-red);
+    font-family: var(--font-poem);
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+}
+
+.passport-page .visit-rows { font-size: 0.82rem; color: var(--text-soft); margin-top: 6px; line-height: 1.6; }
+.passport-page .visit-rows .row { padding: 2px 0; }
+
+.passport-page .page-seal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    font-size: 0.62rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    border-radius: 4px;
+    transform: rotate(8deg);
+    line-height: 1.05;
+    padding: 3px;
+    border: 1.5px solid #fff5d6;
+    animation: stamp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.passport-page .page-seal span {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+@keyframes stamp {
+    0% { transform: rotate(0deg) scale(2); opacity: 0; }
+    60% { transform: rotate(15deg) scale(0.95); opacity: 1; }
+    100% { transform: rotate(8deg) scale(1); }
+}
+
+.passport-page.unvisited .page-seal { display: none; }
+
+/* 成就弹窗 */
+.achievement-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.6);
+    background: linear-gradient(160deg, #fff8e6 0%, #f5dfa8 100%);
+    border: 4px double var(--seal-red);
+    padding: 28px 36px;
+    border-radius: 14px;
+    z-index: 300;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.achievement-toast.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+.achievement-toast h3 {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    letter-spacing: 0.4em;
+    font-size: 1.5rem;
+    margin: 8px 0;
+}
+.achievement-toast p { color: #5a4f3a; font-family: var(--font-poem); letter-spacing: 0.2em; }
+.achievement-toast .ach-seal {
+    width: 80px; height: 80px; margin: 0 auto 12px;
+    background: var(--seal-red); color: #fff5d6;
+    font-family: var(--font-poem); font-size: 2rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px; transform: rotate(-3deg);
+    border: 2px solid #fff5d6;
+}
+
+/* ============================================================
+   计划器
+   ============================================================ */
+.planner-content {
+    background: var(--bg-alt);
+    max-width: 720px;
+    margin: 0 auto;
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+    border-top: 4px solid var(--c-imperial);
+}
+
+.planner-title {
+    font-family: var(--font-poem);
+    text-align: center;
+    color: var(--text);
+    letter-spacing: 0.4em;
+    font-size: 1.35rem;
+    margin-bottom: 18px;
+}
+
+.weather-strip {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.weather-day {
+    background: var(--route-soft);
+    padding: 10px 4px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-soft);
+}
+.weather-day.weekend { border: 2px solid var(--c-imperial); }
+.weather-day .icon { font-size: 1.5rem; display: block; margin: 4px 0; }
+.weather-day .label { font-family: var(--font-poem); font-weight: 700; color: var(--text); }
+.weather-day .temp { color: var(--text-mute); font-size: 0.7rem; }
+
+.planner-rec {
+    background: linear-gradient(135deg, rgba(61,110,90,0.08), rgba(212,160,23,0.05));
+    border: 1px dashed var(--c-pine);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+.planner-rec h4 { font-family: var(--font-poem); color: var(--c-pine); letter-spacing: 0.3em; margin-bottom: 8px; }
+.planner-rec .rec-card {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 10px;
+    background: var(--bg-alt);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.planner-rec .rec-card:hover { transform: translateX(2px); box-shadow: var(--shadow-card); }
+.planner-rec .rec-svg { width: 96px; height: 96px; flex-shrink: 0; border-radius: 6px; overflow: hidden; }
+.planner-rec .rec-info h5 { font-family: var(--font-poem); font-size: 1.1rem; letter-spacing: 0.2em; margin-bottom: 4px; }
+.planner-rec .rec-info p { font-size: 0.84rem; color: var(--text-soft); }
+.planner-rec .rec-reason { color: var(--seal-red); font-size: 0.8rem; margin-top: 6px; font-family: var(--font-poem); }
+
+.countdown-set {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--route-soft);
+    border-radius: 8px;
+}
+.countdown-set label { font-family: var(--font-poem); font-weight: 700; }
+.countdown-set input[type="date"] {
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg-alt);
+    color: var(--text);
+    font-family: inherit;
+}
+.countdown-set button {
+    padding: 6px 14px;
+    background: var(--c-imperial);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+/* ============================================================
+   明信片
+   ============================================================ */
+.postcard-content {
+    background: var(--bg-alt);
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 14px;
+    padding: 24px;
+    position: relative;
+    border-top: 4px solid var(--c-cinnabar);
+}
+
+.postcard-title {
+    font-family: var(--font-poem);
+    text-align: center;
+    color: var(--text);
+    letter-spacing: 0.4em;
+    font-size: 1.35rem;
+    margin-bottom: 16px;
+}
+
+.postcard-stage {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--route-soft);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+.postcard-stage canvas { width: 100%; height: 100%; display: block; }
+
+.postcard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.postcard-actions input {
+    flex: 1;
+    min-width: 160px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--bg-alt);
+    color: var(--text);
+    font-family: inherit;
+}
+
+/* ============================================================
+   约伴墙
+   ============================================================ */
+.meetup-wall {
+    background: var(--route-soft);
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 12px;
+}
+.meetup-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+.meetup-row input, .meetup-row textarea {
+    flex: 1;
+    min-width: 100px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-family: inherit;
+    background: var(--bg-alt);
+    color: var(--text);
+}
+.meetup-row textarea { min-height: 32px; resize: vertical; }
+.meetup-row button {
+    padding: 6px 14px;
+    background: var(--c-pine);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.meetup-list { list-style: none; padding: 0; margin-top: 10px; }
+.meetup-card {
+    background: var(--bg-alt);
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--c-pine);
+    position: relative;
+    font-size: 0.88rem;
+}
+.meetup-card .head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    color: var(--text-soft);
+    font-size: 0.8rem;
+}
+.meetup-card .name { font-family: var(--font-poem); color: var(--text); font-weight: 700; }
+.meetup-card .x { color: var(--text-mute); cursor: pointer; }
+
+/* ============================================================
+   日记
+   ============================================================ */
+.diary-block {
+    background: var(--route-soft);
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 8px;
+}
+.diary-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.diary-form textarea {
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg-alt);
+    color: var(--text);
+    font-family: inherit;
+    line-height: 1.6;
+    min-height: 60px;
+    resize: vertical;
+}
+.diary-form .row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.diary-form select, .diary-form input {
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    font-family: inherit;
+    background: var(--bg-alt);
+    color: var(--text);
+}
+.diary-form button {
+    padding: 8px 16px;
+    background: var(--c-pine);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.diary-list { list-style: none; padding: 0; margin-top: 12px; }
+.diary-entry {
+    background: var(--bg-alt);
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--c-imperial);
+    position: relative;
+}
+.diary-entry .head { font-family: var(--font-poem); color: var(--text); margin-bottom: 4px; font-size: 0.88rem; }
+.diary-entry .body { font-size: 0.88rem; color: var(--text-soft); line-height: 1.6; white-space: pre-wrap; }
+.diary-entry .x { position: absolute; top: 6px; right: 10px; color: var(--text-mute); cursor: pointer; }
+
+/* ============================================================
+   音景控制条
+   ============================================================ */
+.sound-mini {
+    position: fixed;
+    bottom: 18px;
+    left: 18px;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--bg-alt);
+    color: var(--text);
+    border-radius: 24px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+    border: 1px solid var(--line);
+    font-family: var(--font-poem);
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+}
+.sound-mini[hidden] { display: none; }
+.sound-mini .sound-toggle, .sound-mini .sound-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--c-pine);
+    font-size: 1rem;
+    padding: 0 4px;
+}
+.sound-mini .sound-close { color: var(--text-mute); font-size: 1.1rem; }
+
+.sound-link-bar {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+.sound-link {
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    background: var(--route-soft);
+    color: var(--route-primary);
+    border-radius: 14px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+    border: none;
+}
+.sound-link:hover { background: var(--route-primary); color: white; }
+
+/* 诗诵按钮 */
+.recite-btn {
+    margin-left: 8px;
+    padding: 4px 12px;
+    background: var(--seal-red);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: var(--font-poem);
+    letter-spacing: 0.15em;
+}
+.recite-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.recite-btn.playing { background: var(--c-pine); }
+
+/* ============================================================
+   冷知识(右下角小卡片)
+   ============================================================ */
+.trivia-toast {
+    position: fixed;
+    bottom: 88px;
+    right: 18px;
+    width: 320px;
+    max-width: 92vw;
+    background: var(--bg-alt);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--c-imperial);
+    padding: 14px 16px;
+    z-index: 35;
+    font-family: var(--font-poem);
+    transform: translateY(140%);
+    opacity: 0;
+    transition: all 0.4s;
+}
+.trivia-toast.show { transform: translateY(0); opacity: 1; }
+
+.trivia-head {
+    color: var(--c-imperial);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+    font-size: 0.92rem;
+}
+
+.trivia-body {
+    color: var(--text);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+}
+
+.trivia-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--text-mute);
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-family: inherit;
+}
+
+@media (max-width: 540px) {
+    .weather-strip { grid-template-columns: repeat(7, 1fr); }
+    .weather-day { font-size: 0.7rem; padding: 6px 2px; }
+    .weather-day .icon { font-size: 1.2rem; }
+}
+
+/* ============================================================
+   山行三餐 · 仿菜牌
+   ============================================================ */
+.feast-block {
+    margin-top: 14px;
+    background:
+        linear-gradient(180deg, rgba(245,236,217,0.94) 0%, rgba(232,216,184,0.88) 100%);
+    border-top: 3px double var(--seal-red);
+    border-bottom: 3px double var(--seal-red);
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    padding: 22px 24px 24px;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: inset 0 0 30px rgba(180, 150, 100, 0.16), 0 4px 12px rgba(80, 60, 30, 0.05);
+}
+
+[data-theme="dark"] .feast-block {
+    background: linear-gradient(180deg, rgba(45,40,28,0.94) 0%, rgba(35,32,23,0.88) 100%);
+}
+
+.feast-tagline {
+    text-align: center;
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    letter-spacing: 0.3em;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(183, 50, 40, 0.3);
+}
+
+.feast-tagline::before, .feast-tagline::after {
+    content: '◈';
+    margin: 0 10px;
+    color: var(--c-imperial);
+    font-size: 0.7em;
+}
+
+.feast-dishes {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.feast-dish {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--bg-alt);
+    border-radius: 8px;
+    border-left: 3px solid var(--route-primary);
+    transition: all 0.2s;
+}
+
+.feast-dish:hover { transform: translateX(2px); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+
+.feast-dish.signature {
+    border-left-width: 4px;
+    background: linear-gradient(90deg, rgba(212, 160, 23, 0.08), var(--bg-alt) 40%);
+    position: relative;
+}
+
+.feast-dish.signature::before {
+    content: '招牌';
+    position: absolute;
+    top: -8px;
+    left: 14px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    padding: 2px 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(183, 50, 40, 0.3);
+}
+
+.feast-icon {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: var(--route-soft);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.feast-info { min-width: 0; }
+
+.feast-name {
+    font-family: var(--font-poem);
+    font-size: 1.08rem;
+    color: var(--text);
+    letter-spacing: 0.12em;
+    margin-bottom: 3px;
+}
+
+.feast-desc {
+    font-size: 0.84rem;
+    color: var(--text-soft);
+    line-height: 1.55;
+}
+
+.feast-price {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+}
+
+.feast-meta {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(183, 50, 40, 0.25);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.feast-meta .meta-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.6;
+}
+
+.feast-meta .meta-label {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    letter-spacing: 0.15em;
+    flex-shrink: 0;
+    min-width: 4em;
+}
+
+.feast-meta .meta-value {
+    color: var(--text-soft);
+    flex: 1;
+}
+
+.feast-verse {
+    margin-top: 14px;
+    text-align: center;
+    font-family: var(--font-poem);
+    color: var(--text);
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    line-height: 1.8;
+    padding: 10px 8px;
+    background: rgba(183, 50, 40, 0.04);
+    border-radius: 6px;
+    font-style: italic;
+}
+
+.feast-verse::before, .feast-verse::after {
+    color: var(--seal-red);
+    font-weight: 700;
+}
+
+.feast-seal {
+    position: absolute;
+    top: -14px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    border-radius: 5px;
+    box-shadow: 0 3px 8px rgba(183, 50, 40, 0.3);
+    transform: rotate(4deg);
+    line-height: 1.05;
+    padding: 3px;
+    border: 1.5px solid #fff5d6;
+}
+
+.feast-seal span {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+@media (max-width: 540px) {
+    .feast-block { padding: 18px 14px 16px; }
+    .feast-dish { grid-template-columns: 44px 1fr; row-gap: 4px; padding: 10px 12px; }
+    .feast-icon { width: 44px; height: 44px; font-size: 1.5rem; }
+    .feast-price { grid-column: 2 / 3; text-align: left; }
+}
+
+/* ============================================================
+   节日横幅
+   ============================================================ */
+.festival-banner {
+    background: linear-gradient(90deg, var(--seal-red) 0%, var(--c-imperial) 50%, var(--c-cinnabar) 100%);
+    color: #fff5d6;
+    padding: 14px 24px;
+    text-align: center;
+    font-family: var(--font-poem);
+    letter-spacing: 0.25em;
+    cursor: pointer;
+    position: relative;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15);
+    transition: filter 0.2s;
+}
+.festival-banner:hover { filter: brightness(1.08); }
+.festival-banner[hidden] { display: none; }
+.festival-banner .icon { font-size: 1.4rem; margin-right: 6px; vertical-align: middle; }
+.festival-banner .name { font-size: 1.05rem; font-weight: 700; }
+.festival-banner .desc { font-size: 0.88rem; opacity: 0.95; margin-left: 8px; }
+.festival-banner .days { font-weight: 700; padding: 0 4px; }
+
+/* ============================================================
+   节气年轮
+   ============================================================ */
+.ring-content {
+    background: var(--bg-paper);
+    max-width: 760px;
+    margin: 0 auto;
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+    border-top: 4px double var(--seal-red);
+    background-image:
+        linear-gradient(180deg, rgba(245,236,217,0.96) 0%, rgba(232,216,184,0.9) 100%),
+        repeating-linear-gradient(0deg, transparent 0, transparent 22px, rgba(180,150,100,0.05) 22px, rgba(180,150,100,0.05) 23px);
+}
+
+[data-theme="dark"] .ring-content {
+    background-image: linear-gradient(180deg, rgba(45,40,28,0.96) 0%, rgba(35,32,23,0.9) 100%);
+}
+
+.ring-title {
+    font-family: var(--font-poem);
+    text-align: center;
+    color: var(--text);
+    letter-spacing: 0.4em;
+    font-size: 1.35rem;
+    margin-bottom: 18px;
+}
+
+.ring-svg {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    display: block;
+}
+
+.ring-pentad-box {
+    margin-top: 18px;
+    background: var(--route-soft);
+    padding: 16px 18px;
+    border-radius: 10px;
+    border-left: 4px solid var(--seal-red);
+    font-family: var(--font-poem);
+}
+
+.ring-pentad-box h4 {
+    color: var(--seal-red);
+    font-size: 1.05rem;
+    letter-spacing: 0.25em;
+    margin-bottom: 6px;
+}
+
+.ring-pentad-box .row {
+    margin: 6px 0;
+    color: var(--text);
+    font-size: 0.92rem;
+    letter-spacing: 0.05em;
+}
+
+.ring-pentad-box .label {
+    color: var(--seal-red);
+    margin-right: 6px;
+    font-weight: 700;
+}
+
+.ring-flower-tag {
+    display: inline-block;
+    background: var(--c-imperial);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    margin-left: 8px;
+    letter-spacing: 0.15em;
+}
+
+/* ============================================================
+   山中三礼
+   ============================================================ */
+.rite-content {
+    background: linear-gradient(160deg, #fff8e6 0%, #fbf2dc 60%);
+    max-width: 460px;
+    margin: 0 auto;
+    border-radius: 14px;
+    padding: 32px 30px;
+    position: relative;
+    border: 4px double var(--seal-red);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+[data-theme="dark"] .rite-content {
+    background: linear-gradient(160deg, #2a1f15 0%, #1f1810 60%);
+}
+
+.rite-title {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    letter-spacing: 0.4em;
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+    font-weight: 700;
+}
+
+.rite-text {
+    font-family: var(--font-poem);
+    color: var(--text);
+    line-height: 2.2;
+    letter-spacing: 0.18em;
+    font-size: 1rem;
+    white-space: pre-line;
+    padding: 0 12px;
+    margin-bottom: 16px;
+}
+
+.rite-verse {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(183, 50, 40, 0.3);
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    letter-spacing: 0.3em;
+    font-size: 0.98rem;
+    font-style: italic;
+}
+
+.rite-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+    justify-content: center;
+}
+
+.rite-confirm {
+    background: var(--seal-red);
+    color: #fff5d6;
+    border: none;
+    padding: 8px 24px;
+    border-radius: 18px;
+    cursor: pointer;
+    font-family: var(--font-poem);
+    letter-spacing: 0.25em;
+    font-size: 0.92rem;
+}
+
+.rite-skip {
+    background: transparent;
+    color: var(--text-mute);
+    border: 1px solid var(--line);
+    padding: 8px 18px;
+    border-radius: 18px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+
+/* ============================================================
+   文化区(详情页里):性格印 + 画家 + 字体 + 古琴 + 五行 + 成语 + 方言
+   ============================================================ */
+.culture-block {
+    margin-top: 14px;
+    padding: 18px 20px;
+    background: linear-gradient(180deg, rgba(245,236,217,0.5), rgba(245,236,217,0.2));
+    border-radius: 10px;
+    border: 1px solid var(--line);
+}
+
+[data-theme="dark"] .culture-block {
+    background: linear-gradient(180deg, rgba(45,40,28,0.5), rgba(35,32,23,0.2));
+}
+
+.culture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.culture-card {
+    background: var(--bg-alt);
+    padding: 14px 16px;
+    border-radius: 8px;
+    border-top: 3px solid var(--route-primary);
+    position: relative;
+    font-size: 0.88rem;
+}
+
+.culture-card h5 {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    letter-spacing: 0.3em;
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+}
+
+.culture-card .body {
+    color: var(--text);
+    line-height: 1.7;
+    font-family: var(--font-poem);
+    font-size: 0.92rem;
+}
+
+.culture-card .meta {
+    color: var(--text-mute);
+    font-size: 0.78rem;
+    margin-top: 4px;
+}
+
+.culture-card .play-link {
+    display: inline-block;
+    margin-top: 6px;
+    color: var(--seal-red);
+    font-family: var(--font-poem);
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+}
+.culture-card .play-link:hover { text-decoration: underline; }
+
+.spirit-seal-line {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, rgba(183, 50, 40, 0.06), rgba(212,160,23,0.04));
+    border-radius: 10px;
+    margin-bottom: 14px;
+    border: 1px dashed var(--seal-red);
+}
+
+.spirit-seal {
+    width: 60px;
+    height: 60px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    flex-shrink: 0;
+    transform: rotate(-3deg);
+    border: 2px solid #fff5d6;
+    box-shadow: 0 3px 8px rgba(183, 50, 40, 0.3);
+}
+
+.spirit-info { flex: 1; min-width: 0; }
+.spirit-info .name {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    letter-spacing: 0.4em;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+.spirit-info .person {
+    color: var(--text-soft);
+    font-size: 0.82rem;
+    margin: 2px 0 4px;
+    font-family: var(--font-poem);
+}
+.spirit-info .line {
+    color: var(--text);
+    font-family: var(--font-poem);
+    font-style: italic;
+    letter-spacing: 0.1em;
+    font-size: 0.92rem;
+}
+.spirit-info .desc {
+    margin-top: 6px;
+    color: var(--text-soft);
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+.idiom-card {
+    background: var(--bg-alt);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 3px solid var(--c-imperial);
+    margin-top: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.88rem;
+}
+.idiom-card:hover { transform: translateX(2px); }
+.idiom-card .word {
+    font-family: var(--font-poem);
+    font-size: 1.1rem;
+    letter-spacing: 0.4em;
+    color: var(--c-imperial);
+    margin-right: 10px;
+}
+.idiom-card .origin {
+    font-size: 0.78rem;
+    color: var(--text-mute);
+}
+.idiom-card .story {
+    margin-top: 4px;
+    color: var(--text-soft);
+    font-family: var(--font-poem);
+    line-height: 1.6;
+}
+
+.dialect-card {
+    background: var(--bg-alt);
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-top: 6px;
+    font-family: var(--font-poem);
+    font-size: 0.88rem;
+}
+.dialect-card .mandarin { color: var(--text-mute); margin-right: 8px; font-size: 0.82rem; }
+.dialect-card .arrow { color: var(--seal-red); margin-right: 8px; }
+.dialect-card .local { color: var(--text); font-weight: 700; letter-spacing: 0.15em; }
+.dialect-card .area { color: var(--text-mute); font-size: 0.75rem; margin-left: 8px; }
+
+.wuxing-pill {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 3px 12px;
+    background: var(--c-imperial);
+    color: white;
+    border-radius: 12px;
+    font-family: var(--font-poem);
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+}
+.wuxing-pill.wuxing-木 { background: #4a8c4a; }
+.wuxing-pill.wuxing-火 { background: #c9402a; }
+.wuxing-pill.wuxing-土 { background: #b88a4a; }
+.wuxing-pill.wuxing-金 { background: #c9a04a; color: #2c2818; }
+.wuxing-pill.wuxing-水 { background: #4a7c9c; }
+
+/* ============================================================
+   礼仪轴入口按钮(详情页底部)
+   ============================================================ */
+.rite-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(183,50,40,0.05), rgba(212,160,23,0.03));
+    border-radius: 10px;
+    border: 1px dashed var(--seal-red);
+}
+
+.rite-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 14px;
+    background: var(--bg-alt);
+    color: var(--seal-red);
+    border: 1px solid var(--seal-red);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-poem);
+    letter-spacing: 0.25em;
+    font-size: 0.92rem;
+    transition: all 0.2s;
+}
+.rite-btn:hover { background: var(--seal-red); color: #fff5d6; }
+
+/* 农历提示 */
+.lunar-hint {
+    font-size: 0.78rem;
+    color: var(--text-mute);
+    text-align: center;
+    padding: 6px 12px;
+    font-family: var(--font-poem);
+    letter-spacing: 0.18em;
+}
+
+/* 节日推荐(网格里) */
+.festival-card {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(183, 50, 40, 0.08), rgba(212, 160, 23, 0.06));
+    border: 1px dashed var(--seal-red);
+    border-radius: 12px;
+    padding: 18px 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+.festival-card:hover { transform: translateY(-2px); }
+.festival-card .ico { font-size: 2.4rem; }
+.festival-card .info { flex: 1; min-width: 200px; }
+.festival-card .name {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+}
+.festival-card .desc {
+    font-family: var(--font-poem);
+    color: var(--text);
+    margin-top: 4px;
+    letter-spacing: 0.1em;
+}
+.festival-card .days-tag {
+    background: var(--seal-red);
+    color: #fff5d6;
+    padding: 4px 14px;
+    border-radius: 14px;
+    font-family: var(--font-poem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+
+/* ============================================================
+   山社(山友帖)
+   ============================================================ */
+.society-content {
+    background: var(--bg-paper);
+    max-width: 720px;
+    margin: 0 auto;
+    border-radius: 14px;
+    padding: 28px 28px 24px;
+    position: relative;
+    border-top: 5px solid var(--seal-red);
+    background-image:
+        linear-gradient(180deg, rgba(245,236,217,0.96) 0%, rgba(232,216,184,0.88) 100%),
+        repeating-linear-gradient(0deg, transparent 0, transparent 22px, rgba(180,150,100,0.06) 22px, rgba(180,150,100,0.06) 23px);
+}
+
+[data-theme="dark"] .society-content {
+    background-image:
+        linear-gradient(180deg, rgba(45,40,28,0.96) 0%, rgba(35,32,23,0.88) 100%),
+        repeating-linear-gradient(0deg, transparent 0, transparent 22px, rgba(255,240,200,0.04) 22px, rgba(255,240,200,0.04) 23px);
+}
+
+.society-cover {
+    text-align: center;
+    padding: 16px 0 22px;
+    border-bottom: 2px double var(--seal-red);
+    margin-bottom: 18px;
+}
+
+.society-cover h2 {
+    font-family: var(--font-poem);
+    font-size: 1.7rem;
+    letter-spacing: 0.4em;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.society-cover .epithet-line {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    letter-spacing: 0.3em;
+    font-size: 0.95rem;
+    margin: 4px 0;
+}
+
+.society-cover .me-seal {
+    width: 76px; height: 76px;
+    margin: 0 auto 12px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    font-size: 1.9rem;
+    font-weight: 700;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(183, 50, 40, 0.35);
+    border: 2px double #fff5d6;
+    transform: rotate(-2deg);
+    line-height: 1;
+}
+.society-cover .me-seal span {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+.society-cover .aspire {
+    font-family: var(--font-poem);
+    color: var(--text-soft);
+    font-style: italic;
+    letter-spacing: 0.2em;
+    margin-top: 8px;
+}
+
+/* 取山号:首次进社 */
+.signup-form {
+    text-align: center;
+    padding: 8px 0;
+}
+.signup-form h3 {
+    font-family: var(--font-poem);
+    color: var(--text);
+    letter-spacing: 0.4em;
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+}
+.signup-form .intro {
+    font-family: var(--font-poem);
+    color: var(--text-soft);
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+    line-height: 1.8;
+}
+.signup-form .field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    max-width: 420px;
+    margin: 0 auto 12px;
+}
+.signup-form .field label {
+    width: 70px;
+    text-align: right;
+    color: var(--seal-red);
+    font-family: var(--font-poem);
+    letter-spacing: 0.2em;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+.signup-form input,
+.signup-form textarea {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--bg-alt);
+    color: var(--text);
+    font-family: var(--font-poem);
+    letter-spacing: 0.1em;
+}
+.signup-form .dice {
+    background: var(--c-imperial);
+    color: white;
+    border: none;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+.signup-form .submit-btn {
+    margin-top: 14px;
+    padding: 10px 36px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    border: none;
+    border-radius: 22px;
+    cursor: pointer;
+    font-family: var(--font-poem);
+    letter-spacing: 0.4em;
+    font-size: 1rem;
+}
+
+/* 山社操作区 */
+.society-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.society-action {
+    padding: 12px 8px;
+    border: 1px solid var(--line);
+    background: var(--bg-alt);
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    font-family: var(--font-poem);
+}
+.society-action:hover {
+    border-color: var(--seal-red);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+}
+.society-action .ico { font-size: 1.6rem; display: block; margin-bottom: 4px; }
+.society-action .text {
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--text);
+}
+
+/* 名册 */
+.society-section { margin-top: 18px; }
+.society-section .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+.society-section h4 {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    font-size: 1.05rem;
+    letter-spacing: 0.3em;
+}
+.society-section .count {
+    color: var(--text-mute);
+    font-size: 0.82rem;
+}
+
+.roster-list { list-style: none; padding: 0; }
+.roster-card {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 14px;
+    background: var(--bg-alt);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--c-pine);
+    position: relative;
+}
+.roster-card .friend-seal {
+    flex-shrink: 0;
+    width: 50px; height: 50px;
+    background: var(--c-pine);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transform: rotate(-2deg);
+    border: 1.5px solid #fff5d6;
+}
+.roster-card.tongxin .friend-seal {
+    background: var(--seal-red);
+}
+.roster-card .info { flex: 1; min-width: 0; }
+.roster-card .name {
+    font-family: var(--font-poem);
+    color: var(--text);
+    font-size: 1.05rem;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+.roster-card .meta {
+    font-size: 0.78rem;
+    color: var(--text-mute);
+    font-family: var(--font-poem);
+    letter-spacing: 0.1em;
+}
+.roster-card .badges {
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+.roster-card .badge {
+    font-size: 0.72rem;
+    padding: 1px 8px;
+    background: var(--route-soft);
+    color: var(--route-primary);
+    border-radius: 8px;
+    font-family: var(--font-poem);
+    letter-spacing: 0.1em;
+}
+.roster-card .badge.tongxin {
+    background: var(--seal-red);
+    color: #fff5d6;
+}
+.roster-card .x {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--text-mute);
+    cursor: pointer;
+    font-size: 0.78rem;
+}
+
+/* 信物码区 */
+.token-block {
+    background: var(--bg-alt);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 10px;
+    border: 1px dashed var(--seal-red);
+}
+.token-block textarea {
+    width: 100%;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 0.78rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text);
+    word-break: break-all;
+    min-height: 80px;
+    resize: vertical;
+}
+.token-block .row {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+.token-block .depth-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 6px 10px;
+    background: var(--bg);
+    color: var(--text-soft);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: var(--font-poem);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+}
+.token-block .depth-btn.active {
+    background: var(--seal-red);
+    color: #fff5d6;
+    border-color: var(--seal-red);
+}
+.token-block .copy-btn {
+    padding: 8px 18px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: var(--font-poem);
+    letter-spacing: 0.2em;
+    margin-right: 8px;
+}
+.token-block .hint {
+    font-size: 0.78rem;
+    color: var(--text-mute);
+    line-height: 1.6;
+    margin-top: 6px;
+    font-family: var(--font-poem);
+}
+
+/* 受信物 */
+.receive-block {
+    background: var(--bg-alt);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px dashed var(--c-pine);
+    margin-top: 10px;
+}
+
+/* 投帖 */
+.posts-list { list-style: none; padding: 0; }
+.post-card {
+    background: var(--bg-alt);
+    border-radius: 10px;
+    padding: 12px 16px;
+    border-left: 3px solid var(--c-imperial);
+    margin-bottom: 8px;
+    position: relative;
+}
+.post-card .head {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    font-size: 0.92rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 4px;
+}
+.post-card .body {
+    color: var(--text);
+    font-family: var(--font-poem);
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+    font-size: 0.92rem;
+}
+.post-card .target {
+    font-size: 0.78rem;
+    color: var(--text-mute);
+    margin-top: 4px;
+}
+.post-card .x {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: var(--text-mute);
+    cursor: pointer;
+    font-size: 0.78rem;
+}
+
+/* 雅集图 */
+.society-map {
+    background: var(--bg-alt);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: var(--shadow-card);
+}
+
+/* 命定相遇提示 */
+.serendipity-banner {
+    background: linear-gradient(90deg, #b73228, #d4a017);
+    color: #fff5d6;
+    padding: 10px 18px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-family: var(--font-poem);
+    letter-spacing: 0.18em;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(183, 50, 40, 0.25);
+}
+
+/* 同心结印章(护照页 / 详情页) */
+.tongxin-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, var(--seal-red), var(--c-imperial));
+    color: #fff5d6;
+    border-radius: 14px;
+    font-family: var(--font-poem);
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    margin-right: 6px;
+    margin-bottom: 4px;
+}
+
+.cohort-row {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(183, 50, 40, 0.06);
+    border-radius: 8px;
+    border-left: 3px solid var(--seal-red);
+    font-size: 0.85rem;
+    line-height: 1.7;
+}
+.cohort-row .label {
+    color: var(--seal-red);
+    font-family: var(--font-poem);
+    letter-spacing: 0.2em;
+    margin-right: 6px;
+}
+
+/* 山社成就 */
+.society-ach-line {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: var(--font-poem);
+    color: var(--text-soft);
+    letter-spacing: 0.15em;
+    font-size: 0.9rem;
+}
+.society-ach-line .ach-name {
+    color: var(--seal-red);
+    font-weight: 700;
+    margin: 0 8px;
+}
+
+@media (max-width: 540px) {
+    .society-content { padding: 22px 18px 18px; }
+    .society-actions { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   管理后台(?admin=1)
+   ============================================================ */
+body.admin-on { padding-top: 56px; }
+
+.admin-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #1a1814;
+    color: #e8dfcc;
+    z-index: 1000;
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    border-bottom: 2px solid var(--seal-red);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+}
+
+.admin-bar .admin-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.admin-mark {
+    background: var(--seal-red);
+    color: #fff5d6;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-family: var(--font-poem);
+    letter-spacing: 0.2em;
+    font-size: 0.78rem;
+}
+.admin-stats { color: #b8ad94; font-size: 0.8rem; }
+.admin-stats .warn-count { color: #f0ad4e; font-weight: 700; }
+.admin-stats .dirty-flag {
+    color: #fff5d6;
+    background: var(--seal-red);
+    padding: 1px 8px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+}
+
+.admin-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.admin-btn {
+    padding: 5px 12px;
+    border: 1px solid #3a3428;
+    background: #2a2418;
+    color: #e8dfcc;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.8rem;
+}
+.admin-btn:hover { background: #3a3428; border-color: var(--seal-red); }
+.admin-btn.primary { background: var(--seal-red); color: #fff5d6; border-color: var(--seal-red); }
+.admin-btn.warn { background: #5a2018; border-color: #7a2818; color: #ffd6c8; }
+
+.admin-card-tools {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: flex;
+    gap: 4px;
+    z-index: 5;
+    background: rgba(26, 24, 20, 0.85);
+    padding: 4px;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+}
+.admin-icon {
+    width: 26px; height: 26px;
+    border: none;
+    background: #2a2418;
+    color: #fff5d6;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+.admin-icon:hover { background: var(--seal-red); }
+.admin-icon.warn { background: #7a2818; }
+
+/* 编辑面板(右侧抽屉) */
+.admin-edit-panel {
+    position: fixed;
+    top: 56px;
+    right: 0;
+    bottom: 0;
+    width: min(720px, 95vw);
+    background: var(--bg-alt);
+    box-shadow: -10px 0 40px rgba(0,0,0,0.2);
+    z-index: 999;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    border-left: 3px solid var(--seal-red);
+}
+.admin-edit-panel.show { transform: translateX(0); }
+
+.admin-edit-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.admin-edit-head {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-paper);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.admin-edit-head h3 {
+    font-family: var(--font-poem);
+    font-size: 1.1rem;
+    letter-spacing: 0.2em;
+    color: var(--text);
+}
+.admin-edit-head > div { display: flex; gap: 6px; }
+
+.admin-edit-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 18px;
+}
+.admin-edit-foot {
+    padding: 12px 18px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-paper);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-edit-body fieldset {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px 14px;
+    margin-bottom: 14px;
+}
+.admin-edit-body legend {
+    font-family: var(--font-poem);
+    color: var(--seal-red);
+    padding: 0 8px;
+    letter-spacing: 0.2em;
+    font-size: 0.9rem;
+}
+
+.ed-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+.ed-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 140px;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+}
+
+.ed-label {
+    color: var(--text-soft);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+}
+
+.ed-field input,
+.ed-field textarea,
+.ed-field select {
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.85rem;
+    width: 100%;
+}
+.ed-field input:focus,
+.ed-field textarea:focus,
+.ed-field select:focus {
+    border-color: var(--seal-red);
+    outline: none;
+}
+.ed-field small {
+    color: var(--text-mute);
+    font-size: 0.72rem;
+}
+
+.ed-checks {
+    display: flex;
+    gap: 12px;
+    padding: 6px 0;
+}
+.ed-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.88rem;
+}
+
+.ed-wp {
+    background: var(--route-soft);
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--c-pine);
+}
+.ed-wp input {
+    padding: 5px 8px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--bg-alt);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.82rem;
+}
+
+@media (max-width: 720px) {
+    .admin-bar { font-size: 0.78rem; padding: 6px 10px; }
+    .admin-edit-panel { top: auto; bottom: 0; width: 100%; height: 80vh; }
+    body.admin-on { padding-top: 90px; }
+}
+
+/* ============================================================
+   山中天气(详情页)
+   ============================================================ */
+.route-weather-box {
+    background: var(--route-soft);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+}
+
+.route-weather-empty {
+    text-align: center;
+    padding: 18px;
+    color: var(--text-soft);
+}
+
+.rw-now {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 4px;
+    border-bottom: 1px dashed var(--line);
+    margin-bottom: 12px;
+}
+.rw-icon { font-size: 2.6rem; }
+.rw-cur { flex: 1; }
+.rw-text {
+    font-family: var(--font-poem);
+    font-size: 1.15rem;
+    color: var(--text);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+}
+.rw-meta {
+    font-size: 0.82rem;
+    color: var(--text-mute);
+    font-family: var(--font-poem);
+    letter-spacing: 0.08em;
+}
+
+.rw-warn {
+    background: linear-gradient(90deg, rgba(201,64,42,0.15), rgba(217,122,79,0.1));
+    border-left: 3px solid var(--seal-red);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: var(--text);
+    font-family: var(--font-poem);
+    letter-spacing: 0.08em;
+    line-height: 1.6;
+}
+
+.rw-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.rw-day {
+    text-align: center;
+    padding: 8px 2px;
+    background: var(--bg-alt);
+    border-radius: 8px;
+    font-family: var(--font-poem);
+    font-size: 0.75rem;
+}
+.rw-day.warn { border: 1px solid var(--seal-red); }
+.rw-day .d-label { font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.rw-day .d-icon { font-size: 1.3rem; margin: 2px 0; }
+.rw-day .d-name { color: var(--text-soft); font-size: 0.7rem; }
+.rw-day .d-temp { color: var(--text-mute); font-size: 0.68rem; margin-top: 2px; }
+
+/* 天气设置弹窗 */
+.weather-setup-content {
+    background: var(--bg-alt);
+    max-width: 520px;
+    margin: 0 auto;
+    border-radius: 14px;
+    padding: 28px;
+    position: relative;
+    border-top: 4px solid var(--c-imperial);
+}
+
+@media (max-width: 540px) {
+    .rw-week { grid-template-columns: repeat(7, 1fr); gap: 2px; }
+    .rw-day { padding: 6px 1px; font-size: 0.68rem; }
+    .rw-day .d-icon { font-size: 1.1rem; }
+}
+
+/* ============================================================
+   生活指数
+   ============================================================ */
+.rw-section-title {
+    margin-top: 14px;
+    font-family: var(--font-poem);
+    color: var(--text);
+    letter-spacing: 0.2em;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.indices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+}
+
+.idx-card {
+    background: var(--bg-alt);
+    border-radius: 8px;
+    padding: 10px 12px;
+    border-left: 3px solid var(--c-pine);
+}
+
+.idx-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+}
+.idx-ico { font-size: 1.15rem; }
+.idx-name {
+    font-family: var(--font-poem);
+    color: var(--text);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+}
+.idx-level {
+    font-size: 0.72rem;
+    padding: 1px 8px;
+    border-radius: 8px;
+    margin-left: auto;
+    background: var(--route-soft);
+    color: var(--route-primary);
+    font-family: var(--font-poem);
+    letter-spacing: 0.1em;
+}
+.idx-level.lvl-1, .idx-level.lvl-2 { background: rgba(74,140,74,0.15); color: #3a7c3a; }
+.idx-level.lvl-3 { background: rgba(217,154,23,0.15); color: #b07a1f; }
+.idx-level.lvl-4, .idx-level.lvl-5 { background: rgba(201,64,42,0.15); color: var(--seal-red); }
+
+.idx-text {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    line-height: 1.55;
+    font-family: var(--font-poem);
+    letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   预警横幅
+   ============================================================ */
+.warn-banner {
+    display: none;
+    padding: 12px 24px;
+    background: linear-gradient(90deg, #c9402a 0%, #d4a017 100%);
+    color: #fff5d6;
+    font-family: var(--font-poem);
+    letter-spacing: 0.2em;
+    text-align: center;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.15);
+    position: relative;
+    animation: warnPulse 2.4s ease-in-out infinite;
+}
+.warn-banner.show { display: block; }
+.warn-banner span:first-child {
+    background: rgba(0,0,0,0.2);
+    padding: 2px 10px;
+    border-radius: 12px;
+    margin-right: 8px;
+    font-weight: 700;
+}
+.warn-banner .x {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background: rgba(255,255,255,0.2);
+    padding: 2px 12px;
+    border-radius: 14px;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+}
+
+@keyframes warnPulse {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.1); }
+}
+
+/* ============================================================
+   恢复横幅(safety.js)
+   ============================================================ */
+.recovery-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #fff8e6;
+    color: #5a4f3a;
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--seal-red);
+    font-family: var(--font-poem);
+    font-size: 0.88rem;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s;
+}
+
+.recovery-banner.hide { transform: translateY(-100%); }
+
+[data-theme="dark"] .recovery-banner {
+    background: #2a2418;
+    color: #e8dfcc;
+}
+
+.recovery-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.recovery-btn {
+    padding: 4px 12px;
+    background: var(--seal-red);
+    color: #fff5d6;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.78rem;
+}
+.recovery-btn:hover { filter: brightness(1.08); }
+
+.recovery-close {
+    background: transparent;
+    border: 1px solid var(--text-mute);
+    color: var(--text-mute);
+    padding: 3px 12px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.78rem;
+}
+
+/* ============================================================
+   Step 2 · 打磨补丁
+   - 骨架屏 / 字体回退 / 移动端响应式微调 / 减少动效
+   ============================================================ */
+
+/* ---- 字体回退 + font-display ---- */
+:root {
+    --font-poem: "LXGW WenKai Screen", "LXGW WenKai", "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif SC", "FangSong", serif;
+    --font-serif: "LXGW WenKai Screen", "LXGW WenKai", "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif SC", serif;
+}
+
+/* ---- 骨架屏 ---- */
+.skel-card {
+    background: var(--card-bg, #fff8ec);
+    border: 1px solid rgba(60, 50, 30, 0.08);
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(60, 50, 30, 0.04);
+}
+.skel-img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(90deg, rgba(180,170,150,0.08) 0%, rgba(180,170,150,0.18) 50%, rgba(180,170,150,0.08) 100%);
+    background-size: 200% 100%;
+    animation: skelShimmer 1.4s ease-in-out infinite;
+}
+.skel-line {
+    height: 12px;
+    margin: 14px 16px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, rgba(180,170,150,0.10) 0%, rgba(180,170,150,0.22) 50%, rgba(180,170,150,0.10) 100%);
+    background-size: 200% 100%;
+    animation: skelShimmer 1.4s ease-in-out infinite;
+}
+.skel-line.w90 { width: calc(90% - 32px); }
+.skel-line.w70 { width: calc(70% - 32px); }
+.skel-line.w50 { width: calc(50% - 32px); }
+@keyframes skelShimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+[data-theme="dark"] .skel-img,
+[data-theme="dark"] .skel-line {
+    background: linear-gradient(90deg, rgba(220,210,180,0.06) 0%, rgba(220,210,180,0.14) 50%, rgba(220,210,180,0.06) 100%);
+    background-size: 200% 100%;
+}
+
+/* ---- 移动端微调(<= 480px) ---- */
+@media (max-width: 480px) {
+    .brand-bar {
+        padding: 8px 12px;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .brand-name {
+        font-size: 1.05rem;
+    }
+    .brand-name small {
+        display: none;
+    }
+    .brand-tools {
+        gap: 4px;
+    }
+    .icon-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+    }
+    .solar-term-pill {
+        font-size: 0.78rem;
+        padding: 4px 10px;
+    }
+    .hero {
+        min-height: 320px;
+    }
+    .hero-title {
+        font-size: 2.4rem;
+        letter-spacing: 0.4em;
+    }
+    .hero-subtitle {
+        font-size: 0.85rem;
+    }
+    .hero-poem-line {
+        font-size: 1rem;
+    }
+    .filter-bar {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+    .filter-group {
+        flex-wrap: wrap;
+    }
+    .filter-btn {
+        padding: 5px 10px;
+        font-size: 0.82rem;
+    }
+    .search-group input {
+        width: 100%;
+        min-width: 0;
+    }
+    .route-grid {
+        grid-template-columns: 1fr !important;
+        padding: 14px 12px;
+        gap: 14px;
+    }
+    .route-card {
+        margin: 0;
+    }
+    .modal-content,
+    .lottery-content,
+    .passport-content,
+    .planner-content,
+    .ring-content,
+    .society-content,
+    .rite-content,
+    .postcard-content,
+    .compare-modal-content {
+        width: 96vw !important;
+        max-width: 96vw !important;
+        max-height: 92vh !important;
+        padding: 16px 14px !important;
+        border-radius: 12px !important;
+    }
+    .compare-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .safety-panel {
+        width: 92vw;
+        max-width: 360px;
+    }
+    .compare-tray {
+        flex-wrap: wrap;
+        padding: 10px 12px;
+        gap: 6px;
+    }
+    .compare-tray .label {
+        font-size: 0.85rem;
+    }
+    .footer-poem {
+        font-size: 0.95rem;
+    }
+}
+
+/* ---- 触摸设备:增大点击热区 ---- */
+@media (hover: none) and (pointer: coarse) {
+    .filter-btn,
+    .share-btn,
+    .icon-btn {
+        min-height: 36px;
+    }
+    .route-card .pin {
+        padding: 4px 10px;
+    }
+}
+
+/* ---- 安全区域(iPhone 刘海/底部 home indicator) ---- */
+@supports (padding: max(0px)) {
+    .brand-bar {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+        padding-top: max(12px, env(safe-area-inset-top));
+    }
+    footer {
+        padding-bottom: max(28px, env(safe-area-inset-bottom));
+    }
+    .compare-tray {
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+    .sound-mini {
+        bottom: max(16px, env(safe-area-inset-bottom));
+    }
+}
+
+/* ---- 减少动效偏好 ---- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+    .cloud-layer,
+    .bird-layer {
+        display: none;
+    }
+}
+
+/* ---- 打印 ---- */
+@media print {
+    .brand-tools,
+    .filter-bar,
+    .compare-tray,
+    .safety-panel,
+    .sound-mini,
+    .countdown-bar,
+    .trivia-toast,
+    .lottery-trigger,
+    .recovery-banner {
+        display: none !important;
+    }
+    .route-grid {
+        display: block;
+    }
+    .route-card {
+        page-break-inside: avoid;
+        margin-bottom: 14px;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}

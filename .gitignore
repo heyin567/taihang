@@ -1,0 +1,27 @@
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 日志/临时
+*.log
+*.tmp
+.cache/
+
+# 个人备份
+taihang-backup-*.json
+th-error-log.txt
+
+# Node(若以后引入)
+node_modules/
+
+# Claude Code 本地配置
+.claude/
+.claude.zip

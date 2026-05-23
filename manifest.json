@@ -1,0 +1,45 @@
+{
+    "name": "太行徒步志 · Taihang Trails",
+    "short_name": "太行徒步志",
+    "description": "石家庄周边徒步路线指南 · 与古人同游太行",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#f5ecd9",
+    "theme_color": "#3d6e5a",
+    "lang": "zh-CN",
+    "categories": ["travel", "lifestyle", "sports"],
+    "icons": [
+        {
+            "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='38' fill='%23f5ecd9'/><path d='M16 152 L64 84 L88 118 L122 54 L176 152 Z' fill='%233d6e5a'/><circle cx='138' cy='56' r='17' fill='%23d4a017'/></svg>",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='102' fill='%23f5ecd9'/><path d='M42 406 L172 224 L234 314 L325 144 L470 406 Z' fill='%233d6e5a'/><circle cx='370' cy='150' r='45' fill='%23d4a017'/></svg>",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "山野抽签",
+            "short_name": "抽签",
+            "description": "随机推荐一条今日山门",
+            "url": "./?action=lottery"
+        },
+        {
+            "name": "周末计划器",
+            "short_name": "计划",
+            "url": "./?action=planner"
+        },
+        {
+            "name": "我的徒步护照",
+            "short_name": "护照",
+            "url": "./?action=passport"
+        }
+    ]
+}
