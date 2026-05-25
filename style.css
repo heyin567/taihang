@@ -4835,6 +4835,49 @@ body.admin-on { padding-top: 56px; }
     max-height: 540px;
 }
 
+/* 云气东行:极淡云带自西向东缓缓平移 */
+.atlas-clouds { pointer-events: none; }
+.atlas-cloud {
+    will-change: transform, opacity;
+    transform-box: fill-box;
+}
+.atlas-cloud.cloud-a {
+    animation: atlasCloudDriftA 96s linear infinite;
+}
+.atlas-cloud.cloud-b {
+    animation: atlasCloudDriftB 132s linear infinite;
+}
+@keyframes atlasCloudDriftA {
+    0%   { transform: translateX(-260px); opacity: 0; }
+    14%  { opacity: 0.32; }
+    86%  { opacity: 0.32; }
+    100% { transform: translateX(1480px); opacity: 0; }
+}
+@keyframes atlasCloudDriftB {
+    0%   { transform: translateX(-340px); opacity: 0; }
+    16%  { opacity: 0.24; }
+    84%  { opacity: 0.24; }
+    100% { transform: translateX(1500px); opacity: 0; }
+}
+
+/* 钤印渐落:大印与小印于开卷时如朱印落纸 */
+.atlas-seal-big {
+    transform-box: fill-box;
+    transform-origin: center center;
+    animation: atlasSealDrop 1.4s cubic-bezier(.2,.7,.3,1) 0.2s both;
+}
+.atlas-seal-small {
+    transform-box: fill-box;
+    transform-origin: center center;
+    animation: atlasSealDrop 1.4s cubic-bezier(.2,.7,.3,1) 0.9s both;
+}
+@keyframes atlasSealDrop {
+    0%   { opacity: 0; transform: scale(1.35) rotate(-3deg); filter: blur(1.4px); }
+    55%  { opacity: 0.95; transform: scale(1.06) rotate(0.4deg); filter: blur(0); }
+    80%  { transform: scale(0.985) rotate(0deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
+}
+
 /* 山头(不再位移,避免闪烁;只做轻微颜色与缩放变化) */
 .atlas-peak {
     cursor: pointer;
@@ -5108,5 +5151,7 @@ body.admin-on { padding-top: 56px; }
     .atlas-peak { transition: none; }
     .atlas-peak:hover, .atlas-peak:focus { filter: none; }
     .ad-go { transition: none; }
+    .atlas-cloud { animation: none !important; }
+    .atlas-seal-big, .atlas-seal-small { animation: none !important; }
 }
 

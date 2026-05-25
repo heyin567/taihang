@@ -368,7 +368,7 @@
        简化的力学避让
        ============================================================ */
     function avoidOverlap(nodes, minDist) {
-        const iters = 80;
+        const iters = 120;
         for (let k = 0; k < iters; k++) {
             let moved = false;
             for (let i = 0; i < nodes.length; i++) {
@@ -377,7 +377,7 @@
                     const dx = b.sx - a.sx, dy = b.sy - a.sy;
                     const d = Math.sqrt(dx * dx + dy * dy) || 0.01;
                     if (d < minDist) {
-                        const push = (minDist - d) / 2 * 0.6;
+                        const push = (minDist - d) / 2 * 0.7;
                         const ux = dx / d, uy = dy / d;
                         a.sx -= ux * push; a.sy -= uy * push;
                         b.sx += ux * push; b.sy += uy * push;
@@ -388,8 +388,8 @@
             if (!moved) break;
         }
         nodes.forEach(n => {
-            n.sx = n.sx * 0.85 + n.ox * 0.15;
-            n.sy = n.sy * 0.85 + n.oy * 0.15;
+            n.sx = n.sx * 0.94 + n.ox * 0.06;
+            n.sy = n.sy * 0.94 + n.oy * 0.06;
         });
     }
 
@@ -407,7 +407,7 @@
                 const p = project(r.coords.lon, r.coords.lat);
                 return { route: r, ox: p.x, oy: p.y, sx: p.x, sy: p.y };
             });
-        avoidOverlap(peaks, 56);
+        avoidOverlap(peaks, 72);
 
         const seasonIdx = getSeasonIdx();
         const seasonLabel = SEASON_LABEL[seasonIdx];
@@ -512,6 +512,12 @@
                         <!-- 九州古名(在山头下面) -->
                         <g class="atlas-provinces">${provinceHtml}</g>
 
+                        <!-- 云气东行(极淡云带,自西向东缓缓平移) -->
+                        <g class="atlas-clouds" aria-hidden="true">
+                            <path class="atlas-cloud cloud-a" d="M -300 180 q 60 -22 130 0 q 70 -28 150 -4 q 80 -22 160 0 q 70 -18 140 4 q 80 -16 160 6 q 70 -14 140 8 q 70 -10 130 4 L 1140 220 L -300 220 Z" fill="#fff5e0" opacity="0.32"/>
+                            <path class="atlas-cloud cloud-b" d="M -400 320 q 80 -16 160 4 q 70 -20 150 -2 q 80 -14 150 6 q 70 -12 140 4 q 80 -10 150 6 L 1100 350 L -400 350 Z" fill="#fff5e0" opacity="0.24"/>
+                        </g>
+
                         <!-- 罗盘 -->
                         <g class="atlas-compass" transform="translate(1100 110)">
                             <circle r="36" fill="rgba(255,250,235,0.78)" stroke="#6b4a2a" stroke-width="1.2"/>
@@ -524,7 +530,7 @@
                         </g>
 
                         <!-- 大印「山川」 -->
-                        <g transform="translate(110 110)">
+                        <g class="atlas-seal-big" transform="translate(110 110)">
                             <rect x="-44" y="-32" width="88" height="64" fill="#8a2818" rx="3"/>
                             <text y="-4" text-anchor="middle" font-size="22" fill="#fff5e0" letter-spacing="6" font-family="LXGW WenKai Screen, serif">山川</text>
                             <text y="22" text-anchor="middle" font-size="22" fill="#fff5e0" letter-spacing="6" font-family="LXGW WenKai Screen, serif">舆图</text>
@@ -560,7 +566,7 @@
                                 <tspan x="-40" dy="13">望</tspan>
                             </text>
                             <!-- 小印 -->
-                            <g transform="translate(-15 175)">
+                            <g class="atlas-seal-small" transform="translate(-15 175)">
                                 <rect x="-15" y="-15" width="30" height="30" fill="#8a2818" rx="2"/>
                                 <text y="-2" text-anchor="middle" font-size="11" fill="#fff5e0" font-family="LXGW WenKai Screen, serif">${ganzhi[0]}</text>
                                 <text y="11" text-anchor="middle" font-size="11" fill="#fff5e0" font-family="LXGW WenKai Screen, serif">${ganzhi[1]}</text>
