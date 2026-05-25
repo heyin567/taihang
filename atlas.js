@@ -365,6 +365,31 @@
     }
 
     /* ============================================================
+       山系分卷:按 region / id 段归属
+       ============================================================ */
+    const FILTERS = [
+        { key: "all",      label: "全部",       desc: "九州山志,一卷尽收" },
+        { key: "taihang",  label: "太行 · 实地", desc: "燕赵九径,皆可亲行" },
+        { key: "wuyue",    label: "五岳 · 远望", desc: "封禅之地,凭书远眺" },
+        { key: "hidden",   label: "隐山 · 访",   desc: "黄雁武峨终,五方气性" },
+        { key: "textbook", label: "诗山 · 课本", desc: "课本所选,皆可亲行" },
+        { key: "red",      label: "红色山志",   desc: "近百年立,长征所至" }
+    ];
+
+    function categoryOf(route) {
+        if (route.region === "wuyue") return "wuyue";
+        if (route.region === "hidden") {
+            if (route.id >= 28 && route.id <= 33) return "red";
+            if (route.id >= 20 && route.id <= 27) return "textbook";
+            if (route.id >= 15 && route.id <= 19) return "hidden";
+            return "hidden";
+        }
+        return "taihang";
+    }
+
+    let currentFilter = "all";
+
+    /* ============================================================
        简化的力学避让
        ============================================================ */
     function avoidOverlap(nodes, minDist) {
@@ -401,13 +426,25 @@
         if (!host) return;
 
         const list = (typeof routes !== "undefined" && Array.isArray(routes)) ? routes : [];
-        const peaks = list
+        const totalCounts = list.reduce((acc, r) => {
+            if (!r.coords || typeof r.coords.lon !== "number") return acc;
+            acc.all++;
+            const c = categoryOf(r);
+            acc[c] = (acc[c] || 0) + 1;
+            return acc;
+        }, { all: 0 });
+
+        const filteredList = currentFilter === "all"
+            ? list
+            : list.filter(r => categoryOf(r) === currentFilter);
+
+        const peaks = filteredList
             .filter(r => r.coords && typeof r.coords.lon === "number" && typeof r.coords.lat === "number")
             .map(r => {
                 const p = project(r.coords.lon, r.coords.lat);
                 return { route: r, ox: p.x, oy: p.y, sx: p.x, sy: p.y };
             });
-        avoidOverlap(peaks, 72);
+        avoidOverlap(peaks, 50);
 
         const seasonIdx = getSeasonIdx();
         const seasonLabel = SEASON_LABEL[seasonIdx];
@@ -469,9 +506,23 @@
             }).length
         };
 
+        const filterButtons = FILTERS.map(f => {
+            const cnt = f.key === "all" ? totalCounts.all : (totalCounts[f.key] || 0);
+            const active = currentFilter === f.key ? " is-active" : "";
+            const dimmed = cnt === 0 && f.key !== "all" ? " is-empty" : "";
+            return `<button type="button" class="atlas-filter-btn${active}${dimmed}" data-filter="${f.key}" title="${f.desc}">
+                <span class="afb-label">${f.label}</span>
+                <span class="afb-count">${cnt}</span>
+            </button>`;
+        }).join("");
+        const currentFilterDef = FILTERS.find(f => f.key === currentFilter) || FILTERS[0];
+
         host.innerHTML = `
             <div class="atlas-wrap">
                 <div class="atlas-frame">
+                    <div class="atlas-filterbar" role="tablist" aria-label="山系分卷">
+                        ${filterButtons}
+                    </div>
                     <div class="atlas-corner tl"></div>
                     <div class="atlas-corner tr"></div>
                     <div class="atlas-corner bl"></div>
@@ -580,14 +631,14 @@
                 <aside class="atlas-aside" id="atlasAside">
                     <div class="aside-default" id="asideDefault">
                         <div class="aside-stamp">山<br>川<br>舆<br>图</div>
-                        <div class="aside-title">凭舆图远眺</div>
-                        <div class="aside-hint">指点山头,观此地${seasonLabel}时风景</div>
+                        <div class="aside-title">${currentFilterDef.label}</div>
+                        <div class="aside-hint">${currentFilterDef.desc}</div>
                         <div class="aside-counts">
                             <span><i class="dot dot-local"></i>实地 ${counts.local}</span>
                             <span><i class="dot dot-remote"></i>远望 ${counts.remote}</span>
                             <span><i class="dot dot-visited"></i>已徒 ${counts.visited}</span>
                         </div>
-                        <div class="aside-foot">每补一山,自添一峰,不待主人手画</div>
+                        <div class="aside-foot">指点山头,观此地${seasonLabel}时风景</div>
                     </div>
                     <div class="aside-detail" id="asideDetail" hidden></div>
                 </aside>
@@ -596,6 +647,15 @@
 
         const aside = document.getElementById("asideDetail");
         const asideDefault = document.getElementById("asideDefault");
+
+        host.querySelectorAll(".atlas-filter-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const key = btn.getAttribute("data-filter");
+                if (key === currentFilter) return;
+                currentFilter = key;
+                renderAtlas();
+            });
+        });
 
         host.querySelectorAll(".atlas-peak").forEach(g => {
             const id = parseInt(g.getAttribute("data-id"), 10);

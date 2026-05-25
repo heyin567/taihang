@@ -4835,6 +4835,73 @@ body.admin-on { padding-top: 56px; }
     max-height: 540px;
 }
 
+/* ============================================================
+   山系分卷:六枚古风小钮
+   ============================================================ */
+.atlas-filterbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 10px;
+    padding: 6px 8px;
+    background: linear-gradient(180deg, rgba(255, 248, 224, 0.72), rgba(241, 226, 189, 0.62));
+    border: 1px solid rgba(107, 74, 42, 0.28);
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+    position: relative;
+    z-index: 2;
+}
+.atlas-filter-btn {
+    appearance: none;
+    background: linear-gradient(180deg, #fff5e0, #f1e2bd);
+    border: 1px solid rgba(107, 74, 42, 0.45);
+    color: #5a3a1a;
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1.3;
+    transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.08s;
+    box-shadow: 0 1px 2px rgba(58, 46, 28, 0.08);
+}
+.atlas-filter-btn:hover {
+    background: linear-gradient(180deg, #fff8e8, #ecd9a8);
+    border-color: rgba(140, 40, 24, 0.55);
+    color: #6b1a08;
+}
+.atlas-filter-btn:active {
+    transform: translateY(1px);
+}
+.atlas-filter-btn.is-active {
+    background: linear-gradient(180deg, #8a2818, #6b1a08);
+    color: #fff5e0;
+    border-color: #4a1004;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(140, 40, 24, 0.35);
+}
+.atlas-filter-btn.is-empty {
+    opacity: 0.42;
+    filter: grayscale(0.4);
+}
+.atlas-filter-btn .afb-count {
+    font-size: 0.72rem;
+    background: rgba(107, 74, 42, 0.14);
+    color: inherit;
+    padding: 0 5px;
+    border-radius: 8px;
+    min-width: 18px;
+    text-align: center;
+    letter-spacing: 0;
+}
+.atlas-filter-btn.is-active .afb-count {
+    background: rgba(255, 245, 224, 0.22);
+    color: #fff5e0;
+}
+
 /* 云气东行:极淡云带自西向东缓缓平移 */
 .atlas-clouds { pointer-events: none; }
 .atlas-cloud {
@@ -4886,14 +4953,14 @@ body.admin-on { padding-top: 56px; }
     outline: none;
 }
 .atlas-peak .peak-name {
-    font-size: 13px;
+    font-size: 11px;
     fill: #3a2818;
     font-family: var(--font-poem, "LXGW WenKai Screen", serif);
     pointer-events: none;
     user-select: none;
     paint-order: stroke fill;
     stroke: rgba(248, 232, 184, 0.85);
-    stroke-width: 3px;
+    stroke-width: 2.4px;
     stroke-linejoin: round;
     transition: font-weight 0.2s;
 }
@@ -5127,6 +5194,28 @@ body.admin-on { padding-top: 56px; }
 [data-theme="dark"] .ad-scene { background: linear-gradient(180deg, rgba(255,154,90,0.08), rgba(255,154,90,0.18)); color: #f0e0a8; border-left-color: #ff9a5a; }
 [data-theme="dark"] .ad-poem { color: #8ec0a8; }
 [data-theme="dark"] .ad-poem span { color: #c8a868; }
+[data-theme="dark"] .atlas-filterbar {
+    background: linear-gradient(180deg, rgba(60, 48, 32, 0.82), rgba(42, 34, 26, 0.72));
+    border-color: rgba(212, 160, 23, 0.35);
+}
+[data-theme="dark"] .atlas-filter-btn {
+    background: linear-gradient(180deg, #3a2e22, #2a221a);
+    color: #d8c898;
+    border-color: rgba(212, 160, 23, 0.4);
+}
+[data-theme="dark"] .atlas-filter-btn:hover {
+    background: linear-gradient(180deg, #4a3e30, #3a2e22);
+    color: #ffce8a;
+    border-color: rgba(255, 154, 90, 0.55);
+}
+[data-theme="dark"] .atlas-filter-btn.is-active {
+    background: linear-gradient(180deg, #c9402a, #8a2818);
+    color: #fff5e0;
+    border-color: #4a1004;
+}
+[data-theme="dark"] .atlas-filter-btn .afb-count {
+    background: rgba(212, 160, 23, 0.18);
+}
 
 @media (max-width: 900px) {
     .atlas-wrap { grid-template-columns: 1fr; }
@@ -5140,11 +5229,14 @@ body.admin-on { padding-top: 56px; }
     .atlas-title::before, .atlas-title::after { margin: 0 8px; }
     .atlas-sub { font-size: 0.82rem; }
     .atlas-svg { aspect-ratio: 4 / 3; }
-    .atlas-peak .peak-name { font-size: 16px; }
+    .atlas-peak .peak-name { font-size: 13px; }
     .atlas-stamp { font-size: 0.75rem; padding: 6px 5px; }
     .atlas-aside { padding: 12px 12px; }
     .aside-stamp { font-size: 0.88rem; padding: 10px 7px; }
     .ad-name { font-size: 1.15rem; }
+    .atlas-filterbar { gap: 4px; padding: 5px 6px; }
+    .atlas-filter-btn { font-size: 0.74rem; padding: 3px 7px; gap: 4px; letter-spacing: 0.04em; }
+    .atlas-filter-btn .afb-count { font-size: 0.66rem; padding: 0 4px; min-width: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
