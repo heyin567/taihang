@@ -254,6 +254,35 @@
             <path d="M -15 8 Q -10 -7 -3 0 Q 0 -10 3 0 Q 10 -7 15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
             <rect x="-1.5" y="-9" width="3" height="9" fill="#d4a017" stroke="${sc}" stroke-width="0.4"/>
             <path d="M -2.5 -9 L 2.5 -9" stroke="${sc}" stroke-width="0.5"/>`,
+        // 黄山 · 迎客松立云海
+        15: (fc, sc) => `
+            <path d="M -14 8 Q -8 -8 -2 -3 Q 0 -12 2 -3 Q 8 -8 14 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -10 4 Q -2 0 6 -2" stroke="${sc}" stroke-width="0.7" fill="none"/>
+            <path d="M 6 -2 q -2 -3 -1 -6 q 3 1 5 -2 q 1 3 4 1 q 1 3 -2 4 q 2 3 -1 4 q -3 1 -5 -1 z" fill="#3d6e5a" stroke="${sc}" stroke-width="0.4"/>
+            <path d="M 6 -2 L 6 6" stroke="#5a3a1f" stroke-width="0.6"/>`,
+        // 雁荡 · 灵峰双柱
+        16: (fc, sc) => `
+            <path d="M -14 8 L -10 -2 L -6 -10 L -3 -2 L 0 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M 0 8 L 3 -2 L 7 -12 L 10 -2 L 14 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <circle cx="-7" cy="-7" r="0.9" fill="${sc}"/>
+            <circle cx="7" cy="-9" r="0.9" fill="${sc}"/>`,
+        // 武当 · 金顶宫殿三檐
+        17: (fc, sc) => `
+            <path d="M -15 8 L -10 -2 L -2 -8 L 2 -8 L 10 -2 L 15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <rect x="-5" y="-6" width="10" height="3" fill="#d4a017" stroke="${sc}" stroke-width="0.5"/>
+            <path d="M -6 -8 L 6 -8 L 4 -10 L -4 -10 Z" fill="#d4a017" stroke="${sc}" stroke-width="0.5"/>
+            <rect x="-1" y="-13" width="2" height="3" fill="#d4a017" stroke="${sc}" stroke-width="0.4"/>`,
+        // 峨眉 · 金顶佛光
+        18: (fc, sc) => `
+            <path d="M -14 8 L -8 -4 L -2 -10 L 2 -10 L 8 -4 L 14 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <circle cx="0" cy="-13" r="4" fill="none" stroke="#d4a017" stroke-width="0.7" stroke-dasharray="1.2 1"/>
+            <circle cx="0" cy="-13" r="2" fill="#d4a017" stroke="${sc}" stroke-width="0.5"/>
+            <rect x="-2" y="-9" width="4" height="3" fill="#c9402a" stroke="${sc}" stroke-width="0.4"/>`,
+        // 终南 · 云隐山脊
+        19: (fc, sc) => `
+            <path d="M -15 8 Q -10 -2 -6 -4 Q -2 -9 0 -6 Q 2 -10 6 -4 Q 10 -2 15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -12 -1 q 4 -3 8 -1 q 4 -3 8 -1 q 4 -2 8 -1" fill="none" stroke="#fff5e0" stroke-width="1.4" opacity="0.85"/>
+            <path d="M -10 3 q 4 -2 8 0 q 4 -2 8 0" fill="none" stroke="#fff5e0" stroke-width="1" opacity="0.7"/>`,
         default: (fc, sc) => `
             <path d="M -10 8 L 0 -12 L 10 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>`
     };
@@ -275,7 +304,12 @@
         11: ["山桃迎客 · 玉女峰前花满枝", "长空栈险 · 苍龙岭上云未开", "御道金枫 · 千尺幢边秋如画", "雪压莲花 · 西岳剑锋插云端"],
         12: ["祝融杜鹃 · 南岳花海五月红", "藏经殿凉 · 古杉荫蔽暑无声", "回雁雁去 · 衡阳秋深万雁飞", "南岳雪松 · 翠盖披银韵更幽"],
         13: ["悬空燕舞 · 北岳春融寺燕归", "松林清风 · 苍崖避暑塞外凉", "北岳金辉 · 万山红叶塞外秋", "塞外雪原 · 悬空寺顶白茫茫"],
-        14: ["少林山樱 · 嵩岳春深花满坞", "藏经阁凉 · 嵩高维岳避暑天", "嵩山秋叶 · 三皇寨上枫如锦", "塔林雪覆 · 千塔披银禅意深"]
+        14: ["少林山樱 · 嵩岳春深花满坞", "藏经阁凉 · 嵩高维岳避暑天", "嵩山秋叶 · 三皇寨上枫如锦", "塔林雪覆 · 千塔披银禅意深"],
+        15: ["黄山映杜鹃 · 始信峰前云蒸花", "迎客松凉 · 光明顶上观云海", "黄山秋色 · 西海大峡谷红霜染", "黄山雪松 · 玉屏松雪冠如银"],
+        16: ["雁荡春兰 · 灵峰夜色情人现", "大龙湫凉 · 飞瀑千尺溅风衣", "雁荡黄叶 · 灵岩飞渡红云间", "雁荡冬岚 · 海雾绕峰怪石静"],
+        17: ["武当桃源 · 太子坡前杏花开", "紫霄夏荫 · 道院蝉鸣松风冷", "金顶秋光 · 七十二峰朝大顶", "玄岳雪封 · 金殿一点夕阳红"],
+        18: ["峨眉杜鹃 · 万年寺前花海春", "清音消暑 · 双桥流水洗尘心", "峨眉红叶 · 报国寺秋满千林", "金顶佛光 · 云海冬阳现圆轮"],
+        19: ["终南桃林 · 翠华春深花满涧", "辋川夏风 · 摩诘旧居山水清", "终南秋云 · 行到水穷坐看时", "南五台雪 · 重阳宫外鹤归来"]
     };
 
     function getSeasonIdx() {

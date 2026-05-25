@@ -979,5 +979,370 @@ const routes = [
         soundscape: { name: "禅院钟鸣", search: "shaolin temple bell zen" },
         coords: { lon: 113.05, lat: 34.45 },
         lastUpdated: "2026-05-23"
+    },
+    {
+        id: 15,
+        name: "黄山",
+        region: "hidden",
+        type: "remote",
+        location: "安徽 · 黄山市",
+        difficulty: "hard", difficultyLabel: "困难",
+        duration: "multi", durationLabel: "多日",
+        distance: "约 15 km(慈光阁—玉屏—天都—北海—西海大峡谷)",
+        elevation: "海拔 1864 m(莲花峰)",
+        bestSeason: "秋季云海最佳,四季皆可",
+        seasonTags: ["autumn", "spring"],
+        theme: { sky: ["#d8e4ec", "#a0bccc"], far: "#6a8090", mid: "#3a4858", near: "#1a2230", accent: "cloud", sun: "noon", primary: "#3a4858", soft: "#e8eef2" },
+        ratings: { stamina: 5, technical: 3, exposure: 4, retreat: 5, signal: 5 },
+        techGrade: "T3",
+        epithet: "黄岳归来",
+        poem: {
+            title: "送温处士归黄山白鹅峰旧居",
+            author: "李白",
+            dynasty: "唐",
+            lines: ["黄山四千仞", "三十二莲峰", "丹崖夹石柱", "菡萏金芙蓉"],
+            note: "李白笔下黄山:山如莲峰,崖如金芙蓉。徐霞客两登黄山,叹「五岳归来不看山,黄山归来不看岳」,自此天下名山为之逊色。"
+        },
+        description: "皖南奇山,松石云雪四绝。徐霞客两至,叹为天下第一。莲花、光明、天都三主峰并立,迎客松为山之眉目,云海为山之衣。",
+        features: [
+            "**五绝**:奇松、怪石、云海、温泉、冬雪",
+            "迎客松 · 玉屏峰前,八百年虬枝向客,黄山地标",
+            "莲花峰 · 主峰 1864 m,徐霞客「绝胜处」",
+            "西海大峡谷 · 又名梦幻景区,栈道贴壁九转",
+            "「五岳归来不看山,黄山归来不看岳」 — 徐霞客"
+        ],
+        chronicle: [
+            { year: "747",     dynasty: "唐", person: "唐玄宗", event: "敕改黟山为黄山",       legacy: "「黄山」之名自此立(因传黄帝炼丹于此)" },
+            { year: "约 750",  dynasty: "唐", person: "李白",   event: "游黄山赠温处士",       legacy: "「黄山四千仞,三十二莲峰」首咏黄山" },
+            { year: "1233",    dynasty: "宋", person: "吴龙翰", event: "首登天都峰",           legacy: "有文字记录的天都峰第一人" },
+            { year: "1616",    dynasty: "明", person: "徐霞客", event: "初登黄山",             legacy: "《游黄山日记》「踞石上,而仰瞻山色」" },
+            { year: "1618",    dynasty: "明", person: "徐霞客", event: "再登黄山",             legacy: "「五岳归来不看山,黄山归来不看岳」名世" },
+            { year: "1607",    dynasty: "明", person: "渐江",   event: "新安画派师黄山",       legacy: "黄山写生入画,「新安画派」自此立" },
+            { year: "1985",    dynasty: "今", person: "联合国",   event: "黄山入世界双重遗产",   legacy: "自然与文化双遗产,东方山岳之冠" }
+        ],
+        waypoints: [
+            { time: "Day1 08:00", name: "慈光阁",       elev: "900m",  scene: "⛩️", vista: "明万历古刹,登山起点", note: "可乘玉屏索道节力" },
+            { time: "Day1 11:00", name: "迎客松 · 玉屏楼", elev: "1680m", scene: "🌲", vista: "八百年虬枝,正面华山如几案", note: "黄山地标,正面取景" },
+            { time: "Day1 14:00", name: "莲花峰主峰",   elev: "1864m", scene: "🏔️", vista: "黄山之巅,三面绝壁,云海生于足下", note: "徐霞客「绝胜处」" },
+            { time: "Day2 05:00", name: "光明顶观日",   elev: "1860m", scene: "🌅", vista: "黄山日出第一,云海如海潮金光中翻涌", note: "宿光明顶山庄方便看日出" },
+            { time: "Day2 10:00", name: "西海大峡谷",   elev: "1500m", scene: "🪜", vista: "梦幻景区,栈道贴壁九转,云中行走", note: "环线下到云谷寺,缆车或徒步" }
+        ],
+        hiddenSpots: [
+            "始信峰 · 在北海,峰名「至此方信黄山奇」,人少景奇",
+            "排云亭后山 · 西海日落最佳,大多数人挤在丹霞峰",
+            "汤口镇 · 山下温泉镇,有渐江画黄山的真迹拓片"
+        ],
+        photography: "迎客松正午顶光、光明顶日出云海、西海大峡谷晨雾,黄山经典三机位。",
+        food: "徽菜:臭鳜鱼、毛豆腐、问政山笋、火腿炖甲鱼。山顶素食斋面。",
+        cuisine: {
+            tagline: "徽州古商之味,山珍水鲜皆有讲究",
+            signature: { name: "臭鳜鱼", icon: "🐟", price: "¥80-120", desc: "腌渍发酵的鳜鱼,焖烧入味,闻臭吃香,徽菜代表" },
+            snack:     { name: "黄山烧饼", icon: "🥯", price: "¥3-5",  desc: "梅干菜肉馅,炉壁烤焦,徽商出行之干粮" },
+            drink:     { name: "祁门红茶", icon: "🍵", price: "¥30/壶", desc: "黄山脚下祁门所产,世界三大高香红茶之一,蜜糖香" },
+            shop:      "推荐:汤口镇·老徽州 / 屯溪老街·徽府菜馆 / 山顶西海饭店",
+            seasonal:  { autumn: "秋宜:石耳炖鸡 + 新摘秋茶", winter: "冬宜:雪里红炖肉 + 屯溪烫饭" },
+            tea:       "宜配:黄山毛峰,黄山特产高山绿茶,味醇香远",
+            verse:     "「五岳归来不看山,黄山归来不看岳」 — 徐霞客两至,叹为天下"
+        },
+        route: "慈光阁 → 玉屏楼(迎客松) → 莲花峰 → 光明顶 → 西海大峡谷 → 云谷寺",
+        access: "石家庄至黄山北站高铁约 7 小时;山下汤口镇换乘景区大巴。",
+        tips: "山顶冷,带保暖外套;雨衣必备(云雾即雨);周末提前订山顶山庄。",
+        gear: ["登山鞋", "保暖外套(山顶夜<5℃)", "雨衣", "充电宝", "现金"],
+        emergency: { local: "黄山景区 0559-5561111", rescue: "黄山救援 0559-5562290", general: "110 / 120" },
+        gpxNote: "远望志 · 实地徒步循景区标线,无需 GPX。",
+        soundscape: { name: "松涛云海", search: "huangshan wind pine cloud sea" },
+        coords: { lon: 118.17, lat: 30.13 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 16,
+        name: "雁荡山",
+        region: "hidden",
+        type: "remote",
+        location: "浙江 · 乐清",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 8 km(灵峰—灵岩—大龙湫)",
+        elevation: "海拔 1108 m(百冈尖)",
+        bestSeason: "春秋,夜游灵峰别有意趣",
+        seasonTags: ["spring", "autumn"],
+        theme: { sky: ["#d4dae8", "#9aa4b8"], far: "#5a6478", mid: "#36404e", near: "#1a2028", accent: "ridge", sun: "noon", primary: "#36404e", soft: "#e4e8f0" },
+        ratings: { stamina: 3, technical: 2, exposure: 3, retreat: 5, signal: 5 },
+        techGrade: "T2",
+        epithet: "天下奇秀",
+        poem: {
+            title: "梦溪笔谈 · 雁荡(节)",
+            author: "沈括",
+            dynasty: "宋",
+            lines: ["温州雁荡山", "天下奇秀", "然自古图牒未尝有言者", "予观雁荡诸峰,皆峭拔险怪"],
+            note: "沈括于《梦溪笔谈》首叙雁荡奇秀,并发流水侵蚀之地学之论,千年前已悟造山之理。"
+        },
+        description: "浙东海上名山,以「奇峰、灵岩、飞瀑、古洞、清泉」五绝著。沈括誉「天下奇秀」,谢灵运、徐霞客皆至。夜游灵峰,峰形似人禽,千变万化。",
+        features: [
+            "**天下奇秀** · 沈括《梦溪笔谈》定名",
+            "灵峰夜景 · 双笋峰、犀牛望月、雄鹰敛翅,夜中峰形最幻",
+            "大龙湫瀑布 · 落差 197 m,中国十大名瀑之一",
+            "灵岩飞渡 · 表演艺人空中索行,惊心动魄",
+            "沈括于此发流水侵蚀造山之论,中国地质学先声"
+        ],
+        chronicle: [
+            { year: "约 423", dynasty: "南朝宋", person: "谢灵运", event: "游雁荡山下",         legacy: "「裹粮杖轻策」开山水诗中雁荡一脉" },
+            { year: "631",   dynasty: "唐",    person: "诺距那",   event: "天台僧入雁荡修行", legacy: "雁荡山佛教自此立,「雁荡」之名渐显" },
+            { year: "约 1075", dynasty: "宋",  person: "沈括",     event: "考察雁荡,作笔谈", legacy: "「天下奇秀」+ 流水侵蚀说,千年地学先声" },
+            { year: "1613",  dynasty: "明",    person: "徐霞客",   event: "三登雁荡",         legacy: "《游雁宕山日记》三卷,《游记》开篇之作" },
+            { year: "1614",  dynasty: "明",    person: "徐霞客",   event: "再登访雁湖",       legacy: "「雁宕之奇,不在山而在水」一论" }
+        ],
+        waypoints: [
+            { time: "09:00", name: "灵峰",       elev: "200m",  scene: "🪨", vista: "合掌峰、双笋峰,奇形巨石环列", note: "白日观形,夜中观影" },
+            { time: "10:30", name: "灵岩",       elev: "250m",  scene: "🏞️", vista: "天柱、展旗二峰对峙,飞渡表演处", note: "11:00 / 14:30 有飞渡表演" },
+            { time: "13:00", name: "大龙湫",     elev: "300m",  scene: "💦", vista: "197 米飞瀑直下,雷声震谷", note: "雨季尤盛,枯水期变细" },
+            { time: "15:30", name: "雁湖",       elev: "1046m", scene: "🏔️", vista: "山顶湖泊,秋雁宿此,故名雁荡", note: "山顶徐霞客「雁宕」名之所出" },
+            { time: "19:30", name: "灵峰夜游",   elev: "200m",  scene: "🌙", vista: "月下峰影千变,犀牛望月、雄鹰敛翅", note: "雁荡精华,务必夜游" }
+        ],
+        hiddenSpots: [
+            "净名谷 · 灵峰西侧,无人小谷,谢灵运题字处",
+            "显胜门 · 雁荡北边,两峰夹一线天,门高百仞",
+            "羊角洞 · 大龙湫上游,需越溪入,徐霞客「雁宕奇绝处」"
+        ],
+        photography: "灵峰夜景必拍(月光逆剪影)、大龙湫雨后正面、灵岩飞渡侧拍。",
+        food: "温州海鲜+山珍:楠溪江田鱼、雁荡山笋、敲鱼面、姜茶。",
+        cuisine: {
+            tagline: "山海兼得,温州古味与雁荡山珍",
+            signature: { name: "敲鱼面", icon: "🍜", price: "¥35-55", desc: "鱼肉敲打成面状,清汤滚煮,温州第一手艺" },
+            snack:     { name: "雁荡山笋", icon: "🎋", price: "¥30/份", desc: "雨后毛竹笋,白灼或红烧,鲜甘脆嫩" },
+            drink:     { name: "温州姜茶", icon: "🫖", price: "¥10",   desc: "红糖姜片煮成,雁山雨多湿气重,饮之祛寒" },
+            shop:      "推荐:大荆镇·雁山农家 / 灵岩寺旁素斋 / 乐清市区·阿强敲鱼",
+            seasonal:  { spring: "春宜:春笋炖咸肉 + 新茶", summer: "夏宜:楠溪江田鱼 + 绿豆汤" },
+            tea:       "宜配:雁荡毛峰茶,生于火山岩石缝,味清冽",
+            verse:     "「雁宕之奇,不在山而在水」 — 徐霞客一语中的"
+        },
+        route: "灵峰 → 灵岩(飞渡) → 大龙湫 → 雁湖(可选) → 夜返灵峰夜游",
+        access: "石家庄至温州南站高铁约 9 小时;温州至雁荡景区大巴 1.5 小时。",
+        tips: "夜游灵峰是雁荡精华;雨季瀑布最盛,但山路湿滑;雁湖往返需 4 小时。",
+        gear: ["登山鞋", "雨衣", "手电(夜游)", "保暖薄外套"],
+        emergency: { local: "雁荡景区 0577-62221116", rescue: "乐清救援 0577-61880110", general: "110 / 120" },
+        gpxNote: "远望志 · 景区步道完备,无需 GPX。",
+        soundscape: { name: "大龙湫飞瀑", search: "yandang waterfall echo" },
+        coords: { lon: 121.05, lat: 28.40 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 17,
+        name: "武当山",
+        region: "hidden",
+        type: "remote",
+        location: "湖北 · 十堰",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 10 km(琼台—南岩—金顶)",
+        elevation: "海拔 1612 m(天柱峰)",
+        bestSeason: "春秋,避三伏与隆冬",
+        seasonTags: ["spring", "autumn"],
+        theme: { sky: ["#cfd8e8", "#8a9ab4"], far: "#5060700", mid: "#2a3848", near: "#101820", accent: "temple", sun: "warm", primary: "#2a3848", soft: "#e0e6f0" },
+        ratings: { stamina: 3, technical: 2, exposure: 2, retreat: 5, signal: 5 },
+        techGrade: "T2",
+        epithet: "玄岳天下",
+        poem: {
+            title: "题武当山",
+            author: "元好问",
+            dynasty: "金",
+            lines: ["天柱亭亭出翠微", "群峰朝拱势如归", "可怜八百神仙宅", "不见游人来扣扉"],
+            note: "元遗山笔下武当:七十二峰朝大顶,二十四涧水流长。真武修道于此,明永乐大兴宫观,自此为玄岳之尊。"
+        },
+        description: "鄂西道宗祖庭,真武修道地。明永乐敕修,八宫二观三十六庵堂,被誉「亘古无双胜境,天下第一仙山」。太极拳由此演衍。",
+        features: [
+            "**玄岳之尊** · 明永乐敕封「治世玄岳」,在五岳之上",
+            "金殿 · 天柱峰顶,全铜鎏金,五百年风雷不锈,殿内真武像",
+            "南岩宫 · 飞檐悬于绝壁,「天下第一香炉」探出三米",
+            "紫霄宫 · 武当最大宫观,主奉真武大帝",
+            "太极发源 · 张三丰创太极拳于武当,内家拳宗祖"
+        ],
+        chronicle: [
+            { year: "约 1300", dynasty: "宋元", person: "张三丰", event: "修道武当,创太极拳",       legacy: "内家拳宗祖,武当道脉至今承续" },
+            { year: "1413",    dynasty: "明",   person: "明成祖", event: "敕修武当宫观三十三处",   legacy: "三十年大兴土木,今所见格局自此立" },
+            { year: "1416",    dynasty: "明",   person: "明成祖", event: "封武当为「大岳太和山」", legacy: "号「治世玄岳」,五岳之外又一岳" },
+            { year: "1552",    dynasty: "明",   person: "嘉靖帝", event: "重修金殿铸像",           legacy: "今日金顶之像,即此时所铸" },
+            { year: "1610",    dynasty: "明",   person: "袁中道", event: "游武当",                 legacy: "公安派笔下「天柱七十二峰各有名」" },
+            { year: "1994",    dynasty: "今",   person: "联合国",   event: "武当入世界文化遗产",     legacy: "古建群规模为中国道教第一" }
+        ],
+        waypoints: [
+            { time: "07:30", name: "琼台中观",   elev: "600m",  scene: "⛩️", vista: "古观掩在松柏间,索道下站", note: "可乘金顶索道节力" },
+            { time: "09:00", name: "南岩宫",     elev: "1100m", scene: "🛕", vista: "飞檐悬绝壁,「天下第一香炉」探出岩端", note: "武当最险也最美" },
+            { time: "10:30", name: "朝天宫",     elev: "1300m", scene: "⛩️", vista: "登金顶分界,皇室上山在此换装", note: "「人间天上」之分" },
+            { time: "12:00", name: "金殿 · 天柱峰", elev: "1612m", scene: "🏛️", vista: "全铜鎏金,五百年风雷不锈,殿内真武大帝像", note: "可上香,可绕殿" },
+            { time: "15:00", name: "紫霄宫",     elev: "800m",  scene: "🏯", vista: "武当最大宫观,十方丛林", note: "下午光线最美" }
+        ],
+        hiddenSpots: [
+            "太子坡 · 真武修道前为太子读书处,九曲黄河墙",
+            "磨针井 · 「铁杵磨成针」典出此,真武回心处",
+            "五龙宫 · 武当最古道场(唐建),今为废墟,清幽无人"
+        ],
+        photography: "金顶日出云海、南岩宫飞檐侧拍、紫霄宫黄昏古柏,武当三经典。",
+        food: "武当道家素斋:四生盘、太和豆腐、五子献寿。十堰本地豆皮、热干面。",
+        cuisine: {
+            tagline: "道家素斋为正,荤腥不入山门",
+            signature: { name: "武当道家素斋", icon: "🥬", price: "¥80-180", desc: "五子献寿、八卦豆腐、四生盘 — 千年道斋,清淡养性" },
+            snack:     { name: "武当神仙叶凉粉", icon: "🌿", price: "¥8",  desc: "野生神仙叶揉汁凝粉,翠绿如玉,清热祛暑" },
+            drink:     { name: "武当道茶", icon: "🍵", price: "¥30/壶", desc: "山高云雾所生,道家清修茶,味淡而远" },
+            shop:      "推荐:紫霄宫斋堂 / 南岩宫斋堂 / 山下武当镇·三丰素馆",
+            seasonal:  { autumn: "秋宜:山菌烩素 + 武当道茶", winter: "冬宜:温汤豆腐 + 黄精汤" },
+            tea:       "宜配:武当黄精茶,真武修道首选食物,温补不燥",
+            verse:     "「亘古无双胜境,天下第一仙山」 — 明成祖御笔"
+        },
+        route: "琼台 → 南岩宫 → 朝天宫 → 金顶(天柱峰) → 下山紫霄宫",
+        access: "石家庄至武当山高铁站约 5 小时;山下乘景区大巴换索道至琼台。",
+        tips: "金顶风极大,务必带防风衣;道宫多禁拍内殿,先问可否;不宜穿短裤入殿。",
+        gear: ["登山鞋", "防风外套", "充电宝", "现金(山顶香烛)"],
+        emergency: { local: "武当景区 0719-5689001", rescue: "丹江口救援 0719-5666120", general: "110 / 120" },
+        gpxNote: "远望志 · 景区索道与步道齐备,无需 GPX。",
+        soundscape: { name: "金顶钟磬", search: "wudang temple chime taoist" },
+        coords: { lon: 111.00, lat: 32.40 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 18,
+        name: "峨眉山",
+        region: "hidden",
+        type: "remote",
+        location: "四川 · 乐山",
+        difficulty: "hard", difficultyLabel: "困难",
+        duration: "multi", durationLabel: "多日",
+        distance: "约 18 km(报国寺—清音阁—洪椿坪—金顶)",
+        elevation: "海拔 3099 m(万佛顶)",
+        bestSeason: "夏避暑、冬观雪,春秋亦佳",
+        seasonTags: ["summer", "winter"],
+        theme: { sky: ["#dde4e0", "#9eb0a8"], far: "#5a7068", mid: "#2c4038", near: "#101c18", accent: "cloud", sun: "warm", primary: "#2c4038", soft: "#e6ece8" },
+        ratings: { stamina: 5, technical: 3, exposure: 3, retreat: 4, signal: 4 },
+        techGrade: "T3",
+        epithet: "佛光普贤",
+        poem: {
+            title: "登峨眉山",
+            author: "李白",
+            dynasty: "唐",
+            lines: ["蜀国多仙山", "峨眉邈难匹", "周流试登览", "绝怪安可悉"],
+            note: "李白生长蜀中,峨眉是少年游处。后赋《峨眉山月歌》「峨眉山月半轮秋,影入平羌江水流」,千古绝唱。"
+        },
+        description: "川蜀佛国,普贤菩萨道场,中国四大佛山之一。山高三千,从亚热带到亚寒带四时同山。金顶四绝:日出、云海、佛光、圣灯。",
+        features: [
+            "**佛门四大名山之一** · 普贤菩萨道场",
+            "金顶 · 海拔 3079m,日出云海佛光圣灯四绝",
+            "万佛顶 · 3099m 峨眉真正最高点,人少景奇",
+            "清音阁、洪椿坪 · 半山禅意,黑龙江白龙江汇流",
+            "「峨眉山月半轮秋」 — 李白少年游处"
+        ],
+        chronicle: [
+            { year: "约 100", dynasty: "汉",   person: "蒲公",     event: "见普贤光相于峨眉",   legacy: "峨眉成普贤道场,佛教初入山" },
+            { year: "约 750", dynasty: "唐",   person: "李白",     event: "游峨眉作《峨眉山月歌》", legacy: "「峨眉山月半轮秋」千古绝唱" },
+            { year: "约 760", dynasty: "唐",   person: "杜甫",     event: "登峨眉访道",           legacy: "《峨眉山》「冬日蜀地暖,峨眉雪正寒」" },
+            { year: "980",    dynasty: "宋",   person: "白水普贤", event: "造铜铸普贤像七米",     legacy: "「西天瑞像」,峨眉佛艺极盛" },
+            { year: "1614",   dynasty: "明",   person: "徐霞客",   event: "登峨眉",               legacy: "《滇游日记》先途经此,叹「峨之高,何止于五岳」" },
+            { year: "1996",   dynasty: "今",   person: "联合国",     event: "峨眉入世界双重遗产",   legacy: "与乐山大佛同列,文化与自然双遗" }
+        ],
+        waypoints: [
+            { time: "Day1 08:00", name: "报国寺",       elev: "550m",  scene: "⛩️", vista: "峨眉佛事中心,千年古刹,起点", note: "可乘观光车节力" },
+            { time: "Day1 11:00", name: "清音阁",       elev: "710m",  scene: "💧", vista: "黑白二龙江汇流,「清音双桥」", note: "半山禅意,午餐处" },
+            { time: "Day1 14:30", name: "洪椿坪",       elev: "1120m", scene: "🌲", vista: "森林荫蔽古寺,洪椿千年", note: "可宿洪椿坪客舍" },
+            { time: "Day2 04:30", name: "金顶 · 普贤像", elev: "3079m", scene: "🏛️", vista: "全铜普贤十方像,日出云海皆在脚下", note: "可索道直上,或从洪椿坪步行九小时" },
+            { time: "Day2 09:00", name: "万佛顶",       elev: "3099m", scene: "🏔️", vista: "峨眉真正最高峰,云雾深处人迹少", note: "金顶西行一小时" }
+        ],
+        hiddenSpots: [
+            "舍身崖 · 金顶西南,云海最盛处,亦古来观佛光地",
+            "九老洞 · 千年道场,峨眉灵猴最早出没",
+            "黑水寺 · 半山深处,鲜有游客,茶山幽静"
+        ],
+        photography: "金顶日出云海(春秋多)、佛光(午后阳光斜照云海)、万佛顶雪景。",
+        food: "川菜+佛家素斋:钵钵鸡、雪魔芋烧鸭、峨眉素斋、张包子。",
+        cuisine: {
+            tagline: "蜀辣山素皆有,半山饮食两味分",
+            signature: { name: "峨眉雪魔芋", icon: "🍲", price: "¥40-60", desc: "高山魔芋经冬雪冻制,Q 弹入味,峨眉素斋之冠" },
+            snack:     { name: "张包子", icon: "🥟", price: "¥3",    desc: "峨眉市百年老店,皮薄馅丰,登山前必填" },
+            drink:     { name: "竹叶青茶", icon: "🍵", price: "¥40/壶", desc: "峨眉山高山绿茶,色翠形如竹叶,味鲜冽" },
+            shop:      "推荐:报国寺斋堂 / 山下峨眉市·张包子 / 金顶素斋",
+            seasonal:  { summer: "夏宜:冰粉 + 雪魔芋凉拌", winter: "冬宜:钵钵鸡 + 烫白酒" },
+            tea:       "宜配:峨眉竹叶青,茶圣陆羽叹「峨山多药草,茶尤良」",
+            verse:     "「峨眉山月半轮秋,影入平羌江水流」 — 李太白"
+        },
+        route: "报国寺 → 清音阁 → 洪椿坪(宿) → 金顶 → 万佛顶",
+        access: "石家庄至成都东高铁约 9 小时;成都至峨眉景区动车 1.5 小时。",
+        tips: "金顶海拔三千,务必带羽绒;猴区不挑衅、不喂食、收好食物;雨季栈道湿滑。",
+        gear: ["登山鞋", "羽绒服(金顶<0℃)", "防猴竹竿(景区有租)", "雨衣"],
+        emergency: { local: "峨眉景区 0833-5525203", rescue: "峨眉应急 0833-5525555", general: "110 / 120" },
+        gpxNote: "远望志 · 景区步道齐备,索道直达金顶。",
+        soundscape: { name: "金顶梵呗", search: "emei buddhist chant temple" },
+        coords: { lon: 103.48, lat: 29.55 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 19,
+        name: "终南山",
+        region: "hidden",
+        type: "remote",
+        location: "陕西 · 西安",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 10 km(翠华—南五台—太兴山或环山)",
+        elevation: "海拔 2604 m(终南太白段最高)",
+        bestSeason: "秋为正,春次之",
+        seasonTags: ["autumn", "spring"],
+        theme: { sky: ["#d8d8c8", "#a0a088"], far: "#605838", mid: "#2e2818", near: "#0c0a06", accent: "cloud", sun: "warm", primary: "#2e2818", soft: "#ece8d8" },
+        ratings: { stamina: 3, technical: 2, exposure: 2, retreat: 5, signal: 3 },
+        techGrade: "T2",
+        epithet: "终南云隐",
+        poem: {
+            title: "终南别业",
+            author: "王维",
+            dynasty: "唐",
+            lines: ["中岁颇好道", "晚家南山陲", "行到水穷处", "坐看云起时"],
+            note: "王维晚年居终南辋川,作《终南别业》,「行到水穷处,坐看云起时」十字尽其禅意。此句亦为行山志开卷之诗,今卷十归山,正合归来之意。"
+        },
+        description: "关中之南,长安背山。自古隐者之乡,陶弘景、王维、孙思邈、终南五祖皆居之。今仍有数千隐士入山修行,「终南捷径」一词亦出于此。",
+        features: [
+            "**隐者之山** · 自魏晋至今,千载隐居传统不绝",
+            "终南五祖 · 全真道五祖修真处(王重阳、丘处机等)",
+            "王维辋川别业 · 「空山新雨后,天气晚来秋」即此处",
+            "南五台 · 观音、文殊、清凉、舍身、灵应五台,佛家圣地",
+            "孙思邈隐居药王山,《千金方》成于此"
+        ],
+        chronicle: [
+            { year: "约 350", dynasty: "东晋", person: "王嘉",   event: "隐居终南楼观",         legacy: "《拾遗记》成于此,「终南隐」典出" },
+            { year: "约 500", dynasty: "南齐", person: "陶弘景", event: "山中宰相,不入朝",     legacy: "「山中宰相」之号自此立" },
+            { year: "约 640", dynasty: "唐",   person: "孙思邈", event: "终南药王山著《千金方》", legacy: "中国医学万古经典,药王之号" },
+            { year: "约 760", dynasty: "唐",   person: "王维",   event: "辋川别业",             legacy: "「行到水穷处,坐看云起时」千古名句" },
+            { year: "约 1170", dynasty: "金",  person: "王重阳", event: "重阳宫修真",           legacy: "全真道祖庭,丘处机、马钰等七真子由此衍" },
+            { year: "约 705", dynasty: "唐",   person: "卢藏用", event: "走「终南捷径」入仕",   legacy: "「终南捷径」典出,讥假隐求名者" }
+        ],
+        waypoints: [
+            { time: "08:00", name: "翠华山",     elev: "1200m", scene: "🏞️", vista: "天池古湫,唐玄宗避难处", note: "可半日轻游" },
+            { time: "10:00", name: "南五台",     elev: "1688m", scene: "🛕", vista: "五峰并列,观音庙居顶", note: "佛家五台,登山主线" },
+            { time: "12:00", name: "西竹林",     elev: "1500m", scene: "🌿", vista: "千年竹林,王维「独坐幽篁里」处", note: "辋川风物今犹在" },
+            { time: "14:00", name: "重阳宫",     elev: "800m",  scene: "⛩️", vista: "全真道祖庭,王重阳修真处", note: "山下平地,可顺路" },
+            { time: "16:00", name: "净业寺",     elev: "1100m", scene: "🌲", vista: "南山律宗祖庭,鲜有游人", note: "鉴真东渡前讲律于此" }
+        ],
+        hiddenSpots: [
+            "嘉午台 · 终南正脊,人迹罕至,徒步爱好者首选",
+            "辋川 · 王维旧居遗址,蓝田县境内,今见碑无楼",
+            "石砭峪 · 山中隐士聚居处,问路可见茅棚"
+        ],
+        photography: "南五台晨雾、翠华山天池倒影、终南脊线晚霞。",
+        food: "陕菜+终南山野味:葫芦头、岐山臊子面、终南山野菌、菜疙瘩。",
+        cuisine: {
+            tagline: "关中老味,终南山下三千年长安食制",
+            signature: { name: "葫芦头泡馍", icon: "🍲", price: "¥30-50", desc: "猪大肠去腥精炖,馍块掰入,汤清味厚,长安老味" },
+            snack:     { name: "终南菜疙瘩", icon: "🥬", price: "¥15",   desc: "山间野菜揉面团,蒸熟蘸蒜醋,隐士日常之食" },
+            drink:     { name: "终南山泉水", icon: "💧", price: "免费",   desc: "翠华山下凉泉,清甘冽冽,王维笔下「清泉石上流」" },
+            shop:      "推荐:西安·春发生葫芦头(百年老店) / 翠华山下·农家素面 / 重阳宫旁茶寮",
+            seasonal:  { autumn: "秋宜:野菌烩面 + 新核桃", winter: "冬宜:羊肉泡馍 + 黄酒一壶" },
+            tea:       "宜配:陕青(终南秦巴茶),陶弘景隐山时常饮",
+            verse:     "「行到水穷处,坐看云起时」 — 王摩诘,亦行山志开卷之诗"
+        },
+        route: "翠华山 → 南五台 → 西竹林 → 重阳宫(山下) → 净业寺",
+        access: "石家庄至西安北高铁约 5 小时;西安市区至终南各景区车程 1-2 小时。",
+        tips: "终南支脉极广,一日难尽,选一两处即可;山中隐士勿打扰、勿拍照;秋季气温变化大。",
+        gear: ["登山鞋", "薄外套", "充足饮水", "现金"],
+        emergency: { local: "西安长安区文旅 029-85291888", rescue: "终南山救援 029-85688110", general: "110 / 120" },
+        gpxNote: "远望志 · 终南支脉甚多,深入需向导。",
+        soundscape: { name: "终南云水", search: "zhongnan mountain wind temple" },
+        coords: { lon: 108.95, lat: 33.90 },
+        lastUpdated: "2026-05-25"
     }
 ];
