@@ -67,6 +67,7 @@
     <div class="solar-term-pill" id="solarTermPill" title="点击查看节气详情"></div>
     <div class="brand-tools">
         <button id="societyBtn" class="icon-btn" title="山社 · 山友帖">🏮</button>
+        <button id="textbookLineBtn" class="icon-btn" title="诗山行 · 跟着课本去爬山">📚</button>
         <button id="yearScrollBtn" class="icon-btn" title="岁卷 · 廿四节气长轴">🗞️</button>
         <button id="ringBtn" class="icon-btn" title="节气年轮 · 七十二候">☯</button>
         <button id="passportBtn" class="icon-btn" title="我的徒步护照">📔</button>
@@ -353,6 +354,14 @@
     </div>
 </div>
 
+<!-- 诗山行 · 课本主线 -->
+<div class="modal" id="textbookLineModal">
+    <div class="textbook-line-content">
+        <span class="close-btn" id="textbookLineClose">&times;</span>
+        <div id="textbookLineBody"></div>
+    </div>
+</div>
+
 <footer>
     <div class="footer-poem">且放白鹿青崖间 · 须行即骑访名山</div>
     <div>&copy; 2026 行山志 · 林泉之约,与古人同游</div>
@@ -369,6 +378,7 @@
 <script src="app.js"></script>
 <script src="atlas.js"></script>
 <script src="yearscroll.js"></script>
+<script src="textbook.js"></script>
 <script src="admin.js"></script>
 <script>
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
