@@ -496,11 +496,18 @@ function buildChronicleScroll(chronicle, mountainName) {
 /* ============================================================
    诗轴(立轴竖排,落朱印)
    ============================================================ */
-function buildPoemScroll(poem, epithet) {
+function buildPoemScroll(poem, epithet, routeId) {
     if (!poem) return "";
     const lines = poem.lines.map(l => `<div class="poem-line">${l}</div>`).join("");
     const sealText = (epithet || "").slice(0, 4) || "山";
     const sealHtml = sealText.split("").map(c => `<span>${c}</span>`).join("");
+    const tb = (typeof getTextbookForRoute === "function" && routeId != null)
+        ? getTextbookForRoute(routeId) : null;
+    const textbookSeal = tb ? `
+        <button class="textbook-seal" type="button" data-route="${routeId}" title="此山曾入语文课本 · 点开看典出">
+            <span class="tbs-line1">故人句</span>
+            <span class="tbs-line2">曾入课本</span>
+        </button>` : "";
     return `<div class="poem-scroll">
         <div class="poem-meta">
             <div class="title">《${poem.title}》</div>
@@ -508,6 +515,7 @@ function buildPoemScroll(poem, epithet) {
         </div>
         <div class="poem-lines">${lines}</div>
         <div class="poem-seal">${sealHtml}</div>
+        ${textbookSeal}
         <button class="recite-btn" id="reciteBtn" style="position:absolute;left:18px;top:14px;">🔊 听诗</button>
         ${poem.note ? `<div class="poem-note" style="position:absolute;left:0;right:0;bottom:-32px;">${poem.note}</div>` : ""}
     </div>`;
@@ -546,7 +554,7 @@ function openModal(id) {
             </div>
         </div>
         <div class="modal-body">
-            ${buildPoemScroll(r.poem, r.epithet)}
+            ${buildPoemScroll(r.poem, r.epithet, r.id)}
 
             ${r.chronicle && r.chronicle.length ? buildChronicleScroll(r.chronicle, r.name) : ""}
 
@@ -704,6 +712,11 @@ function openModal(id) {
         reciteBtn.addEventListener("click", () => recitePoem(r.poem, reciteBtn));
     }
 
+    const tbSeal = modalBody.querySelector(".textbook-seal");
+    if (tbSeal) {
+        tbSeal.addEventListener("click", () => openTextbookCard(r.id));
+    }
+
     const playSnd = $("playSoundscape");
     if (playSnd) playSnd.addEventListener("click", () => playSoundscape(r));
 
@@ -714,6 +727,30 @@ function openModal(id) {
     // 礼仪按钮
     document.querySelectorAll(".rite-btn").forEach(b =>
         b.addEventListener("click", () => openRite(b.dataset.rite, r)));
+}
+
+function openTextbookCard(routeId) {
+    const r = routes.find(x => x.id === routeId);
+    const tb = (typeof getTextbookForRoute === "function") ? getTextbookForRoute(routeId) : null;
+    if (!r || !tb) return;
+    const wrap = document.createElement("div");
+    wrap.className = "textbook-card-overlay";
+    wrap.innerHTML = `
+        <div class="textbook-card">
+            <button class="tbc-close" aria-label="关">&times;</button>
+            <div class="tbc-stamp">课本</div>
+            <div class="tbc-eyebrow">${tb.grade} · ${tb.version}</div>
+            <h3 class="tbc-mountain">${r.name}</h3>
+            <blockquote class="tbc-line">${tb.line}</blockquote>
+            <div class="tbc-poet">—— ${tb.poet}</div>
+            <p class="tbc-note">${tb.note}</p>
+            <div class="tbc-foot">少年时背过,登山方知所写为何处。</div>
+        </div>`;
+    document.body.appendChild(wrap);
+    const close = () => wrap.remove();
+    wrap.querySelector(".tbc-close").addEventListener("click", close);
+    wrap.addEventListener("click", e => { if (e.target === wrap) close(); });
+    requestAnimationFrame(() => wrap.classList.add("show"));
 }
 
 function formatShareText(r) {

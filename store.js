@@ -14,7 +14,8 @@ const STORE = (() => {
         plan: "th_plan",
         meetups: "th_meetups",
         achievements: "th_achievements",
-        countdownTarget: "th_countdown"
+        countdownTarget: "th_countdown",
+        yearStamps: "th_year_stamps"
     };
 
     function getJSON(k, def) {
@@ -81,6 +82,23 @@ const STORE = (() => {
             if (!all[routeId]) return;
             all[routeId] = all[routeId].filter(m => m.id !== mid);
             setJSON(KEYS.meetups, all);
+        },
+
+        /* 岁印 · 二十四节气长卷
+           结构: { "丙午": { "立春": { date: "2026-02-04", first: true }, ... }, "丁未": {...} }
+           key 为干支纪年,值为 24 节气名→盖印记录;访问当节气期间任意一日即可盖印 */
+        getYearStamps: () => getJSON(KEYS.yearStamps, {}),
+        stampTerm: (ganzhi, termName) => {
+            const all = getJSON(KEYS.yearStamps, {});
+            all[ganzhi] = all[ganzhi] || {};
+            if (all[ganzhi][termName]) return false;
+            all[ganzhi][termName] = { date: new Date().toISOString().slice(0, 10), ts: Date.now() };
+            setJSON(KEYS.yearStamps, all);
+            return true;
+        },
+        getYearStampCount: ganzhi => {
+            const all = getJSON(KEYS.yearStamps, {});
+            return Object.keys(all[ganzhi] || {}).length;
         }
     };
 })();
