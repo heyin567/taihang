@@ -1344,5 +1344,998 @@ const routes = [
         soundscape: { name: "终南云水", search: "zhongnan mountain wind temple" },
         coords: { lon: 108.95, lat: 33.90 },
         lastUpdated: "2026-05-25"
+    },
+    {
+        id: 20,
+        name: "庐山",
+        region: "hidden",
+        type: "remote",
+        location: "江西 · 九江",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "multi", durationLabel: "多日",
+        distance: "约 18 km(牯岭—花径—锦绣谷—含鄱口—五老峰)",
+        elevation: "海拔 1474 m(汉阳峰)",
+        bestSeason: "春夏看瀑、秋观红叶、冬赏雾凇",
+        seasonTags: ["spring", "summer", "autumn"],
+        theme: { sky: ["#dceadc", "#a8c8b0"], far: "#5a7868", mid: "#3a5a48", near: "#1c3028", accent: "waterfall", sun: "morning", primary: "#3a5a48", soft: "#e8f0e8" },
+        ratings: { stamina: 4, technical: 2, exposure: 3, retreat: 5, signal: 5 },
+        techGrade: "T2",
+        epithet: "匡庐奇秀甲天下",
+        poem: {
+            title: "望庐山瀑布",
+            author: "李白",
+            dynasty: "唐",
+            lines: ["日照香炉生紫烟", "遥看瀑布挂前川", "飞流直下三千尺", "疑是银河落九天"],
+            note: "三年级上册必背。诗仙写香炉峰瀑布,以「银河落九天」一比千古传诵。今香炉峰下三叠泉、开先瀑布皆可见此意——课本所背即此山,登之方知「三千尺」非虚。"
+        },
+        description: "江西九江长江南畔,匡庐之奇秀甲于天下。东晋慧远立东林寺,开净土一宗;陶潜居柴桑,「采菊东篱」南山即此;李白题瀑布,白乐天种桃花,东坡题西林,朱晦庵兴白鹿洞——一山而集中国诗、文、宗、学之半数大事,无与并者。",
+        features: [
+            "**一山六诗**:李白《望庐山瀑布》、苏轼《题西林壁》、陶潜《饮酒》、白居易《大林寺桃花》、毛泽东《登庐山》、慧远偈语",
+            "三叠泉 · 「不到三叠泉,不算庐山客」,落差 155 米",
+            "白鹿洞书院 · 朱熹兴学,中国四大书院之首",
+            "东林寺 · 慧远立白莲社,净土宗祖庭",
+            "「不识庐山真面目,只缘身在此山中」 — 苏轼《题西林壁》"
+        ],
+        chronicle: [
+            { year: "约 405", dynasty: "晋", person: "陶渊明", event: "归隐柴桑,作《饮酒》",   legacy: "「采菊东篱下,悠然见南山」之南山即庐山" },
+            { year: "约 384", dynasty: "晋", person: "慧远",   event: "立东林寺,结白莲社",     legacy: "中国净土宗祖庭,中外名僧云集" },
+            { year: "约 422", dynasty: "宋", person: "谢灵运", event: "登庐山赋诗",             legacy: "中国山水诗之祖,匡庐为山水诗发源地之一" },
+            { year: "约 756", dynasty: "唐", person: "李白",   event: "游庐山题瀑布",           legacy: "「飞流直下三千尺,疑是银河落九天」" },
+            { year: "约 817", dynasty: "唐", person: "白居易", event: "贬江州司马,登大林寺",   legacy: "「人间四月芳菲尽,山寺桃花始盛开」入小学课本" },
+            { year: "1084",  dynasty: "宋", person: "苏轼",   event: "游庐山题西林壁",         legacy: "「不识庐山真面目,只缘身在此山中」入四上必背" },
+            { year: "1180",  dynasty: "宋", person: "朱熹",   event: "复兴白鹿洞书院",         legacy: "订《白鹿洞书院揭示》,中国书院制度之范" },
+            { year: "1618",  dynasty: "明", person: "徐霞客", event: "登庐山五老峰",           legacy: "《游庐山日记》详记三叠泉、汉阳峰" },
+            { year: "1959",  dynasty: "今", person: "毛泽东", event: "庐山会议,作《登庐山》", legacy: "「一山飞峙大江边,跃上葱茏四百旋」" },
+            { year: "1996",  dynasty: "今", person: "联合国", event: "庐山入世界文化景观遗产", legacy: "中国第一个「文化景观」遗产,以人文胜" }
+        ],
+        waypoints: [
+            { time: "Day1 09:00", name: "牯岭镇",      elev: "1167m", scene: "🏘️", vista: "庐山山顶小镇,云雾常绕,民国别墅群",         note: "山上住宿集中地,先行落脚" },
+            { time: "Day1 11:00", name: "花径 · 大林寺", elev: "1100m", scene: "🌸", vista: "白居易「人间四月芳菲尽」桃花处,小池如玉",   note: "课本诗实地,可念诗一遍" },
+            { time: "Day1 14:00", name: "锦绣谷 · 仙人洞", elev: "1180m", scene: "🪨", vista: "悬崖叠翠,毛泽东「无限风光在险峰」即此",     note: "栈道贴壁,慎防风" },
+            { time: "Day2 06:00", name: "含鄱口观日",  elev: "1286m", scene: "🌅", vista: "鄱阳湖与长江尽收眼底,日出第一处",           note: "提前 30 分钟到位" },
+            { time: "Day2 09:00", name: "五老峰",      elev: "1436m", scene: "🏔️", vista: "李白「青天削出金芙蓉」之峰,五峰并立",       note: "上至三峰即可,体力充沛者可至五峰" },
+            { time: "Day2 14:00", name: "三叠泉",      elev: "950m",  scene: "💧", vista: "「不到三叠泉,不算庐山客」,落差 155 m",     note: "下行台阶 1500 级,留体力返程" },
+            { time: "Day3 09:00", name: "白鹿洞书院",  elev: "240m",  scene: "📜", vista: "朱熹复兴之书院,中国四大书院首",             note: "山下景点,文学人必访" },
+            { time: "Day3 14:00", name: "东林寺",      elev: "100m",  scene: "🏯", vista: "慧远立白莲社处,净土宗祖庭,千年银杏",       note: "归途收尾,听一晚经" }
+        ],
+        hiddenSpots: [
+            "汉阳峰 · 庐山真正最高峰,游人罕至,可见南天一柱碑",
+            "天池寺 · 牯岭西北,云雾深处的小寺,谢灵运曾游",
+            "秀峰瀑布 · 山南,李白《望庐山瀑布》之「香炉峰」实在此,与三叠泉非一处"
+        ],
+        photography: "含鄱口日出云海、五老峰云雾、三叠泉飞瀑、锦绣谷晚霞,皆经典机位。",
+        food: "赣菜:庐山石鸡、庐山石鱼、庐山三石(石鸡、石鱼、石耳)、庐山云雾茶。",
+        cuisine: {
+            tagline: "庐山三石 + 云雾茶,山中三鲜俱在",
+            signature: { name: "庐山石鸡", icon: "🐸", price: "¥80-120", desc: "庐山涧中棘胸蛙,肉嫩似鸡,清炖最鲜,庐山头牌" },
+            snack:     { name: "庐山石耳", icon: "🍄", price: "¥40-60", desc: "悬崖石壁上所生地衣,炖汤极鲜,名贵山珍" },
+            drink:     { name: "庐山云雾茶", icon: "🍵", price: "¥40/壶", desc: "庐山高山绿茶,云雾蒸润,味厚气清,东林寺旁所产最佳" },
+            shop:      "推荐:牯岭镇·三石馆 / 山下·东林寺斋堂 / 九江·浔阳楼",
+            seasonal:  { spring: "春宜:石耳炖鸡 + 新摘云雾茶", summer: "夏宜:石鱼羹 + 庐山豆参" },
+            tea:       "宜配:庐山云雾,中国十大名茶之一,产于汉阳峰、五老峰一带",
+            verse:     "「匡庐奇秀甲天下」 — 白居易《庐山草堂记》"
+        },
+        route: "牯岭镇 → 花径 → 锦绣谷 → 含鄱口 → 五老峰 → 三叠泉 → 白鹿洞书院 → 东林寺",
+        access: "石家庄至九江高铁约 8 小时;九江高铁站至山下八里坡换大巴上山,亦可自驾盘山公路四百旋至牯岭。",
+        tips: "山上昼夜温差大,夏夜亦凉;雾大时栈道湿滑,慎行;三叠泉下行容易上行难,留体力。",
+        gear: ["登山鞋", "薄外套(山顶夏夜亦凉)", "雨衣", "充足饮水", "现金"],
+        emergency: { local: "庐山景区 0792-8281301", rescue: "庐山救援 0792-8282498", general: "110 / 120" },
+        gpxNote: "远望志 · 实地循景区标线,无需 GPX。",
+        soundscape: { name: "三叠飞瀑 · 云雾松风", search: "lushan waterfall cloud temple bell" },
+        coords: { lon: 115.97, lat: 29.56 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 21,
+        name: "天门山",
+        region: "hidden",
+        type: "remote",
+        location: "安徽 · 马鞍山 · 当涂",
+        difficulty: "easy", difficultyLabel: "轻松",
+        duration: "half", durationLabel: "半日",
+        distance: "约 4 km(东梁山眺台 + 江畔环线)",
+        elevation: "海拔 88 m(东梁山)",
+        bestSeason: "秋日江风最爽,春夏皆宜",
+        seasonTags: ["autumn", "spring", "summer"],
+        theme: { sky: ["#dce8ec", "#a8c0c8"], far: "#5878a0", mid: "#3a5878", near: "#1c3050", accent: "river", sun: "afternoon", primary: "#3a5878", soft: "#e8eef0" },
+        ratings: { stamina: 1, technical: 1, exposure: 2, retreat: 5, signal: 5 },
+        techGrade: "T1",
+        epithet: "两岸青山相对出",
+        poem: {
+            title: "望天门山",
+            author: "李白",
+            dynasty: "唐",
+            lines: ["天门中断楚江开", "碧水东流至此回", "两岸青山相对出", "孤帆一片日边来"],
+            note: "三年级上册必背。开元十三年(725)李白二十五岁出蜀东下,船至长江此段,见东西梁山如门夹江而立,作此诗。课本所背即此地——东梁山在江北、西梁山在江南,长江穿门东去,「天门」之名即此。"
+        },
+        description: "长江下游马鞍山段,东、西梁山夹江对峙,如门户中开。李白舟行至此,作《望天门山》入小学必背。今东梁山有李白塑像、碑林,登顶可见碧水东流之实景。",
+        features: [
+            "**两岸青山**:东梁山(博望山)在江北,西梁山(梁山)在江南,长江穿门",
+            "李白《望天门山》碑林 · 历代名家书此诗碑石数十方",
+            "古时为长江中下游之锁钥,兵家必争",
+            "「天门中断楚江开,碧水东流至此回」 — 李白"
+        ],
+        chronicle: [
+            { year: "约 725", dynasty: "唐", person: "李白",   event: "舟过天门山题诗", legacy: "「两岸青山相对出,孤帆一片日边来」入三上必背" },
+            { year: "约 759", dynasty: "唐", person: "李白",   event: "再游当涂",       legacy: "李白晚年居此,卒于当涂青山,葬青山西麓" },
+            { year: "宋",     dynasty: "宋", person: "陆游",   event: "舟过天门",       legacy: "《入蜀记》载「东西梁山夹江如门」" },
+            { year: "明",     dynasty: "明", person: "李攀龙", event: "题天门山诗",     legacy: "「楚江回处是龙门」复申李白之意" }
+        ],
+        waypoints: [
+            { time: "08:30", name: "东梁山牌坊",     elev: "10m", scene: "⛩️", vista: "李白塑像处,起点", note: "可背《望天门山》一遍" },
+            { time: "09:00", name: "李白诗碑林",     elev: "30m", scene: "📜", vista: "历代书家题《望天门山》",  note: "拓本可购" },
+            { time: "10:00", name: "东梁山顶眺台",   elev: "88m", scene: "🌅", vista: "东望西梁山如门相对,长江穿其中,孤帆点点", note: "「两岸青山相对出」实景" },
+            { time: "11:30", name: "江畔环线",       elev: "5m",  scene: "🚤", vista: "「碧水东流至此回」之处,水流湍急转折",     note: "可乘船过江至西梁山" }
+        ],
+        hiddenSpots: [
+            "西梁山 · 江南一侧,游人罕至,有《望天门山》摩崖石刻",
+            "李白墓 · 当涂青山西麓,距天门山约 30 km,可一并访"
+        ],
+        photography: "黄昏时东梁山顶望长江日落与西梁山剪影,即「孤帆一片日边来」之机位。",
+        food: "皖南江鲜:刀鱼、鲥鱼、河豚(限季)、采石矶茶干。",
+        cuisine: {
+            tagline: "江鲜小吃 + 太白遗韵",
+            signature: { name: "采石矶刀鱼", icon: "🐟", price: "¥120-200", desc: "长江三鲜之首,清明前肥美,蒸食最鲜" },
+            snack:     { name: "采石矶茶干", icon: "🟫", price: "¥10-20",  desc: "马鞍山特产,五香豆干,李白曾配酒之物" },
+            drink:     { name: "太白宴酒",   icon: "🍶", price: "¥80",    desc: "当涂出酒,李白晚岁所饮,甘冽" },
+            shop:      "推荐:采石矶古镇 / 当涂太白楼酒家",
+            seasonal:  { spring: "春宜:刀鱼宴 + 茶干", autumn: "秋宜:江蟹 + 太白酒" },
+            tea:       "宜配:黄山毛峰或祁门红茶,皖南本色",
+            verse:     "「天门中断楚江开,碧水东流至此回」 — 李白《望天门山》"
+        },
+        route: "东梁山牌坊 → 李白诗碑林 → 东梁山顶眺台 → 江畔环线 →(可乘船)西梁山",
+        access: "石家庄至马鞍山东高铁约 6 小时;马鞍山东站打车至当涂天门山景区约 40 分钟。",
+        tips: "山势平缓不须登山装,但江风大;船游需查潮汐;李白墓与采石矶可一日联游。",
+        gear: ["运动鞋", "防晒帽", "充足饮水"],
+        emergency: { local: "马鞍山文旅 0555-2475117", rescue: "长江航道救援 12395", general: "110 / 120" },
+        gpxNote: "远望志 · 半日休闲,无需 GPX。",
+        soundscape: { name: "楚江东流 · 孤帆远影", search: "yangtze river boat sail" },
+        coords: { lon: 118.49, lat: 31.62 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 22,
+        name: "敬亭山",
+        region: "hidden",
+        type: "remote",
+        location: "安徽 · 宣城",
+        difficulty: "easy", difficultyLabel: "轻松",
+        duration: "half", durationLabel: "半日",
+        distance: "约 6 km(山门—太白楼—翠云庵—一峰)",
+        elevation: "海拔 317 m",
+        bestSeason: "春秋两季最宜,云雾常绕",
+        seasonTags: ["spring", "autumn"],
+        theme: { sky: ["#e0e8d8", "#b0c0a0"], far: "#5a7858", mid: "#3a5838", near: "#1c2c18", accent: "solitary", sun: "afternoon", primary: "#3a5838", soft: "#e8efe0" },
+        ratings: { stamina: 1, technical: 1, exposure: 1, retreat: 5, signal: 5 },
+        techGrade: "T1",
+        epithet: "相看两不厌",
+        poem: {
+            title: "独坐敬亭山",
+            author: "李白",
+            dynasty: "唐",
+            lines: ["众鸟高飞尽", "孤云独去闲", "相看两不厌", "只有敬亭山"],
+            note: "四年级下册必背。天宝十二载(753)李白游宣城,独坐敬亭山而作。「相看两不厌」一句道尽中国文人与山相伴之至境——四下小学必背,而此山多数人终生未访。山虽不过三百米,而境界为李白生平之极。"
+        },
+        description: "皖南宣城北郊,海拔 317 米。南齐谢朓守宣城,常登此山作诗;李白慕其名,先后七次登敬亭,作《独坐敬亭山》《赠宣州谢朓楼》等。山小而文重,堪称「江南诗山」。",
+        features: [
+            "**江南诗山**:谢朓、李白、白居易、杜牧、苏东坡、文天祥、汤显祖皆登题",
+            "太白独坐处 · 山中李白塑像独坐石上,与对面石壁「相看」",
+            "谢朓楼 · 山下宣城古楼,谢朓守宣州时所建",
+            "「相看两不厌,只有敬亭山」 — 李白"
+        ],
+        chronicle: [
+            { year: "约 495", dynasty: "齐",   person: "谢朓",   event: "守宣城登敬亭", legacy: "首咏敬亭,「兹山亘百里,合沓与云齐」" },
+            { year: "约 753", dynasty: "唐",   person: "李白",   event: "登敬亭山题诗", legacy: "「相看两不厌,只有敬亭山」入四下必背" },
+            { year: "约 836", dynasty: "唐",   person: "杜牧",   event: "守宣城登敬亭", legacy: "《题宣州开元寺水阁》「六朝文物草连空」" },
+            { year: "宋",     dynasty: "宋",   person: "苏轼",   event: "题敬亭山",     legacy: "「敬亭一旧友,知我醉吟来」" },
+            { year: "明",     dynasty: "明",   person: "汤显祖", event: "登敬亭",       legacy: "「我亦登临敬亭客,谢公李白共徘徊」" }
+        ],
+        waypoints: [
+            { time: "09:00", name: "山门 · 谢朓亭", elev: "60m",  scene: "⛩️", vista: "起点,山下立谢朓诗碑",            note: "购票后步行" },
+            { time: "10:00", name: "太白独坐处",   elev: "200m", scene: "🪨", vista: "李白塑像独坐石上,正对一峰",     note: "「相看两不厌」实景" },
+            { time: "11:00", name: "翠云庵",       elev: "270m", scene: "🏯", vista: "唐宋古庵,谢朓、李白皆曾游",      note: "可饮一杯敬亭茶" },
+            { time: "11:30", name: "一峰山顶",     elev: "317m", scene: "🌄", vista: "宣城全景,皖南云雾铺展",          note: "下山或原路或环线" }
+        ],
+        hiddenSpots: [
+            "云齐阁 · 山中半腰,谢朓「合沓与云齐」之名所出,人少静",
+            "广教寺双塔 · 山下,北宋砖塔,与敬亭一并访"
+        ],
+        photography: "李白塑像与一峰相对全景、太白独坐处侧逆光,皆经典机位。",
+        food: "宣城菜:三鲜锅、宣州板栗、敬亭绿雪茶。",
+        cuisine: {
+            tagline: "诗山之物,以茶为重",
+            signature: { name: "宣城三鲜",   icon: "🍲", price: "¥60-100", desc: "土鸡、河虾、香菇同煲,皖南家常名菜" },
+            snack:     { name: "宣州板栗",   icon: "🌰", price: "¥30/斤",  desc: "宣城所产油栗,糖炒最香,李白曾赞" },
+            drink:     { name: "敬亭绿雪茶", icon: "🍵", price: "¥60/壶",  desc: "敬亭山特产绿茶,茸毛如雪,色翠香高" },
+            shop:      "推荐:宣城老街 / 敬亭山下茶馆",
+            seasonal:  { autumn: "秋宜:板栗 + 绿雪茶 + 三鲜锅" },
+            tea:       "宜配:敬亭绿雪,中国传统名茶之一,产自此山",
+            verse:     "「相看两不厌,只有敬亭山」 — 李白《独坐敬亭山》"
+        },
+        route: "山门 → 太白独坐处 → 翠云庵 → 一峰山顶",
+        access: "石家庄至宣城高铁约 7 小时(经合肥);宣城站打车至敬亭山约 20 分钟。",
+        tips: "山小可半日,慢游一日亦可;李白塑像处人多,清晨或黄昏更静。",
+        gear: ["运动鞋", "薄外套(山中常雾)", "饮水"],
+        emergency: { local: "宣城文旅 0563-3022138", rescue: "宣城景区救援 0563-3035110", general: "110 / 120" },
+        gpxNote: "远望志 · 半日休闲,无需 GPX。",
+        soundscape: { name: "孤云独去 · 鸟鸣山涧", search: "mountain bird solitude bamboo" },
+        coords: { lon: 118.75, lat: 30.97 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 23,
+        name: "天姥山",
+        region: "hidden",
+        type: "remote",
+        location: "浙江 · 绍兴 · 新昌",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 12 km(刘门坞—惆怅溪—拨云尖—大尖峰)",
+        elevation: "海拔 818 m(拨云尖)",
+        bestSeason: "秋季云海最盛,夏可避暑",
+        seasonTags: ["autumn", "summer"],
+        theme: { sky: ["#dde2ec", "#a0a8c8"], far: "#5060a0", mid: "#303860", near: "#1c1830", accent: "dream", sun: "dawn", primary: "#303860", soft: "#e8eaf2" },
+        ratings: { stamina: 3, technical: 2, exposure: 3, retreat: 4, signal: 3 },
+        techGrade: "T2",
+        epithet: "诗仙梦游处",
+        poem: {
+            title: "梦游天姥吟留别",
+            author: "李白",
+            dynasty: "唐",
+            lines: ["天姥连天向天横", "势拔五岳掩赤城", "天台四万八千丈", "对此欲倒东南倾"],
+            note: "高中必修必背。天宝四载(745)李白将离东鲁南下越中,作此诗。「安能摧眉折腰事权贵,使我不得开心颜」一句为千古之骨。然天姥山实在浙东新昌,海拔不过八百米,「势拔五岳」乃诗仙梦境之夸饰——惟登之方知,非真高,实是李白心中之高。"
+        },
+        description: "浙江新昌天姥山,海拔 818 米,虽不甚高,然为「唐诗之路」终点,李白《梦游天姥吟留别》入高中必修。山中拨云尖、大尖峰、惆怅溪、刘门坞皆诗中之景,六朝以来文人慕名而至者不绝。",
+        features: [
+            "**唐诗之路终点**:自钱塘江入浙东,经曹娥江、剡溪,至天姥",
+            "拨云尖 · 主峰,海拔 818 m,「半壁见海日」之处",
+            "惆怅溪 · 谢灵运所凿,行人至此惆怅而返",
+            "「安能摧眉折腰事权贵,使我不得开心颜」 — 李白"
+        ],
+        chronicle: [
+            { year: "约 422", dynasty: "晋", person: "谢灵运", event: "凿山开路游天姥", legacy: "中国山水诗之祖,「谢公屐」即此山所创" },
+            { year: "约 727", dynasty: "唐", person: "李白",   event: "初游天姥",       legacy: "次年作《天台晓望》「攀条摘朱实」" },
+            { year: "745",   dynasty: "唐", person: "李白",   event: "作《梦游天姥吟留别》", legacy: "「安能摧眉折腰事权贵」高中必修必背" },
+            { year: "约 760", dynasty: "唐", person: "杜甫",   event: "题天姥",         legacy: "《壮游》「东下姑苏台,已具浮海航」" },
+            { year: "宋",     dynasty: "宋", person: "陆游",   event: "登天姥",         legacy: "「我昔游剡溪,梦寐到天姥」" }
+        ],
+        waypoints: [
+            { time: "07:30", name: "刘门坞",   elev: "200m", scene: "⛩️", vista: "山下入口,谢公屐遗迹",          note: "起点,购水准备" },
+            { time: "09:00", name: "惆怅溪",   elev: "350m", scene: "💧", vista: "谢灵运所凿古道,溪水清冽",      note: "「迷花倚石忽已暝」之景" },
+            { time: "11:00", name: "拨云尖",   elev: "818m", scene: "🏔️", vista: "天姥主峰,「半壁见海日」之处", note: "可见雁荡方向云海" },
+            { time: "13:00", name: "大尖峰",   elev: "780m", scene: "🌅", vista: "诗中「青冥浩荡不见底」处",      note: "下行返刘门坞" }
+        ],
+        hiddenSpots: [
+            "斑竹村 · 山下村,有李白祠与《梦游天姥》全诗壁",
+            "桃源洞 · 半山,据传谢灵运所发现,洞中有崖刻"
+        ],
+        photography: "拨云尖晨雾、惆怅溪流水、大尖峰远眺雁荡,皆经典机位。",
+        food: "浙东山菜:小京生花生、新昌大佛龙井、笋干菜、镬糍。",
+        cuisine: {
+            tagline: "唐诗之路终点之味",
+            signature: { name: "新昌春饼",     icon: "🥞", price: "¥10-20", desc: "薄如纸,卷山菜笋丝豆芽,新昌人请客必备" },
+            snack:     { name: "小京生花生",   icon: "🥜", price: "¥30/斤", desc: "新昌特产,粒小香脆,李白曾配酒之物" },
+            drink:     { name: "大佛龙井",     icon: "🍵", price: "¥80/壶", desc: "新昌大佛寺龙井,色清气高,与西湖龙井齐名" },
+            shop:      "推荐:新昌县城 · 大佛寺路口 / 山下斑竹村农家",
+            seasonal:  { spring: "春宜:春饼 + 大佛龙井(明前)", autumn: "秋宜:笋干菜烧肉 + 镬糍" },
+            tea:       "宜配:大佛龙井,新昌出茶,清香高长",
+            verse:     "「天姥连天向天横,势拔五岳掩赤城」 — 李白《梦游天姥吟留别》"
+        },
+        route: "刘门坞 → 惆怅溪 → 拨云尖 → 大尖峰 → 返刘门坞",
+        access: "石家庄至新昌高铁约 9 小时(经杭州东);新昌站打车至天姥山景区约 40 分钟。",
+        tips: "山势比李白所写温和,但秋冬气温低,雾大慎防湿滑;若读此诗者,登顶应再背一遍。",
+        gear: ["登山鞋", "薄抓绒", "雨衣", "饮水"],
+        emergency: { local: "新昌文旅 0575-86027777", rescue: "新昌山岳救援 0575-86081234", general: "110 / 120" },
+        gpxNote: "远望志 · 实地循景区标线,无需 GPX。",
+        soundscape: { name: "惆怅溪 · 谢公屐", search: "tianmu mountain stream cloud" },
+        coords: { lon: 120.90, lat: 29.50 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 24,
+        name: "阴山",
+        region: "hidden",
+        type: "remote",
+        location: "内蒙古 · 包头—呼和浩特一线",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 14 km(大青山段 · 哈达门国家森林公园)",
+        elevation: "海拔 2338 m(大青山主峰)",
+        bestSeason: "夏秋最宜,冬寒春风沙",
+        seasonTags: ["summer", "autumn"],
+        theme: { sky: ["#e8e2d0", "#c8b890"], far: "#807058", mid: "#605040", near: "#3a3020", accent: "frontier", sun: "noon", primary: "#605040", soft: "#f0e8d0" },
+        ratings: { stamina: 3, technical: 2, exposure: 4, retreat: 3, signal: 3 },
+        techGrade: "T2",
+        epithet: "敕勒川下",
+        poem: {
+            title: "敕勒歌",
+            author: "北朝民歌",
+            dynasty: "北朝",
+            lines: ["敕勒川,阴山下", "天似穹庐,笼盖四野", "天苍苍,野茫茫", "风吹草低见牛羊"],
+            note: "二年级下册必背。北齐时鲜卑歌谣,以汉译入《乐府》,千古传诵。「敕勒川」即今呼和浩特至包头之间土默特平原,「阴山」即今大青山。课本中最早出现的山,亦为唯一一首入选小学的边塞民歌——登阴山,即知「天似穹庐」非夸饰。"
+        },
+        description: "阴山山脉横亘内蒙古中部,东西绵延一千二百公里,为农牧分界、汉胡分野。阴山即《敕勒歌》之阴山、王昌龄《出塞》「但使龙城飞将在,不教胡马度阴山」之阴山——中国北方第一道天然屏障。今登大青山段哈达门或苏木山,可见敕勒川草原全景。",
+        features: [
+            "**农牧分野**:山南为汉地,山北为草原,自秦汉以来文化分水岭",
+            "大青山 · 阴山中段,呼包之间主峰,海拔 2338 m",
+            "阴山岩画 · 数千年来匈奴、突厥、蒙古族留下岩画万余幅",
+            "「但使龙城飞将在,不教胡马度阴山」 — 王昌龄《出塞》"
+        ],
+        chronicle: [
+            { year: "前 215", dynasty: "秦",   person: "蒙恬",   event: "北逐匈奴,阴山为塞", legacy: "「却匈奴七百余里」,长城沿阴山而筑" },
+            { year: "前 119", dynasty: "汉",   person: "霍去病", event: "出阴山击匈奴",       legacy: "封狼居胥,匈奴远遁,「漠南无王庭」" },
+            { year: "约 564", dynasty: "北齐", person: "敕勒人", event: "传唱《敕勒歌》",     legacy: "鲜卑民歌入汉,「天似穹庐,笼盖四野」千载共记" },
+            { year: "唐",     dynasty: "唐",   person: "王昌龄", event: "作《出塞》",         legacy: "「不教胡马度阴山」入唐诗三百" },
+            { year: "唐",     dynasty: "唐",   person: "卢纶",   event: "作《塞下曲》",       legacy: "「月黑雁飞高,单于夜遁逃」即阴山之夜" }
+        ],
+        waypoints: [
+            { time: "08:00", name: "哈达门入口",       elev: "1300m", scene: "⛩️", vista: "国家森林公园起点,有蒙古包",          note: "可换骑马上行" },
+            { time: "10:00", name: "阴山岩画",         elev: "1700m", scene: "🪨", vista: "数千年北方游牧民族岩画,鹿羊狼虎",  note: "保护区,勿触摸" },
+            { time: "12:00", name: "大青山观景台",     elev: "2100m", scene: "🌄", vista: "南望敕勒川,北望阴山主脉",          note: "「敕勒川,阴山下」之实景" },
+            { time: "14:00", name: "敕勒川草原",       elev: "1100m", scene: "🐑", vista: "下山入草原,「风吹草低见牛羊」",   note: "可宿蒙古包,夜看星河" }
+        ],
+        hiddenSpots: [
+            "苏木山 · 阴山东段,落叶松林壮丽,「内蒙古小瑞士」之名",
+            "昭君墓 · 呼和浩特郊外,「青冢」即此,与阴山齐为汉胡和亲之证",
+            "五当召 · 阴山深处藏传佛教寺,内蒙古三大召之一"
+        ],
+        photography: "敕勒川黄昏牛羊归牧、阴山岩画拓印、大青山日出云海,皆经典机位。",
+        food: "内蒙菜:手把肉、烤全羊、奶茶、莜面、奶豆腐。",
+        cuisine: {
+            tagline: "草原山食 · 牛羊奶茶为本",
+            signature: { name: "手把肉",     icon: "🍖", price: "¥80-150", desc: "整块羊肉清水煮熟,蘸盐韭花酱,蒙古族第一礼食" },
+            snack:     { name: "莜面窝窝",   icon: "🌾", price: "¥20-30",  desc: "阴山旱地莜麦磨粉,蒸笼成窝,配羊肉汤" },
+            drink:     { name: "蒙古奶茶",   icon: "🥛", price: "¥30/壶",  desc: "砖茶 + 鲜奶 + 黄油 + 盐,塞外之必需" },
+            shop:      "推荐:呼和浩特·小肥羊总店 / 包头·烤全羊店 / 草原蒙古包",
+            seasonal:  { summer: "夏宜:奶豆腐 + 现挤马奶酒", autumn: "秋宜:烤全羊 + 莜面" },
+            tea:       "宜配:砖茶或蒙古咸奶茶,塞外本色",
+            verse:     "「天似穹庐,笼盖四野」 — 北朝《敕勒歌》"
+        },
+        route: "哈达门入口 → 阴山岩画 → 大青山观景台 → 敕勒川草原(可宿蒙古包)",
+        access: "石家庄至呼和浩特高铁约 5 小时;呼和浩特或包头打车至大青山景区约 40-60 分钟。",
+        tips: "高原日晒强,带防晒;夏夜亦凉(山顶 10℃ 以下);蒙古包夜寒,带保暖;岩画区禁触禁拓。",
+        gear: ["登山鞋", "防晒帽", "保暖外套", "防风衣", "充足饮水"],
+        emergency: { local: "内蒙古文旅 0471-6961155", rescue: "内蒙古救援 0471-6680119", general: "110 / 120" },
+        gpxNote: "远望志 · 大青山段循景区标线;深入草原需向导。",
+        soundscape: { name: "敕勒长调 · 草原风", search: "mongolia steppe long song wind" },
+        coords: { lon: 110.30, lat: 40.85 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 25,
+        name: "褒禅山",
+        region: "hidden",
+        type: "remote",
+        location: "安徽 · 马鞍山 · 含山",
+        difficulty: "easy", difficultyLabel: "轻松",
+        duration: "half", durationLabel: "半日",
+        distance: "约 5 km(山门—华阳洞—前洞—后洞)",
+        elevation: "海拔 481 m",
+        bestSeason: "春秋最宜,夏可避暑",
+        seasonTags: ["spring", "autumn"],
+        theme: { sky: ["#dce8d8", "#a0b8a0"], far: "#5a7058", mid: "#3a5238", near: "#1c2a18", accent: "cave", sun: "afternoon", primary: "#3a5238", soft: "#e8f0e0" },
+        ratings: { stamina: 1, technical: 2, exposure: 1, retreat: 5, signal: 4 },
+        techGrade: "T1",
+        epithet: "尽吾志而无悔",
+        poem: {
+            title: "游褒禅山记",
+            author: "王安石",
+            dynasty: "宋",
+            lines: ["距洞百余步,有碑仆道", "其文漫灭,独其为文犹可识曰花山", "夫夷以近,则游者众", "险以远,则至者少"],
+            note: "高中必修必背。至和元年(1054)王安石与友游褒禅山,入华阳后洞至最深处,因怠而出,出后悔不能尽兴。归后作记一篇,以登山未尽喻治学未深——「尽吾志也而不能至者,可以无悔矣」一句,为中国议论文之骨。课本读毕,登山亲见前洞、后洞与仆道残碑,「游」与「记」始合。"
+        },
+        description: "安徽含山褒禅山,海拔不过五百米,然因王安石《游褒禅山记》入高中必修而声名千载。前洞夷而广,后洞险而深,仆道残碑「花山」二字尚可辨——课本所写之山,一草一木一碑皆在原处。",
+        features: [
+            "**议论山记之祖**:王安石以游山喻治学,「尽吾志而无悔」之骨",
+            "华阳洞 · 前洞夷以近,后洞险以远",
+            "仆道残碑 · 「花山」二字今已重立,「华」音之考证由此",
+            "「夫夷以近,则游者众;险以远,则至者少」 — 王安石"
+        ],
+        chronicle: [
+            { year: "唐",     dynasty: "唐", person: "慧褒禅师", event: "结庐于山立寺",       legacy: "山以禅师名,「褒禅」由此" },
+            { year: "1054",  dynasty: "宋", person: "王安石",   event: "游褒禅山,入华阳洞", legacy: "归舒州后作《游褒禅山记》入高中必修必背" },
+            { year: "1058",  dynasty: "宋", person: "王安石",   event: "上《万言书》",       legacy: "「尽吾志」之论,后启变法之志" },
+            { year: "明",     dynasty: "明", person: "胡宗宪",   event: "重立花山残碑",       legacy: "今所见仆道碑即此后所立" }
+        ],
+        waypoints: [
+            { time: "09:00", name: "山门 · 王安石塑像", elev: "100m", scene: "⛩️", vista: "起点,介甫立石",                  note: "可背全文一段" },
+            { time: "10:00", name: "前洞",            elev: "200m", scene: "🕳️", vista: "「夷以近」之洞,游者众",            note: "课本所写第一洞" },
+            { time: "11:00", name: "仆道残碑",        elev: "250m", scene: "📜", vista: "「花山」二字残碑,介甫所辨", note: "「华」「花」音考之实据" },
+            { time: "12:00", name: "后洞",            elev: "300m", scene: "🕳️", vista: "「险以远」之洞,深邃幽暗",            note: "课本「不能十一」之处" }
+        ],
+        hiddenSpots: [
+            "慧空禅院遗址 · 山门旁,介甫记中所宿",
+            "明胡宗宪石坊 · 重立残碑处,旁有题刻"
+        ],
+        photography: "前后洞口、仆道残碑、洞中钟乳,皆经典机位。",
+        food: "皖东本菜:含山老鹅、巢湖白鱼、炒米、刀板香。",
+        cuisine: {
+            tagline: "皖东简朴本味",
+            signature: { name: "含山老鹅", icon: "🦢", price: "¥80-120", desc: "含山特产,清炖老鹅,汤鲜肉烂,皖东头牌" },
+            snack:     { name: "炒米",     icon: "🌾", price: "¥10",    desc: "糯米炒制,泡开水即食,介甫游山之干粮" },
+            drink:     { name: "霍山黄芽", icon: "🍵", price: "¥40/壶", desc: "皖西黄茶,汤色清亮,皖东人常饮" },
+            shop:      "推荐:含山县城 · 老鹅馆",
+            seasonal:  { autumn: "秋宜:老鹅炖板栗 + 黄芽茶" },
+            tea:       "宜配:霍山黄芽,味甘气清,与游山记之议论同调",
+            verse:     "「尽吾志也而不能至者,可以无悔矣」 — 王安石《游褒禅山记》"
+        },
+        route: "山门 → 前洞 → 仆道残碑 → 后洞",
+        access: "石家庄至马鞍山东高铁约 6 小时;马鞍山东站至含山打车约 60 分钟,亦可乘大巴。",
+        tips: "山势平缓,半日足矣;后洞探深需带电筒;雨季洞内湿滑慎行。",
+        gear: ["运动鞋", "手电(后洞)", "饮水"],
+        emergency: { local: "含山文旅 0555-4313828", rescue: "含山救援 0555-4310110", general: "110 / 120" },
+        gpxNote: "远望志 · 半日休闲,无需 GPX。",
+        soundscape: { name: "幽洞水滴 · 钟乳石声", search: "cave drip stalactite quiet" },
+        coords: { lon: 118.10, lat: 31.71 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 26,
+        name: "石钟山",
+        region: "hidden",
+        type: "remote",
+        location: "江西 · 九江 · 湖口",
+        difficulty: "easy", difficultyLabel: "轻松",
+        duration: "half", durationLabel: "半日",
+        distance: "约 3 km(山门—怀苏亭—下钟洞—鄱阳湖口)",
+        elevation: "海拔 61 m",
+        bestSeason: "春秋两季最宜,夏夜尤佳",
+        seasonTags: ["spring", "autumn", "summer"],
+        theme: { sky: ["#dce6ec", "#a0b8c8"], far: "#587890", mid: "#385868", near: "#1c2c38", accent: "lake", sun: "evening", primary: "#385868", soft: "#e8eef0" },
+        ratings: { stamina: 1, technical: 1, exposure: 2, retreat: 5, signal: 5 },
+        techGrade: "T1",
+        epithet: "夜泛石钟",
+        poem: {
+            title: "石钟山记",
+            author: "苏轼",
+            dynasty: "宋",
+            lines: ["事不目见耳闻", "而臆断其有无", "可乎?", "舟回至两山间,将入港口"],
+            note: "高中必修必背。元丰七年(1084)苏轼送子苏迈赴德兴,夜泛舟至石钟山下,亲探水石相搏之声,以辨郦道元、李渤之说。「事不目见耳闻而臆断其有无可乎」一句,为中国实证文之骨,与王安石《游褒禅山记》议论山记并峙。今下钟山临鄱阳湖口,夜静仍可听水石相搏。"
+        },
+        description: "江西湖口县鄱阳湖入长江处,小山一座,海拔六十余米,因苏轼《石钟山记》入高中必修而名世。山下临湖,水石相搏,声如洪钟——东坡夜泛亲探,正其名。",
+        features: [
+            "**实证山记之祖**:苏轼夜泛亲探,「事不目见耳闻而臆断其有无」之骨",
+            "下钟洞 · 临鄱阳湖口,水石相搏处",
+            "鄱阳湖入长江 · 一站可见两江交汇",
+            "「事不目见耳闻而臆断其有无,可乎?」 — 苏轼"
+        ],
+        chronicle: [
+            { year: "约 520", dynasty: "北魏", person: "郦道元", event: "《水经注》记石钟",   legacy: "「下临深潭,微风鼓浪,水石相搏」" },
+            { year: "唐",     dynasty: "唐",   person: "李渤",   event: "至山,扣石得声",     legacy: "「南声函胡,北音清越」之说,东坡所驳" },
+            { year: "1084",  dynasty: "宋",   person: "苏轼",   event: "夜泛石钟山",         legacy: "作《石钟山记》入高中必修必背,实证之文" },
+            { year: "明",     dynasty: "明",   person: "罗洪先", event: "登石钟,题怀苏亭",   legacy: "今怀苏亭犹存,纪东坡夜泛事" }
+        ],
+        waypoints: [
+            { time: "16:00", name: "山门",        elev: "10m", scene: "⛩️", vista: "起点,东坡塑像",            note: "可背《石钟山记》一段" },
+            { time: "16:30", name: "怀苏亭",      elev: "40m", scene: "🏯", vista: "明罗洪先所建,纪东坡",      note: "题诗最盛处" },
+            { time: "17:00", name: "下钟洞",      elev: "5m",  scene: "🕳️", vista: "临鄱阳湖口,水石相搏处",  note: "课本「水石相搏」实地" },
+            { time: "18:00", name: "鄱阳湖口眺台", elev: "50m", scene: "🌅", vista: "鄱阳湖入长江,日落金波", note: "「江湖两水分」之奇景" }
+        ],
+        hiddenSpots: [
+            "上钟山 · 与下钟山并立,游人多忽,登顶可览湖口全景",
+            "梅家洲 · 鄱阳湖中沙洲,候鸟季可见东方白鹳"
+        ],
+        photography: "下钟洞临湖夜景、鄱阳湖入江日落、怀苏亭逆光剪影,皆经典机位。",
+        food: "赣菜江湖鲜:鄱阳湖银鱼、湖口糟鱼、鄱阳湖野鸭、藜蒿炒腊肉。",
+        cuisine: {
+            tagline: "江湖之味 · 鱼鸟同烹",
+            signature: { name: "鄱阳湖银鱼", icon: "🐟", price: "¥80-120", desc: "鄱阳湖特产,蛋白丰富,清炒最鲜" },
+            snack:     { name: "湖口糟鱼",   icon: "🐠", price: "¥40-60", desc: "湖口特产腌鱼,东坡夜泛或曾尝" },
+            drink:     { name: "庐山云雾茶", icon: "🍵", price: "¥40/壶", desc: "石钟山距庐山极近,常饮此茶" },
+            shop:      "推荐:湖口县城 · 鄱阳湖鱼馆",
+            seasonal:  { autumn: "秋宜:藜蒿炒腊肉 + 庐山云雾茶", winter: "冬宜:野鸭煲" },
+            tea:       "宜配:庐山云雾,与东坡题瀑诗同饮",
+            verse:     "「事不目见耳闻而臆断其有无,可乎?」 — 苏轼《石钟山记》"
+        },
+        route: "山门 → 怀苏亭 → 下钟洞 → 鄱阳湖口眺台",
+        access: "石家庄至九江高铁约 8 小时;九江至湖口大巴或高铁 30 分钟。",
+        tips: "山小半日足,然夜泛听水石之声为东坡原境,可宿湖口一晚;湖区蚊虫多,带驱蚊。",
+        gear: ["运动鞋", "驱蚊液", "饮水"],
+        emergency: { local: "湖口文旅 0792-6322317", rescue: "湖口救援 0792-6322110", general: "110 / 120" },
+        gpxNote: "远望志 · 半日休闲,无需 GPX。",
+        soundscape: { name: "鄱阳湖水石 · 夜钟", search: "lake water rock waves night" },
+        coords: { lon: 116.22, lat: 29.74 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 27,
+        name: "崂山",
+        region: "hidden",
+        type: "remote",
+        location: "山东 · 青岛",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 14 km(太清宫—巨峰主峰—九水)",
+        elevation: "海拔 1133 m(巨峰)",
+        bestSeason: "夏秋最宜,临海凉爽",
+        seasonTags: ["summer", "autumn", "spring"],
+        theme: { sky: ["#dce8ec", "#a0c0c8"], far: "#5878a0", mid: "#385878", near: "#1c2c40", accent: "sea", sun: "morning", primary: "#385878", soft: "#e8eff0" },
+        ratings: { stamina: 3, technical: 2, exposure: 4, retreat: 4, signal: 5 },
+        techGrade: "T2",
+        epithet: "海上名山第一",
+        poem: {
+            title: "劳山道士",
+            author: "蒲松龄",
+            dynasty: "清",
+            lines: ["邑有王生", "行七,故家子", "少慕道,闻劳山多仙人", "负笈往游"],
+            note: "初中课本《聊斋志异》必读篇。蒲留仙以崂山道士为引,讲一书生学穿墙术终招笑柄。「穿墙术」一段尽人皆知。今崂山太清宫即蒲留仙笔下「上清宫」原型,旁有蒲松龄塑像。讽喻虽深,而崂山之神仙气韵自此入民间。"
+        },
+        description: "山东青岛崂山,海拔 1133 米,中国大陆海岸线第一高峰。秦皇汉武访仙至此,丘处机、张三丰皆居此修道,蒲松龄又以《劳山道士》一篇入选初中课本——道教、文学、海岳之奇皆备。",
+        features: [
+            "**海上名山第一**:中国大陆海岸线最高峰,「山海相连」之奇",
+            "太清宫 · 道教全真道祖庭之一,丘处机居此七年",
+            "巨峰 · 主峰,海拔 1133 m,可观日出",
+            "「劳山多仙人」 — 蒲松龄《劳山道士》"
+        ],
+        chronicle: [
+            { year: "前 219", dynasty: "秦", person: "始皇帝",   event: "东巡访仙至崂山",     legacy: "「驾过崂山,望蓬莱」,中国帝王访仙第一站" },
+            { year: "前 110", dynasty: "汉", person: "汉武帝",   event: "登崂山祭神",         legacy: "汉武求仙,崂山入官祭名山" },
+            { year: "约 412", dynasty: "晋", person: "法显",     event: "西行归航至崂山",     legacy: "崂山南岸登陆,带回《佛国记》" },
+            { year: "1209",  dynasty: "宋", person: "丘处机",   event: "居崂山七年",         legacy: "全真道在崂山立祖庭,留诗二十余首" },
+            { year: "1413",  dynasty: "明", person: "张三丰",   event: "至崂山修道",         legacy: "崂山三丰洞遗迹犹存" },
+            { year: "约 1685", dynasty: "清", person: "蒲松龄", event: "作《劳山道士》",     legacy: "入初中课本必读,「穿墙术」千古谐文" }
+        ],
+        waypoints: [
+            { time: "07:00", name: "太清宫",       elev: "10m",   scene: "⛩️", vista: "崂山道教祖庭,丘处机居此七年",          note: "起点,可购山门票" },
+            { time: "09:00", name: "蒲松龄塑像",   elev: "30m",   scene: "🗿", vista: "太清宫旁,留仙故事的发源",              note: "课本《劳山道士》之地" },
+            { time: "11:00", name: "巨峰索道",     elev: "800m",  scene: "🚡", vista: "上行节力,可见山海全景",                note: "亦可徒步,约 3 小时" },
+            { time: "13:00", name: "巨峰主峰",     elev: "1133m", scene: "🏔️", vista: "崂山顶,东望黄海,西望胶州湾",          note: "「山海相连」之奇景" },
+            { time: "15:00", name: "九水画廊",     elev: "200m",  scene: "💧", vista: "崂山名涧,九折九弯,松涧相映",         note: "下山支线,可一并游" }
+        ],
+        hiddenSpots: [
+            "明霞洞 · 太清宫上方,丘处机题诗处,「明霞夕照」之名",
+            "华严寺 · 山东侧海边,清初古刹,藏古经卷",
+            "石老人 · 崂山东南海岸礁石,似老人临海,青岛地标"
+        ],
+        photography: "巨峰日出云海、太清宫古柏、九水溪涧、石老人海岸,皆经典机位。",
+        food: "青岛海鲜:崂山笋、崂山菇、海菜凉粉、原浆青啤、海蛎子煎。",
+        cuisine: {
+            tagline: "山海双味 · 啤酒之城",
+            signature: { name: "崂山菇炖鸡",   icon: "🍲", price: "¥80-120", desc: "崂山野生菌与本地鸡同炖,山中鲜物" },
+            snack:     { name: "海菜凉粉",     icon: "🥣", price: "¥15-25", desc: "崂山海菜熬制成冻,清凉解暑,夏宜" },
+            drink:     { name: "崂山原浆青啤", icon: "🍺", price: "¥20/扎", desc: "青岛原浆鲜啤,登山归来一扎,登仙之味" },
+            shop:      "推荐:青岛劈柴院 / 太清宫旁海鲜街",
+            seasonal:  { summer: "夏宜:海菜凉粉 + 原浆青啤", autumn: "秋宜:崂山菇炖鸡 + 崂山笋" },
+            tea:       "宜配:崂山绿茶,中国最北端的茶产地,味浓气清",
+            verse:     "「劳山多仙人」 — 蒲松龄《劳山道士》"
+        },
+        route: "太清宫 → 蒲松龄塑像 → 巨峰索道 → 巨峰主峰 → 九水画廊",
+        access: "石家庄至青岛高铁约 7 小时;青岛地铁 11 号线直达崂山。",
+        tips: "山海风大,带防风外套;巨峰索道可节力;太清宫一线人多,巨峰一线相对清净。",
+        gear: ["登山鞋", "防风外套", "墨镜", "饮水"],
+        emergency: { local: "崂山文旅 0532-88899000", rescue: "崂山救援 0532-88899007", general: "110 / 120" },
+        gpxNote: "远望志 · 实地循景区标线,无需 GPX。",
+        soundscape: { name: "崂山道音 · 海风松涛", search: "qingdao laoshan temple wave wind" },
+        coords: { lon: 120.61, lat: 36.16 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 28,
+        name: "井冈山",
+        region: "hidden",
+        type: "remote",
+        location: "江西 · 吉安",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "multi", durationLabel: "多日",
+        distance: "约 16 km(茨坪—黄洋界—八角楼—五指峰)",
+        elevation: "海拔 1841 m(五指峰)",
+        bestSeason: "春观杜鹃,秋观红叶,夏可避暑",
+        seasonTags: ["spring", "summer", "autumn"],
+        theme: { sky: ["#dde8d8", "#a0c0a0"], far: "#5a7858", mid: "#3a5838", near: "#1c2c18", accent: "revolution", sun: "morning", primary: "#3a5838", soft: "#e8efe0" },
+        ratings: { stamina: 3, technical: 2, exposure: 3, retreat: 5, signal: 5 },
+        techGrade: "T2",
+        epithet: "中国革命摇篮",
+        poem: {
+            title: "西江月 · 井冈山",
+            author: "毛泽东",
+            dynasty: "今",
+            lines: ["山下旌旗在望", "山头鼓角相闻", "敌军围困万千重", "我自岿然不动", "黄洋界上炮声隆", "报道敌军宵遁"],
+            note: "1928 年毛泽东作此词以纪黄洋界保卫战。中学语文与历史课本皆收,「黄洋界上炮声隆,报道敌军宵遁」一句为「以少胜多」之典。今黄洋界尚存当年炮位与「黄洋界保卫战胜利纪念碑」,红军路、八角楼、井冈山革命博物馆皆可寻。"
+        },
+        description: "湘赣边界罗霄山脉中段,1927 年秋毛泽东率秋收起义部队上井冈山,创建中国第一个农村革命根据地——党史第一山。茨坪为根据地中心,黄洋界为五大哨口之首,八角楼为毛泽东著《中国的红色政权为什么能够存在?》之处,五指峰为山中主峰,人民币百元背面图案即此。",
+        features: [
+            "**革命摇篮**:1927 年秋毛泽东率秋收起义余部上山,中国第一个农村革命根据地",
+            "黄洋界 · 五大哨口之首,1928 年「黄洋界保卫战」以少胜多",
+            "八角楼 · 毛泽东居此著《中国的红色政权为什么能够存在?》",
+            "五指峰 · 主峰 1841 m,百元人民币背面图案",
+            "「黄洋界上炮声隆,报道敌军宵遁」 — 毛泽东《西江月 · 井冈山》"
+        ],
+        chronicle: [
+            { year: "1927.10", dynasty: "今", person: "毛泽东", event: "率秋收起义部队上井冈山", legacy: "创建中国第一个农村革命根据地" },
+            { year: "1928.04", dynasty: "今", person: "朱德、毛泽东", event: "井冈山会师",         legacy: "红四军成立,「朱毛红军」自此立" },
+            { year: "1928.08", dynasty: "今", person: "黄洋界守军",   event: "黄洋界保卫战胜利",   legacy: "以一营击退敌四团,「以少胜多」之典" },
+            { year: "1928.10", dynasty: "今", person: "毛泽东",       event: "著《井冈山的斗争》", legacy: "「农村包围城市」战略思想之始" },
+            { year: "1928.冬", dynasty: "今", person: "毛泽东",       event: "作《西江月 · 井冈山》", legacy: "中学语文 · 历史课本必学" },
+            { year: "1965.05", dynasty: "今", person: "毛泽东",       event: "重上井冈山",         legacy: "作《水调歌头 · 重上井冈山》「世上无难事,只要肯登攀」" }
+        ],
+        waypoints: [
+            { time: "Day1 09:00", name: "茨坪 · 革命博物馆", elev: "850m",  scene: "🏛️", vista: "井冈山根据地中心,博物馆全面陈列",       note: "起点,购山门联票" },
+            { time: "Day1 14:00", name: "八角楼",           elev: "880m",  scene: "🏠", vista: "毛泽东居处,著《为什么能够存在》",     note: "课本「八角楼的灯光」原址" },
+            { time: "Day2 08:00", name: "黄洋界",           elev: "1343m", scene: "🎯", vista: "五大哨口之首,炮位、纪念碑、保卫战旧址", note: "「黄洋界上炮声隆」实地" },
+            { time: "Day2 11:00", name: "红军路",           elev: "1200m", scene: "🥾", vista: "当年挑粮小道,朱德「朱德的扁担」之路",     note: "课本《朱德的扁担》原址" },
+            { time: "Day2 15:00", name: "五指峰",           elev: "1841m", scene: "🏔️", vista: "井冈山主峰,百元人民币背面图案",         note: "可索道或步道" }
+        ],
+        hiddenSpots: [
+            "大井 · 毛泽东、朱德、彭德怀旧居,人少,门前两棵「常青树」",
+            "小井红军医院 · 中国红军第一所正规医院,有 130 烈士殉难处",
+            "笔架山 · 杜鹃花海最盛处,五月可见「十里杜鹃」"
+        ],
+        photography: "黄洋界纪念碑日出、五指峰云海、八角楼晨雾、笔架山杜鹃,皆经典机位。",
+        food: "赣菜 · 红米饭 + 南瓜汤(红军饭)、井冈山土鸡、烟笋炒肉、井冈山豆皮。",
+        cuisine: {
+            tagline: "红军饭一碗,自识当年苦",
+            signature: { name: "红米饭南瓜汤", icon: "🍚", price: "¥30-50", desc: "红米饭 + 南瓜汤 + 红军菜,当年红军主食,今为井冈山招牌" },
+            snack:     { name: "井冈山烟笋",   icon: "🎍", price: "¥15-25", desc: "山中楠竹烟熏笋干,炒肉极香" },
+            drink:     { name: "井冈山红米酒", icon: "🍶", price: "¥30",    desc: "本地红米酿造,色如琥珀,登山归来一盏" },
+            shop:      "推荐:茨坪 · 红军饭店 / 黄洋界下哨口饭庄",
+            seasonal:  { spring: "春宜:笋炒红米饭 + 杜鹃酒", autumn: "秋宜:土鸡煲 + 米酒" },
+            tea:       "宜配:井冈翠绿,本山所产高山绿茶,味鲜气厚",
+            verse:     "「黄洋界上炮声隆,报道敌军宵遁」 — 毛泽东《西江月 · 井冈山》"
+        },
+        route: "茨坪 · 革命博物馆 → 八角楼 → 黄洋界 → 红军路 → 五指峰",
+        access: "石家庄至吉安高铁约 9 小时;吉安站打车至井冈山景区约 2 小时,亦可乘景区大巴。",
+        tips: "山区昼夜温差大,带薄外套;景点分散,景区大巴串接;革命遗址多在山中,体力差者可分两日。",
+        gear: ["登山鞋", "薄外套", "雨衣(山区多雨)", "充电宝", "现金"],
+        emergency: { local: "井冈山文旅 0796-6552788", rescue: "井冈山救援 0796-6552110", general: "110 / 120" },
+        gpxNote: "远望志 · 实地循景区路线,无需 GPX。",
+        soundscape: { name: "黄洋界 · 红米南瓜", search: "jinggang mountain revolution drum" },
+        coords: { lon: 114.18, lat: 26.58 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 29,
+        name: "六盘山",
+        region: "hidden",
+        type: "remote",
+        location: "宁夏 · 固原",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 12 km(红军长征纪念馆—六盘山主峰—老龙潭)",
+        elevation: "海拔 2942 m(米缸山)",
+        bestSeason: "夏秋最宜,冬寒春风沙",
+        seasonTags: ["summer", "autumn"],
+        theme: { sky: ["#e8e0c8", "#c8b890"], far: "#807058", mid: "#605040", near: "#3a3020", accent: "long-march", sun: "noon", primary: "#605040", soft: "#f0e8d0" },
+        ratings: { stamina: 3, technical: 2, exposure: 4, retreat: 4, signal: 3 },
+        techGrade: "T2",
+        epithet: "不到长城非好汉",
+        poem: {
+            title: "清平乐 · 六盘山",
+            author: "毛泽东",
+            dynasty: "今",
+            lines: ["天高云淡", "望断南飞雁", "不到长城非好汉", "屈指行程二万", "六盘山上高峰", "红旗漫卷西风"],
+            note: "1935 年 10 月红军长征翻越六盘山时作。「不到长城非好汉,屈指行程二万」一句,为长征二万五千里之精神标杆。中学语文课本与历史课本同收。今六盘山上立「红军长征纪念馆」与诗碑,主峰可登,可见当年红军翻越路径。"
+        },
+        description: "宁夏南部六盘山,自西北至东南绵延二百四十公里,为陕北高原与陇中高原分水岭。1935 年 10 月红军长征翻越此山,毛泽东作《清平乐 · 六盘山》——长征二万五千里,六盘是最后一座大山。山中主峰米缸山海拔 2942 米,东侧有老龙潭,泾水之源。",
+        features: [
+            "**长征最后一山**:1935 年 10 月红军翻越,《清平乐》之作",
+            "红军长征纪念馆 · 山顶,陈列长征全程史料",
+            "老龙潭 · 泾水之源,「泾渭分明」之泾",
+            "「不到长城非好汉,屈指行程二万」 — 毛泽东《清平乐 · 六盘山》"
+        ],
+        chronicle: [
+            { year: "前 138", dynasty: "汉", person: "张骞",   event: "出西域过陇山",         legacy: "陇山古道,丝绸之路必经" },
+            { year: "唐",     dynasty: "唐", person: "高适",   event: "塞上六盘",             legacy: "「陇头明月迥临关」陇山诗" },
+            { year: "1227",  dynasty: "蒙", person: "成吉思汗", event: "驻军六盘山,病卒于此", legacy: "蒙古帝国第一汗驾崩之地" },
+            { year: "1935.10", dynasty: "今", person: "毛泽东", event: "率红军翻越六盘山",     legacy: "作《清平乐 · 六盘山》,长征最后一关" },
+            { year: "1947.09", dynasty: "今", person: "毛泽东", event: "再过六盘山",           legacy: "转战陕北时再翻,赋长征记忆" }
+        ],
+        waypoints: [
+            { time: "08:00", name: "山下停车场",      elev: "1900m", scene: "🅿️", vista: "起点,有红军雕塑",                    note: "购山门票" },
+            { time: "09:30", name: "红军长征纪念馆",  elev: "2300m", scene: "🏛️", vista: "陈列长征二万五千里全程史料",           note: "可观一小时" },
+            { time: "11:00", name: "毛泽东诗碑",      elev: "2400m", scene: "📜", vista: "刻《清平乐 · 六盘山》全文",            note: "可背诵留影" },
+            { time: "13:00", name: "六盘山主峰",      elev: "2942m", scene: "🏔️", vista: "米缸山顶,可见陕北高原与陇中高原分野", note: "「红旗漫卷西风」实景" },
+            { time: "15:00", name: "老龙潭",          elev: "2000m", scene: "💧", vista: "泾水之源,潭水墨绿,瀑泻三叠",         note: "下山支线" }
+        ],
+        hiddenSpots: [
+            "凉殿峡 · 成吉思汗病卒处,蒙古帝王驾崩遗址",
+            "二龙河 · 山南,泾水另一源头,人少景奇"
+        ],
+        photography: "六盘山主峰云海、纪念馆全景、老龙潭三叠瀑、毛泽东诗碑日落,皆经典机位。",
+        food: "宁夏菜:手抓羊肉、六盘山土豆烩面、固原烩肉、油茶。",
+        cuisine: {
+            tagline: "西北简朴 · 一碗烩面登山足",
+            signature: { name: "手抓羊肉",     icon: "🍖", price: "¥80-150", desc: "六盘山滩羊,清水煮肉蘸盐,西北第一礼食" },
+            snack:     { name: "固原烩面",     icon: "🍜", price: "¥20-30",  desc: "面片 + 羊肉汤 + 土豆,登山归来御寒" },
+            drink:     { name: "宁夏八宝盖碗茶", icon: "🍵", price: "¥20/壶",  desc: "茶 + 枸杞 + 桂圆 + 红枣 + 冰糖,西北人之常饮" },
+            shop:      "推荐:固原 · 老回回手抓 / 六盘山下烩面馆",
+            seasonal:  { autumn: "秋宜:手抓羊肉 + 烩面", winter: "冬宜:羊肉泡馍" },
+            tea:       "宜配:八宝盖碗茶,可暖胃",
+            verse:     "「不到长城非好汉,屈指行程二万」 — 毛泽东《清平乐 · 六盘山》"
+        },
+        route: "山下停车场 → 红军长征纪念馆 → 毛泽东诗碑 → 六盘山主峰 → 老龙潭",
+        access: "石家庄至固原高铁(经西安)约 8 小时;固原打车或大巴至六盘山景区约 1 小时。",
+        tips: "高原日晒强,带防晒;山顶夏夜亦凉(10℃ 以下),带保暖;部分路段需徒步,登山鞋为佳。",
+        gear: ["登山鞋", "防晒帽", "保暖外套", "饮水"],
+        emergency: { local: "固原文旅 0954-2026666", rescue: "六盘山救援 0954-3060119", general: "110 / 120" },
+        gpxNote: "远望志 · 实地循景区路线,无需 GPX。",
+        soundscape: { name: "六盘秋风 · 红旗漫卷", search: "northwest wind grassland march" },
+        coords: { lon: 106.33, lat: 35.65 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 30,
+        name: "乌蒙山",
+        region: "hidden",
+        type: "remote",
+        location: "云贵交界 · 毕节—昭通—会泽一线",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "full", durationLabel: "一日",
+        distance: "约 14 km(乌蒙大草原 · 韭菜坪)",
+        elevation: "海拔 2900 m(韭菜坪)",
+        bestSeason: "夏秋最宜,韭菜花期 7-9 月",
+        seasonTags: ["summer", "autumn"],
+        theme: { sky: ["#e0e8e0", "#a8c0a8"], far: "#5a7860", mid: "#3a5840", near: "#1c2c20", accent: "march", sun: "noon", primary: "#3a5840", soft: "#e8f0e8" },
+        ratings: { stamina: 3, technical: 2, exposure: 4, retreat: 3, signal: 3 },
+        techGrade: "T2",
+        epithet: "磅礴走泥丸",
+        poem: {
+            title: "七律 · 长征",
+            author: "毛泽东",
+            dynasty: "今",
+            lines: ["红军不怕远征难", "万水千山只等闲", "五岭逶迤腾细浪", "乌蒙磅礴走泥丸", "金沙水拍云崖暖", "大渡桥横铁索寒"],
+            note: "六年级上册必背。1935 年 10 月长征胜利在望时,毛泽东作此诗以揽全程。「乌蒙磅礴走泥丸」一句写云贵高原乌蒙山——红军于 1935 年 2-4 月间数过此山,「四渡赤水」「巧渡金沙江」皆在乌蒙山系之内。今乌蒙大草原与「贵州屋脊」韭菜坪皆开放,可见乌蒙真貌。"
+        },
+        description: "云贵高原乌蒙山,横亘云南、贵州两省,主体在毕节、昭通、曲靖之间。1935 年红军长征「四渡赤水」「巧渡金沙江」皆在乌蒙山系。「乌蒙磅礴走泥丸」入小学六年级必背诗,与岷山「千里雪」并峙。今乌蒙大草原(贵州六盘水)与韭菜坪(贵州赫章)为乌蒙观山最佳处,夏秋韭菜花海蓝紫一片。",
+        features: [
+            "**长征山**:四渡赤水、巧渡金沙皆在乌蒙",
+            "韭菜坪 · 海拔 2900 m,贵州屋脊,夏秋韭菜花海",
+            "乌蒙大草原 · 高山牧场,适合徒步与露营",
+            "「乌蒙磅礴走泥丸」 — 毛泽东《七律 · 长征》"
+        ],
+        chronicle: [
+            { year: "三国",     dynasty: "三国", person: "诸葛亮", event: "南征过乌蒙",       legacy: "「五月渡泸」之泸即金沙江,过乌蒙南麓" },
+            { year: "明洪武",   dynasty: "明",   person: "傅友德", event: "平云南过乌蒙",     legacy: "明军入滇主道" },
+            { year: "1935.01", dynasty: "今",   person: "红军",   event: "四渡赤水",         legacy: "毛泽东军事生涯得意之笔,乌蒙北麓" },
+            { year: "1935.04", dynasty: "今",   person: "红军",   event: "巧渡金沙江",       legacy: "甩开追敌,「金沙水拍云崖暖」" },
+            { year: "1935.10", dynasty: "今",   person: "毛泽东", event: "作《七律 · 长征》", legacy: "「乌蒙磅礴走泥丸」入小学六上必背" }
+        ],
+        waypoints: [
+            { time: "08:00", name: "韭菜坪入口",     elev: "2400m", scene: "⛩️", vista: "起点,贵州屋脊牌坊",            note: "购山门票" },
+            { time: "10:00", name: "二韭菜坪",       elev: "2700m", scene: "🌸", vista: "韭菜花海第一段,蓝紫一片",     note: "夏秋花期最盛" },
+            { time: "12:00", name: "韭菜坪顶",       elev: "2900m", scene: "🏔️", vista: "贵州最高点,可见乌蒙磅礴",     note: "「走泥丸」即此意" },
+            { time: "14:00", name: "乌蒙大草原",     elev: "2300m", scene: "🐎", vista: "高山牧场,可骑马,可露营",     note: "下行支线" }
+        ],
+        hiddenSpots: [
+            "大方县 · 毕节境内,奢香古镇,彝族文化重镇",
+            "海雀村 · 毕节贫困村脱贫典型,可见乌蒙山民今貌",
+            "扎西会议旧址 · 云南威信,长征转折会议之一"
+        ],
+        photography: "韭菜坪花海、乌蒙大草原日出、贵州屋脊牌坊、彝族村寨,皆经典机位。",
+        food: "云贵山菜:折耳根、酸汤鱼、宣威火腿、洋芋粑、苦荞粑。",
+        cuisine: {
+            tagline: "云贵山民之味",
+            signature: { name: "宣威火腿",   icon: "🥓", price: "¥80-120", desc: "云南宣威特产,与金华、伊比利亚并称世界三大名腿" },
+            snack:     { name: "洋芋粑",     icon: "🥔", price: "¥10",    desc: "毕节街头小吃,土豆泥煎饼,登山点心" },
+            drink:     { name: "苦荞酒",     icon: "🍶", price: "¥40",    desc: "彝族苦荞酿造,色淡气清,可解高原燥" },
+            shop:      "推荐:毕节 · 黔西南菜馆 / 韭菜坪下农家",
+            seasonal:  { summer: "夏宜:酸汤鱼 + 苦荞茶", autumn: "秋宜:火腿炒洋芋 + 苦荞酒" },
+            tea:       "宜配:云南普洱或苦荞茶,登山解燥",
+            verse:     "「乌蒙磅礴走泥丸」 — 毛泽东《七律 · 长征》"
+        },
+        route: "韭菜坪入口 → 二韭菜坪 → 韭菜坪顶 → 乌蒙大草原",
+        access: "石家庄至贵阳高铁约 11 小时;贵阳至毕节大巴约 3 小时;毕节至韭菜坪约 2 小时。",
+        tips: "高原反应,慢上;山顶夏夜亦凉,带保暖;雨季路滑,雨衣必备。",
+        gear: ["登山鞋", "保暖外套", "雨衣", "防晒帽", "饮水"],
+        emergency: { local: "毕节文旅 0857-8221066", rescue: "韭菜坪救援 0857-3522119", general: "110 / 120" },
+        gpxNote: "远望志 · 实地循景区路线,无需 GPX。",
+        soundscape: { name: "乌蒙磅礴 · 高原长风", search: "yunnan plateau wind grassland" },
+        coords: { lon: 104.71, lat: 26.91 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 31,
+        name: "岷山",
+        region: "hidden",
+        type: "remote",
+        location: "甘肃·四川 交界 · 阿坝—陇南—白龙江上游",
+        difficulty: "hard", difficultyLabel: "困难",
+        duration: "multi", durationLabel: "多日",
+        distance: "约 18 km(松潘—雪宝顶基地观山)",
+        elevation: "海拔 5588 m(雪宝顶)",
+        bestSeason: "夏秋最宜,冬春雪封",
+        seasonTags: ["summer", "autumn"],
+        theme: { sky: ["#e0e8ec", "#a8c0d0"], far: "#6080a0", mid: "#406080", near: "#1c2c44", accent: "snow", sun: "morning", primary: "#406080", soft: "#e8eef2" },
+        ratings: { stamina: 5, technical: 4, exposure: 5, retreat: 2, signal: 2 },
+        techGrade: "T4",
+        epithet: "千里雪",
+        poem: {
+            title: "七律 · 长征",
+            author: "毛泽东",
+            dynasty: "今",
+            lines: ["更喜岷山千里雪", "三军过后尽开颜"],
+            note: "六年级上册必背,《七律 · 长征》之尾联。1935 年 9 月红军翻越岷山,长征接近尾声,毛泽东以「千里雪」作收。岷山自青藏高原东缘自西北至东南绵延五百公里,主峰雪宝顶海拔 5588 米,白龙江、岷江皆发源于此。今松潘黄龙、九寨沟、雪宝顶皆在岷山一系,登顶专业,山下观山亦可。"
+        },
+        description: "岷山自甘肃陇南至四川阿坝绵延五百公里,主峰雪宝顶海拔 5588 米,为白龙江、岷江、嘉陵江发源地。1935 年 9 月红军翻越岷山,《七律 · 长征》「更喜岷山千里雪」即此。今九寨沟、黄龙、雪宝顶皆在岷山一系,九寨黄龙为世界自然遗产,松潘古城为唐宋以来汉藏交界重镇。",
+        features: [
+            "**长征千里雪**:1935 年 9 月红军翻越,《七律 · 长征》之尾",
+            "雪宝顶 · 主峰 5588 m,岷山最高,登顶级 T5",
+            "黄龙 · 钙华梯池,世界自然遗产",
+            "九寨沟 · 翠海叠瀑,世遗",
+            "「更喜岷山千里雪,三军过后尽开颜」 — 毛泽东《七律 · 长征》"
+        ],
+        chronicle: [
+            { year: "汉",     dynasty: "汉", person: "汉武帝", event: "开西南夷,设汶山郡", legacy: "岷山入汉版图" },
+            { year: "唐",     dynasty: "唐", person: "杜甫",   event: "流寓成都望岷山",     legacy: "「窗含西岭千秋雪」之西岭即岷山支脉" },
+            { year: "1935.06", dynasty: "今", person: "红军",   event: "翻越夹金山",         legacy: "长征翻越的第一座大雪山,岷山系" },
+            { year: "1935.09", dynasty: "今", person: "红军",   event: "过岷山主脉",         legacy: "长征翻越的最后一座大雪山" },
+            { year: "1935.10", dynasty: "今", person: "毛泽东", event: "作《七律 · 长征》",   legacy: "「更喜岷山千里雪」入小学六上必背" },
+            { year: "1992",  dynasty: "今", person: "联合国", event: "九寨黄龙入世遗",     legacy: "岷山自然胜境入世界遗产名录" }
+        ],
+        waypoints: [
+            { time: "Day1 09:00", name: "松潘古城",         elev: "2900m", scene: "⛩️", vista: "唐宋茶马古道重镇,城墙犹存",                note: "起点,可宿古城" },
+            { time: "Day1 14:00", name: "黄龙五彩池",       elev: "3576m", scene: "💧", vista: "钙华梯池如龙鳞,水色金黄翠绿",              note: "高反慢游,索道节力" },
+            { time: "Day2 06:00", name: "雪宝顶基地观山",   elev: "4200m", scene: "🏔️", vista: "岷山主峰雪宝顶 5588 m,登顶专业,基地观最佳", note: "登顶需专业向导,常人观山即可" },
+            { time: "Day3 09:00", name: "九寨沟 · 长海",     elev: "3060m", scene: "🌊", vista: "九寨海拔最高之海子,雪山倒映",              note: "可专车串接景点" },
+            { time: "Day3 14:00", name: "九寨沟 · 五花海",   elev: "2472m", scene: "🎨", vista: "九寨「沟中之眼」,色五彩",                  note: "九寨经典机位" }
+        ],
+        hiddenSpots: [
+            "牟尼沟 · 松潘县内,有扎嘎瀑布 104 米跌水,游人罕至",
+            "毕棚沟 · 理县,夹金山支线,秋色不输九寨",
+            "若尔盖大草原 · 岷山西北侧,长征过草地之地"
+        ],
+        photography: "雪宝顶日出、黄龙五彩池晨雾、九寨五花海、长海雪山倒影,皆经典机位。",
+        food: "川北藏菜:藏式酥油茶、青稞酒、牦牛肉、糌粑、松潘老腊肉。",
+        cuisine: {
+            tagline: "高原之味 · 牦牛酥油为本",
+            signature: { name: "牦牛肉火锅", icon: "🍲", price: "¥150-300", desc: "高原牦牛肉,清汤或红汤,登山归来御寒" },
+            snack:     { name: "糌粑",       icon: "🥣", price: "¥10",    desc: "青稞炒面 + 酥油 + 茶,藏族登山口粮" },
+            drink:     { name: "酥油茶",     icon: "🍵", price: "¥30/壶",  desc: "砖茶 + 酥油 + 盐,高原必饮,可抗高反" },
+            shop:      "推荐:松潘古城藏餐馆 / 九寨沟口藏家寨",
+            seasonal:  { summer: "夏宜:酸奶 + 青稞酒", autumn: "秋宜:牦牛火锅 + 酥油茶" },
+            tea:       "宜配:藏式酥油茶或青稞酒",
+            verse:     "「更喜岷山千里雪,三军过后尽开颜」 — 毛泽东《七律 · 长征》"
+        },
+        route: "松潘古城 → 黄龙五彩池 → 雪宝顶基地观山 → 九寨长海 → 五花海",
+        access: "石家庄至成都高铁约 11 小时;成都至九黄机场飞行 1 小时,或大巴 8 小时上岷山。",
+        tips: "高反务必慢上,带红景天;雪宝顶登顶专业级,常人在基地观山即可;冬春雪封不通车;手机信号弱,带卫星信标。",
+        gear: ["登山鞋", "保暖外套", "防风雨衣", "防晒霜", "墨镜", "卫星信标(雪宝顶)"],
+        emergency: { local: "阿坝文旅 0837-7239998", rescue: "九寨救援 0837-7733333", general: "110 / 120" },
+        gpxNote: "远望志 · 雪宝顶专业,常人观山循景区线;九寨黄龙均景区栈道。",
+        soundscape: { name: "岷山雪原 · 经幡风", search: "tibet snow mountain prayer wind" },
+        coords: { lon: 103.82, lat: 32.75 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 32,
+        name: "狼牙山",
+        region: "hidden",
+        type: "remote",
+        location: "河北 · 保定 · 易县",
+        difficulty: "easy", difficultyLabel: "轻松",
+        duration: "half", durationLabel: "半日",
+        distance: "约 7 km(山门—棋盘陀—跳崖处—五壮士纪念塔)",
+        elevation: "海拔 1105 m(莲花峰)",
+        bestSeason: "春秋最宜,夏可避暑",
+        seasonTags: ["spring", "autumn", "summer"],
+        theme: { sky: ["#dde0d0", "#a8b0a0"], far: "#604838", mid: "#3a2818", near: "#1c1208", accent: "valor", sun: "afternoon", primary: "#3a2818", soft: "#ece8d8" },
+        ratings: { stamina: 2, technical: 2, exposure: 3, retreat: 5, signal: 5 },
+        techGrade: "T2",
+        epithet: "五壮士跳崖处",
+        poem: {
+            title: "狼牙山五壮士",
+            author: "课文",
+            dynasty: "今",
+            lines: ["为了保护人民群众和连队主力", "五位战士把敌人引上了狼牙山", "胜利地完成了掩护任务", "把敌人引上了棋盘陀"],
+            note: "六年级上册必背课文。1941 年 9 月,晋察冀军区第一军分区一团七连六班五位战士马宝玉、葛振林、宋学义、胡德林、胡福才,为掩护主力转移,将敌引至狼牙山棋盘陀,弹尽援绝,毁枪跳崖。葛、宋幸存,余三人壮烈牺牲。课文几十年传诵。今棋盘陀立「五勇士纪念塔」,跳崖处仍存。"
+        },
+        description: "河北易县太行山北段,主峰莲花峰海拔 1105 米。1941 年抗日战争「狼牙山五壮士」事即发生于此,棋盘陀为五壮士跳崖处,今立纪念塔。山势险峻,如群狼之牙,易县在京西二百里,与北京清西陵、紫荆关一线连通。本山属太行余脉,与本志卷一太行九径同脉。",
+        features: [
+            "**五壮士跳崖处**:1941 年抗战壮烈事,小学六上必背课文",
+            "棋盘陀 · 五壮士最后阵地,跳崖处尚存",
+            "五勇士纪念塔 · 1959 年聂荣臻题字",
+            "「为了保护人民群众和连队主力,五位战士把敌人引上了狼牙山」 — 课文《狼牙山五壮士》"
+        ],
+        chronicle: [
+            { year: "汉",     dynasty: "汉",   person: "燕赵兵家", event: "易水南屏",         legacy: "易县易水古战场,与狼牙山相连" },
+            { year: "1941.09.25", dynasty: "今", person: "五壮士", event: "狼牙山阻击日军",   legacy: "五位战士将敌引至棋盘陀,弹尽跳崖" },
+            { year: "1959",  dynasty: "今",   person: "聂荣臻",   event: "题「五勇士纪念塔」", legacy: "今纪念塔立于棋盘陀,塔高 21 米" },
+            { year: "1986",  dynasty: "今",   person: "课本",     event: "《狼牙山五壮士》入小学课本", legacy: "至今犹为六上必背课文" }
+        ],
+        waypoints: [
+            { time: "09:00", name: "山门 · 五壮士广场", elev: "300m",  scene: "⛩️", vista: "起点,五壮士群雕",                note: "可购山门票" },
+            { time: "10:30", name: "红玛瑙溶洞",       elev: "600m",  scene: "🕳️", vista: "山中天然溶洞,五壮士曾隐处",      note: "支线,可一并游" },
+            { time: "12:00", name: "棋盘陀 · 跳崖处",   elev: "1000m", scene: "🪨", vista: "五壮士最后阵地,崖壁陡立百米",   note: "课文实景,默念课文一段" },
+            { time: "13:00", name: "五勇士纪念塔",     elev: "1080m", scene: "🗿", vista: "21 米高塔,聂荣臻题字",           note: "可绕塔致意" },
+            { time: "14:00", name: "莲花峰",           elev: "1105m", scene: "🌄", vista: "狼牙山主峰,可见太行余脉与京西",  note: "下山支线" }
+        ],
+        hiddenSpots: [
+            "清西陵 · 易县境内,雍正泰陵、嘉庆昌陵、道光慕陵、光绪崇陵,与狼牙山可一并访",
+            "紫荆关 · 长城内三关之一,与狼牙山相距三十里",
+            "易水河 · 「风萧萧兮易水寒」之地,荆轲别燕太子丹处"
+        ],
+        photography: "棋盘陀崖壁、五勇士纪念塔逆光、莲花峰云海,皆经典机位。",
+        food: "燕赵山菜:易县驴肉火烧、野菜饼、易县豆腐脑、保定卤煮鸡。",
+        cuisine: {
+            tagline: "燕赵山中朴素之味",
+            signature: { name: "易县驴肉火烧", icon: "🥪", price: "¥10-20", desc: "保定 · 易县名吃,酥皮驴肉夹饼" },
+            snack:     { name: "野菜饼",       icon: "🥬", price: "¥5-10",  desc: "山中野菜面饼,登山点心" },
+            drink:     { name: "保定老白酒",   icon: "🍶", price: "¥30",   desc: "燕赵传统白酒,登山归来一盏" },
+            shop:      "推荐:易县县城 · 驴肉火烧老店",
+            seasonal:  { spring: "春宜:野菜饼 + 老白酒", autumn: "秋宜:卤鸡 + 火烧" },
+            tea:       "宜配:茉莉花茶,北方家常",
+            verse:     "「为了保护人民群众和连队主力」 — 课文《狼牙山五壮士》"
+        },
+        route: "山门 · 五壮士广场 → 红玛瑙溶洞 → 棋盘陀 · 跳崖处 → 五勇士纪念塔 → 莲花峰",
+        access: "石家庄至易县大巴或自驾约 2.5 小时;易县打车至狼牙山景区约 40 分钟。",
+        tips: "山势险,跳崖处务必勿越护栏;可与清西陵、易水、紫荆关一日联游;红色教育意义重,适合带学生。",
+        gear: ["运动鞋", "薄外套", "饮水"],
+        emergency: { local: "易县文旅 0312-8225058", rescue: "狼牙山景区救援 0312-8266199", general: "110 / 120" },
+        gpxNote: "远望志 · 半日休闲,无需 GPX。",
+        soundscape: { name: "易水萧萧 · 太行风", search: "taihang wind valor solemn" },
+        coords: { lon: 115.20, lat: 39.36 },
+        lastUpdated: "2026-05-25"
+    },
+    {
+        id: 33,
+        name: "大别山",
+        region: "hidden",
+        type: "remote",
+        location: "鄂豫皖 交界 · 信阳—六安—黄冈",
+        difficulty: "medium", difficultyLabel: "中等",
+        duration: "multi", durationLabel: "多日",
+        distance: "约 15 km(天堂寨—白马大峡谷—哲人峰)",
+        elevation: "海拔 1729 m(白马尖)",
+        bestSeason: "春观杜鹃,秋观红叶,夏可避暑",
+        seasonTags: ["spring", "summer", "autumn"],
+        theme: { sky: ["#dde8d8", "#a0c0a0"], far: "#5a7a58", mid: "#3a5a38", near: "#1c2c18", accent: "march", sun: "morning", primary: "#3a5a38", soft: "#e8efe0" },
+        ratings: { stamina: 3, technical: 2, exposure: 3, retreat: 4, signal: 4 },
+        techGrade: "T2",
+        epithet: "千里跃进",
+        poem: {
+            title: "千里跃进大别山",
+            author: "课文",
+            dynasty: "今",
+            lines: ["1947 年", "刘邓大军", "千里跃进大别山", "揭开战略反攻序幕"],
+            note: "中学历史课本必读。1947 年 8 月,刘伯承、邓小平率晋冀鲁豫野战军主力 12 万人,自鲁西南强渡黄河,千里跃进大别山,直插国民党战略纵深——揭开人民解放军全国战略反攻序幕。今大别山中天堂寨、金寨皆有刘邓军部旧址。又有事:大别山亦是长江与淮河分水岭、湖北黄冈赤壁所在,东坡《赤壁赋》之赤壁即在山南。"
+        },
+        description: "大别山横亘鄂豫皖三省,西起桐柏,东至霍山,绵延四百公里,为长江与淮河分水岭。1947 年刘邓大军千里跃进大别山,揭开解放战争战略反攻序幕——党史历史课本必读。又有黄冈赤壁(东坡赤壁)在山南、麻城杜鹃花海冠绝中国、天堂寨为主峰之一。山性温润,鄂豫皖三省民风皆有所聚。",
+        features: [
+            "**战略反攻起点**:1947 年刘邓大军千里跃进,揭开反攻序幕",
+            "天堂寨 · 大别山中段主峰,海拔 1729 m,森林覆盖 96.5%",
+            "麻城杜鹃 · 中国杜鹃花海之冠,4-5 月红遍十里",
+            "金寨 · 红军摇篮县,十大将军县之一",
+            "「千里跃进大别山,揭开战略反攻序幕」 — 中学历史课本"
+        ],
+        chronicle: [
+            { year: "三国",     dynasty: "三国", person: "周瑜",     event: "赤壁之战",         legacy: "黄冈赤壁,大别山南麓,东坡《赤壁赋》之地" },
+            { year: "1082",   dynasty: "宋",   person: "苏轼",     event: "贬黄州作《赤壁赋》", legacy: "「大江东去」,赤壁在大别山南" },
+            { year: "1929",   dynasty: "今",   person: "徐向前",   event: "立鄂豫皖根据地",     legacy: "红四方面军摇篮,金寨、麻城为中心" },
+            { year: "1947.08", dynasty: "今",   person: "刘伯承、邓小平", event: "千里跃进大别山", legacy: "解放战争战略反攻起点,中学历史必读" },
+            { year: "1955",   dynasty: "今",   person: "金寨县",   event: "出 59 位开国将军",   legacy: "「红军摇篮 · 将军县」,与兴国并列" }
+        ],
+        waypoints: [
+            { time: "Day1 09:00", name: "金寨 · 红军纪念馆", elev: "300m",  scene: "🏛️", vista: "鄂豫皖根据地史料 · 59 将军县",          note: "起点,可观一小时" },
+            { time: "Day1 14:00", name: "刘邓军部旧址",     elev: "400m",  scene: "🏠", vista: "1947 年挺进大别山驻地",                note: "课本「千里跃进」实地" },
+            { time: "Day2 08:00", name: "天堂寨景区入口",   elev: "800m",  scene: "⛩️", vista: "大别山中段主峰起点",                  note: "可换景区车" },
+            { time: "Day2 11:00", name: "白马大峡谷",       elev: "1200m", scene: "💧", vista: "大别山最深之谷,瀑布连环",            note: "栈道贴壁,慎防雨" },
+            { time: "Day2 14:00", name: "白马尖 · 哲人峰",   elev: "1729m", scene: "🏔️", vista: "大别山主峰,东望淮河,西望长江",      note: "「千里跃进」之高地" },
+            { time: "Day3 09:00", name: "麻城龟峰山",       elev: "1200m", scene: "🌸", vista: "「人间四月天」杜鹃花海,十里绯红",     note: "4-5 月最盛,可一并访" }
+        ],
+        hiddenSpots: [
+            "黄冈赤壁(东坡赤壁) · 山南,大别山南麓,东坡《赤壁赋》原地",
+            "罗田薄刀峰 · 山中冷门主峰,杜鹃林壮丽,人少",
+            "英山桃花冲 · 大别山东段,瀑布与春桃并美"
+        ],
+        photography: "白马尖日出云海、麻城杜鹃花海、白马大峡谷瀑布、刘邓旧址,皆经典机位。",
+        food: "鄂豫皖菜:六安瓜片、信阳毛尖、湖北 · 蕲春艾叶粑、金寨红军菜、霍山石斛。",
+        cuisine: {
+            tagline: "三省山中之味,茶为重",
+            signature: { name: "金寨红军菜", icon: "🥬", price: "¥30-50", desc: "山中野菜与腊肉同炒,当年红军主菜" },
+            snack:     { name: "蕲春艾叶粑", icon: "🌿", price: "¥10",    desc: "湖北蕲春春艾米粉做粑,东坡贬地之物" },
+            drink:     { name: "信阳毛尖",   icon: "🍵", price: "¥80/壶", desc: "中国十大名茶,大别山北麓所产" },
+            shop:      "推荐:金寨县城 · 红军菜馆 / 麻城 · 鄂东菜",
+            seasonal:  { spring: "春宜:艾叶粑 + 信阳毛尖(明前)", summer: "夏宜:六安瓜片(谷雨)" },
+            tea:       "宜配:信阳毛尖或六安瓜片,皆产于大别山",
+            verse:     "「千里跃进大别山,揭开战略反攻序幕」 — 中学历史课本"
+        },
+        route: "金寨 · 红军纪念馆 → 刘邓军部旧址 → 天堂寨 → 白马大峡谷 → 白马尖 → 麻城龟峰山",
+        access: "石家庄至麻城 / 六安高铁约 6-7 小时;高铁站打车至大别山景区约 1.5 小时。",
+        tips: "山区雨多,雨衣必备;杜鹃花期(4-5 月)景区拥挤,提前订房;红军遗址散布,景区车串接。",
+        gear: ["登山鞋", "薄外套", "雨衣", "充电宝", "现金"],
+        emergency: { local: "六安文旅 0564-3379088", rescue: "天堂寨救援 0564-3379110", general: "110 / 120" },
+        gpxNote: "远望志 · 实地循景区路线,无需 GPX。",
+        soundscape: { name: "大别山风 · 杜鹃花涧", search: "dabie mountain wind cuckoo" },
+        coords: { lon: 115.78, lat: 31.10 },
+        lastUpdated: "2026-05-25"
     }
 ];

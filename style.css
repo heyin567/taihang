@@ -5994,4 +5994,116 @@ body.admin-on { padding-top: 56px; }
 [data-theme="dark"] .tb-foot p { color: #d8c890; }
 [data-theme="dark"] .tb-foot-meta { color: #f0a878 !important; }
 
+/* === 诗山行 · 三轴(诗/文/事)v1.7.0 === */
+.tb-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 14px;
+    font-size: 0.82rem;
+    color: #6b4a2a;
+    letter-spacing: 1px;
+}
+.tb-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px 4px 4px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    background: rgba(245,236,217,0.5);
+}
+.tb-legend-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0;
+}
+.tb-legend-item.tb-kind-poem { background: rgba(61,110,90,0.10); border-color: rgba(61,110,90,0.32); color: #2c5a48; }
+.tb-legend-item.tb-kind-poem .tb-legend-dot { background: #3d6e5a; }
+.tb-legend-item.tb-kind-wen  { background: rgba(70,110,160,0.10); border-color: rgba(70,110,160,0.32); color: #2c4a78; }
+.tb-legend-item.tb-kind-wen  .tb-legend-dot { background: #466ea0; }
+.tb-legend-item.tb-kind-shi  { background: rgba(201,64,42,0.10); border-color: rgba(201,64,42,0.32); color: #8a3220; }
+.tb-legend-item.tb-kind-shi  .tb-legend-dot { background: #c9402a; }
+
+.tb-card-kind {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #fff;
+    margin-right: auto;
+    letter-spacing: 0;
+    cursor: help;
+}
+.tb-card.tb-kind-poem .tb-card-kind { background: #3d6e5a; }
+.tb-card.tb-kind-wen  .tb-card-kind { background: #466ea0; }
+.tb-card.tb-kind-shi  .tb-card-kind { background: #c9402a; }
+
+/* 左竖条颜色随 kind 变 */
+.tb-card.tb-kind-poem { box-shadow: 0 4px 14px rgba(60,40,20,0.08), 0 0 0 1px rgba(110,80,40,0.18) inset, inset 4px 0 0 #3d6e5a; }
+.tb-card.tb-kind-wen  { box-shadow: 0 4px 14px rgba(60,40,20,0.08), 0 0 0 1px rgba(110,80,40,0.18) inset, inset 4px 0 0 #466ea0; }
+.tb-card.tb-kind-shi  { box-shadow: 0 4px 14px rgba(60,40,20,0.08), 0 0 0 1px rgba(110,80,40,0.18) inset, inset 4px 0 0 #c9402a; }
+.tb-card.tb-kind-poem:hover { box-shadow: 0 8px 22px rgba(60,40,20,0.14), 0 0 0 1px rgba(110,80,40,0.25) inset, inset 4px 0 0 #3d6e5a; }
+.tb-card.tb-kind-wen:hover  { box-shadow: 0 8px 22px rgba(60,40,20,0.14), 0 0 0 1px rgba(110,80,40,0.25) inset, inset 4px 0 0 #466ea0; }
+.tb-card.tb-kind-shi:hover  { box-shadow: 0 8px 22px rgba(60,40,20,0.14), 0 0 0 1px rgba(110,80,40,0.25) inset, inset 4px 0 0 #c9402a; }
+
+/* 「事」卡稍异:换底色为淡朱,以与诗、文判别 */
+.tb-card.tb-kind-shi {
+    background: #fef5ed;
+    background-image:
+        linear-gradient(90deg, transparent 31px, rgba(201,64,42,0.28) 32px, transparent 33px),
+        linear-gradient(0deg, transparent 19px, rgba(140,160,200,0.10) 20px, transparent 21px);
+}
+.tb-card.tb-kind-shi .tb-card-poet { color: #8a3220; }
+.tb-card.tb-kind-shi .tb-card-line { color: #4a2818; font-style: normal; }
+
+/* 「文」卡稍异:换底色为淡青,以与诗判别 */
+.tb-card.tb-kind-wen {
+    background: #f2f5f8;
+    background-image:
+        linear-gradient(90deg, transparent 31px, rgba(70,110,160,0.28) 32px, transparent 33px),
+        linear-gradient(0deg, transparent 19px, rgba(140,160,200,0.10) 20px, transparent 21px);
+}
+.tb-card.tb-kind-wen .tb-card-poet { color: #2c4a78; }
+
+@media (max-width: 720px) {
+    .tb-legend { gap: 8px; font-size: 0.74rem; }
+    .tb-legend-item { padding: 3px 8px 3px 3px; }
+    .tb-legend-dot { width: 18px; height: 18px; font-size: 0.68rem; }
+    .tb-card-kind { width: 20px; height: 20px; font-size: 0.72rem; }
+}
+
+[data-theme="dark"] .tb-legend { color: #d8c890; }
+[data-theme="dark"] .tb-legend-item { background: rgba(60,50,40,0.5); }
+[data-theme="dark"] .tb-legend-item.tb-kind-poem { background: rgba(80,160,140,0.14); border-color: rgba(80,160,140,0.4); color: #b8e0c8; }
+[data-theme="dark"] .tb-legend-item.tb-kind-wen  { background: rgba(120,170,220,0.14); border-color: rgba(120,170,220,0.4); color: #b8d4f0; }
+[data-theme="dark"] .tb-legend-item.tb-kind-shi  { background: rgba(232,100,80,0.14); border-color: rgba(232,100,80,0.4); color: #f0a878; }
+[data-theme="dark"] .tb-card.tb-kind-shi {
+    background: #2a1c14;
+    background-image:
+        linear-gradient(90deg, transparent 31px, rgba(232,100,80,0.32) 32px, transparent 33px),
+        linear-gradient(0deg, transparent 19px, rgba(140,160,200,0.18) 20px, transparent 21px);
+}
+[data-theme="dark"] .tb-card.tb-kind-wen {
+    background: #1c2230;
+    background-image:
+        linear-gradient(90deg, transparent 31px, rgba(120,170,220,0.32) 32px, transparent 33px),
+        linear-gradient(0deg, transparent 19px, rgba(140,160,200,0.18) 20px, transparent 21px);
+}
+[data-theme="dark"] .tb-card.tb-kind-shi .tb-card-line { color: #f0d488; }
+[data-theme="dark"] .tb-card.tb-kind-shi .tb-card-poet { color: #f0a878; }
+[data-theme="dark"] .tb-card.tb-kind-wen .tb-card-poet { color: #b8d4f0; }
+
 
