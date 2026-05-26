@@ -1762,7 +1762,24 @@ $("soundClose").addEventListener("click", stopSoundscape);
    诗诵(Web SpeechSynthesis)
    ============================================================ */
 let reciteUtterance = null;
-function recitePoem(poem, btn) {
+function pickReciteVoice() {
+    const voices = speechSynthesis.getVoices();
+    if (!voices || !voices.length) return null;
+    const male = voices.find(v => /zh/i.test(v.lang) && /kangkang|yunyang|yunxi|yunjian|yunhao|male/i.test(v.name));
+    if (male) return male;
+    const zh = voices.find(v => v.lang && v.lang.toLowerCase().startsWith("zh"));
+    return zh || null;
+}
+function ensureVoicesReady() {
+    return new Promise(resolve => {
+        const v = speechSynthesis.getVoices();
+        if (v && v.length) return resolve();
+        const handler = () => { speechSynthesis.removeEventListener("voiceschanged", handler); resolve(); };
+        speechSynthesis.addEventListener("voiceschanged", handler);
+        setTimeout(() => { speechSynthesis.removeEventListener("voiceschanged", handler); resolve(); }, 1500);
+    });
+}
+async function recitePoem(poem, btn) {
     if (!("speechSynthesis" in window)) { toast("浏览器不支持语音"); return; }
     if (reciteUtterance && speechSynthesis.speaking) {
         speechSynthesis.cancel();
@@ -1771,15 +1788,21 @@ function recitePoem(poem, btn) {
         reciteUtterance = null;
         return;
     }
+    await ensureVoicesReady();
+    const voice = pickReciteVoice();
+    if (!voice) {
+        toast("未检测到中文语音 — 请于系统语言设置中添加中文语音包");
+        return;
+    }
     const text = poem.lines.join("。") + "。";
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = "zh-CN";
-    u.rate = 0.78;
-    u.pitch = 1.0;
-    const voices = speechSynthesis.getVoices();
-    const zh = voices.find(v => v.lang.startsWith("zh"));
-    if (zh) u.voice = zh;
+    u.voice = voice;
+    u.lang = voice.lang || "zh-CN";
+    u.rate = 0.65;
+    u.pitch = 0.7;
+    u.volume = 1.0;
     u.onend = () => { btn.classList.remove("playing"); btn.textContent = "🔊 听诗"; reciteUtterance = null; };
+    u.onerror = () => { btn.classList.remove("playing"); btn.textContent = "🔊 听诗"; reciteUtterance = null; toast("朗诵中断 — 请重试"); };
     btn.classList.add("playing");
     btn.textContent = "⏸ 朗诵中";
     reciteUtterance = u;

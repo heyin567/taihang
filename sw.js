@@ -6,7 +6,7 @@
    - 版本号变更即触发更新
    ============================================================ */
 
-const VERSION = "th-v2.2.1";
+const VERSION = "th-v2.2.2";
 const CORE_CACHE = `${VERSION}-core`;
 const FONT_CACHE = `${VERSION}-font`;
 
