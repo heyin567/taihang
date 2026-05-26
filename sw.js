@@ -6,7 +6,7 @@
    - 版本号变更即触发更新
    ============================================================ */
 
-const VERSION = "th-v2.2.2";
+const VERSION = "th-v2.3.0";
 const CORE_CACHE = `${VERSION}-core`;
 const FONT_CACHE = `${VERSION}-font`;
 
@@ -23,6 +23,7 @@ const CORE_ASSETS = [
     "./changelog.js",
     "./app.js",
     "./atlas.js",
+    "./xingrenscroll.js",
     "./yearscroll.js",
     "./textbook.js",
     "./admin.js",

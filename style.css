@@ -6211,4 +6211,324 @@ body.admin-on { padding-top: 56px; }
 [data-theme="dark"] .tb-card.tb-kind-shi .tb-card-poet { color: #f0a878; }
 [data-theme="dark"] .tb-card.tb-kind-wen .tb-card-poet { color: #b8d4f0; }
 
+/* ============================================================
+   行人卷轴 · 卷二十 · 阳明三山行
+   - 在「行人志」卷钮亮起时显于舆图上方
+   - 左立人 + 立卷诗 + 三段串骨 + 时序珠链
+   ============================================================ */
+.xingren-scroll {
+    margin: 28px auto 36px;
+    max-width: 1100px;
+    background: linear-gradient(180deg, #f5ecd9 0%, #ede0c0 100%);
+    border: 2px solid #6b4a2a;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(60,40,20,0.18), inset 0 0 60px rgba(212,160,23,0.08);
+    position: relative;
+    padding: 28px 32px 36px;
+}
+.xingren-scroll::before,
+.xingren-scroll::after {
+    content: "";
+    position: absolute;
+    left: -8px; right: -8px;
+    height: 14px;
+    background: linear-gradient(90deg, #5a3a1a 0%, #8a5a2a 50%, #5a3a1a 100%);
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
+.xingren-scroll::before { top: -10px; }
+.xingren-scroll::after  { bottom: -10px; }
+
+.xs-stage {
+    display: flex;
+    gap: 32px;
+    align-items: stretch;
+}
+.xs-side {
+    flex: 0 0 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding-right: 24px;
+    border-right: 1px dashed rgba(140,40,24,0.3);
+}
+.xingren-portrait {
+    width: 180px;
+    height: auto;
+    filter: drop-shadow(0 4px 6px rgba(40,30,20,0.25));
+}
+.xs-side-meta {
+    text-align: center;
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+}
+.xs-name-row {
+    font-size: 1.12rem;
+    color: #3a2818;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+.xs-life {
+    font-size: 0.78rem;
+    color: #6b4a2a;
+    margin-top: 4px;
+    letter-spacing: 0.1em;
+}
+.xs-epithet {
+    margin-top: 8px;
+    font-size: 0.92rem;
+    color: #8a2818;
+    letter-spacing: 0.18em;
+    border-top: 1px dotted rgba(140,40,24,0.35);
+    border-bottom: 1px dotted rgba(140,40,24,0.35);
+    padding: 5px 0;
+}
+.xs-poem {
+    margin-top: 12px;
+    text-align: center;
+}
+.xs-poem-title {
+    font-size: 0.78rem;
+    color: #6b4a2a;
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+}
+.xs-poem-line {
+    font-size: 0.88rem;
+    color: #3a2818;
+    line-height: 1.85;
+    letter-spacing: 0.12em;
+}
+.xs-poem-author {
+    font-size: 0.72rem;
+    color: #6b4a2a;
+    margin-top: 6px;
+    letter-spacing: 0.06em;
+    font-style: italic;
+}
+
+.xs-main {
+    flex: 1 1 0;
+    min-width: 0;
+}
+.xs-head {
+    text-align: center;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2px double rgba(140,40,24,0.35);
+}
+.xs-kernel {
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+    font-size: 1.6rem;
+    color: #8a2818;
+    letter-spacing: 0.32em;
+    font-weight: 600;
+    text-shadow: 0 1px 0 rgba(255,245,224,0.6);
+}
+.xs-sub {
+    margin-top: 6px;
+    font-size: 0.84rem;
+    color: #6b4a2a;
+    letter-spacing: 0.22em;
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+}
+
+.xs-prose {
+    margin: 0 0 22px;
+    padding: 0 6px;
+}
+.xs-prose p {
+    margin: 0 0 10px;
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+    font-size: 0.88rem;
+    color: #3a2818;
+    line-height: 1.95;
+    letter-spacing: 0.06em;
+    text-indent: 2em;
+    text-align: justify;
+    text-justify: inter-ideograph;
+}
+.xs-prose strong {
+    color: #8a2818;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    margin-right: 4px;
+}
+
+.xs-stations {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 14px 0 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 12px;
+    position: relative;
+}
+.xs-station {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: transform 0.25s ease;
+}
+.xs-station:hover,
+.xs-station:focus {
+    transform: translateY(-2px);
+}
+.xs-station.is-missing {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+.xs-year {
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+    font-size: 0.82rem;
+    color: #6b4a2a;
+    letter-spacing: 0.18em;
+    margin-bottom: 6px;
+}
+.xs-axis {
+    width: 100%;
+    height: 16px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.xs-bead {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff5e0, #c9402a 60%, #6b1a08);
+    box-shadow: 0 0 0 2px rgba(255,245,224,0.6), 0 2px 4px rgba(60,20,8,0.4);
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+}
+.xs-station.is-missing .xs-bead {
+    background: radial-gradient(circle at 35% 35%, #e0d4b0, #8a8060 60%, #5a4a30);
+}
+.xs-line {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: calc(100% + 12px);
+    height: 1px;
+    background: repeating-linear-gradient(90deg, rgba(140,40,24,0.6) 0 4px, transparent 4px 8px);
+    z-index: 1;
+}
+.xs-card {
+    margin-top: 12px;
+    padding: 10px 8px 12px;
+    background: rgba(255,245,224,0.55);
+    border: 1px solid rgba(140,40,24,0.22);
+    border-radius: 4px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+.xs-station:hover .xs-card,
+.xs-station:focus .xs-card {
+    border-color: rgba(140,40,24,0.6);
+    background: rgba(255,245,224,0.85);
+}
+.xs-pith {
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+    font-size: 0.94rem;
+    color: #8a2818;
+    letter-spacing: 0.22em;
+    font-weight: 600;
+}
+.xs-name {
+    margin-top: 4px;
+    font-size: 0.96rem;
+    color: #3a2818;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+.xs-age {
+    margin-top: 2px;
+    font-size: 0.72rem;
+    color: #6b4a2a;
+    letter-spacing: 0.08em;
+}
+.xs-line-text {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: #5a3a1a;
+    line-height: 1.6;
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+    letter-spacing: 0.04em;
+}
+.xs-go {
+    margin-top: 8px;
+    font-size: 0.74rem;
+    color: #8a2818;
+    letter-spacing: 0.16em;
+    border-top: 1px dotted rgba(140,40,24,0.3);
+    padding-top: 5px;
+}
+.xs-go.is-pending {
+    color: #8a8060;
+}
+
+@media (max-width: 760px) {
+    .xingren-scroll { padding: 22px 18px 28px; }
+    .xs-stage { flex-direction: column; gap: 20px; }
+    .xs-side {
+        flex: none;
+        padding-right: 0;
+        padding-bottom: 18px;
+        border-right: none;
+        border-bottom: 1px dashed rgba(140,40,24,0.3);
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .xingren-portrait { width: 120px; flex: 0 0 120px; }
+    .xs-side-meta { text-align: left; flex: 1 1 0; }
+    .xs-poem { text-align: left; }
+    .xs-stations { flex-direction: column; gap: 14px; }
+    .xs-station { width: 100%; }
+    .xs-axis { width: 80%; }
+    .xs-line { display: none; }
+    .xs-kernel { font-size: 1.32rem; }
+}
+
+[data-theme="dark"] .xingren-scroll {
+    background: linear-gradient(180deg, #2a2218 0%, #1c1610 100%);
+    border-color: #4a3a20;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4), inset 0 0 60px rgba(212,160,23,0.05);
+}
+[data-theme="dark"] .xs-side { border-right-color: rgba(212,160,23,0.25); }
+[data-theme="dark"] .xs-name-row { color: #f0e0c0; }
+[data-theme="dark"] .xs-life     { color: #c0a070; }
+[data-theme="dark"] .xs-epithet  { color: #e88860; border-color: rgba(232,136,96,0.3); }
+[data-theme="dark"] .xs-poem-title  { color: #c0a070; }
+[data-theme="dark"] .xs-poem-line   { color: #e8d8b8; }
+[data-theme="dark"] .xs-poem-author { color: #c0a070; }
+[data-theme="dark"] .xs-head      { border-bottom-color: rgba(232,136,96,0.4); }
+[data-theme="dark"] .xs-kernel    { color: #f0a878; text-shadow: 0 1px 0 rgba(0,0,0,0.4); }
+[data-theme="dark"] .xs-sub       { color: #c0a070; }
+[data-theme="dark"] .xs-prose p   { color: #e8d8b8; }
+[data-theme="dark"] .xs-prose strong { color: #f0a878; }
+[data-theme="dark"] .xs-year      { color: #c0a070; }
+[data-theme="dark"] .xs-card      { background: rgba(64,48,32,0.5); border-color: rgba(212,160,23,0.25); }
+[data-theme="dark"] .xs-station:hover .xs-card,
+[data-theme="dark"] .xs-station:focus .xs-card { background: rgba(80,60,40,0.7); border-color: rgba(232,136,96,0.55); }
+[data-theme="dark"] .xs-pith      { color: #f0a878; }
+[data-theme="dark"] .xs-name      { color: #f0e0c0; }
+[data-theme="dark"] .xs-age       { color: #c0a070; }
+[data-theme="dark"] .xs-line-text { color: #e0c890; }
+[data-theme="dark"] .xs-go        { color: #f0a878; border-top-color: rgba(232,136,96,0.3); }
+[data-theme="dark"] .xs-go.is-pending { color: #8a8060; }
+[data-theme="dark"] .xs-station.is-missing .xs-bead {
+    background: radial-gradient(circle at 35% 35%, #6a5840, #4a3820 60%, #2a2010);
+}
+
 

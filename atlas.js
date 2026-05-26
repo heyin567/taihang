@@ -290,6 +290,17 @@
             <rect x="-3" y="-12" width="6" height="4" fill="#fff5e0" stroke="${sc}" stroke-width="0.5"/>
             <path d="M -2 -11 L 2 -11 M -2 -10 L 2 -10" stroke="${sc}" stroke-width="0.3"/>
             <text x="0" y="-13" text-anchor="middle" font-size="3.5" fill="${sc}" font-family="LXGW WenKai Screen, serif">心</text>`,
+        // 阳明洞 · 宛委山中天然石洞 · 阳明子号所自
+        35: (fc, sc) => `
+            <path d="M -13 8 L -8 -2 L -3 -7 L 3 -7 L 8 -2 L 13 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -5 8 L -5 -1 Q 0 -6 5 -1 L 5 8 Z" fill="#1a1208" stroke="${sc}" stroke-width="0.5"/>
+            <text x="0" y="-9" text-anchor="middle" font-size="3.6" fill="${sc}" font-family="LXGW WenKai Screen, serif">阳</text>`,
+        // 白鹿洞 · 书院 + 鹿 · 朱阳并峙
+        36: (fc, sc) => `
+            <path d="M -14 8 L -10 -2 L -3 -6 L 3 -6 L 10 -2 L 14 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <rect x="-7" y="-2" width="14" height="6" fill="#d4a017" stroke="${sc}" stroke-width="0.5" opacity="0.92"/>
+            <path d="M -8 -2 L 8 -2 L 6 -4 L -6 -4 Z" fill="#8a2818" stroke="${sc}" stroke-width="0.5"/>
+            <text x="0" y="-7" text-anchor="middle" font-size="3.6" fill="${sc}" font-family="LXGW WenKai Screen, serif">鹿</text>`,
         default: (fc, sc) => `
             <path d="M -10 8 L 0 -12 L 10 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>`
     };
@@ -317,7 +328,9 @@
         17: ["武当桃源 · 太子坡前杏花开", "紫霄夏荫 · 道院蝉鸣松风冷", "金顶秋光 · 七十二峰朝大顶", "玄岳雪封 · 金殿一点夕阳红"],
         18: ["峨眉杜鹃 · 万年寺前花海春", "清音消暑 · 双桥流水洗尘心", "峨眉红叶 · 报国寺秋满千林", "金顶佛光 · 云海冬阳现圆轮"],
         19: ["终南桃林 · 翠华春深花满涧", "辋川夏风 · 摩诘旧居山水清", "终南秋云 · 行到水穷坐看时", "南五台雪 · 重阳宫外鹤归来"],
-        34: ["阳明洞春 · 龙场草青读《易》声", "何陋夏荫 · 君子亭凉竹风冷", "龙冈秋静 · 良知一悟天地清", "黔中冬寒 · 阳明洞中独立思"]
+        34: ["阳明洞春 · 龙场草青读《易》声", "何陋夏荫 · 君子亭凉竹风冷", "龙冈秋静 · 良知一悟天地清", "黔中冬寒 · 阳明洞中独立思"],
+        35: ["宛委春深 · 阳明洞口紫藤垂", "会稽夏荫 · 飞来石下竹风长", "禹穴秋寒 · 阳明草庐石阶湿", "山阴冬寂 · 龙瑞残碑独自苍"],
+        36: ["书院春讲 · 棂星门外杏花飞", "御书夏凉 · 朱子祠前古柏深", "白鹿秋读 · 阳明诗碑落叶斑", "学规冬厚 · 雪压礼圣殿瓦红"]
     };
 
     function getSeasonIdx() {
@@ -709,6 +722,13 @@
                 asideDefault.hidden = false;
             });
         }
+
+        // 行人志卷轴钩子:由 xingrenscroll.js 监听并注入横轴
+        try {
+            window.dispatchEvent(new CustomEvent("atlas:rendered", {
+                detail: { filter: currentFilter, list }
+            }));
+        } catch (_) {}
     }
 
     window.renderAtlas = renderAtlas;
