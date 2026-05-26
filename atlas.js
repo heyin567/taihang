@@ -283,6 +283,13 @@
             <path d="M -15 8 Q -10 -2 -6 -4 Q -2 -9 0 -6 Q 2 -10 6 -4 Q 10 -2 15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
             <path d="M -12 -1 q 4 -3 8 -1 q 4 -3 8 -1 q 4 -2 8 -1" fill="none" stroke="#fff5e0" stroke-width="1.4" opacity="0.85"/>
             <path d="M -10 3 q 4 -2 8 0 q 4 -2 8 0" fill="none" stroke="#fff5e0" stroke-width="1" opacity="0.7"/>`,
+        // 龙冈 · 阳明洞 · 一山一洞一卷书
+        34: (fc, sc) => `
+            <path d="M -14 8 L -8 -3 L -2 -8 L 2 -8 L 8 -3 L 14 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -4 8 L -4 -1 Q 0 -5 4 -1 L 4 8 Z" fill="#1a1208" stroke="${sc}" stroke-width="0.5"/>
+            <rect x="-3" y="-12" width="6" height="4" fill="#fff5e0" stroke="${sc}" stroke-width="0.5"/>
+            <path d="M -2 -11 L 2 -11 M -2 -10 L 2 -10" stroke="${sc}" stroke-width="0.3"/>
+            <text x="0" y="-13" text-anchor="middle" font-size="3.5" fill="${sc}" font-family="LXGW WenKai Screen, serif">心</text>`,
         default: (fc, sc) => `
             <path d="M -10 8 L 0 -12 L 10 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>`
     };
@@ -309,7 +316,8 @@
         16: ["雁荡春兰 · 灵峰夜色情人现", "大龙湫凉 · 飞瀑千尺溅风衣", "雁荡黄叶 · 灵岩飞渡红云间", "雁荡冬岚 · 海雾绕峰怪石静"],
         17: ["武当桃源 · 太子坡前杏花开", "紫霄夏荫 · 道院蝉鸣松风冷", "金顶秋光 · 七十二峰朝大顶", "玄岳雪封 · 金殿一点夕阳红"],
         18: ["峨眉杜鹃 · 万年寺前花海春", "清音消暑 · 双桥流水洗尘心", "峨眉红叶 · 报国寺秋满千林", "金顶佛光 · 云海冬阳现圆轮"],
-        19: ["终南桃林 · 翠华春深花满涧", "辋川夏风 · 摩诘旧居山水清", "终南秋云 · 行到水穷坐看时", "南五台雪 · 重阳宫外鹤归来"]
+        19: ["终南桃林 · 翠华春深花满涧", "辋川夏风 · 摩诘旧居山水清", "终南秋云 · 行到水穷坐看时", "南五台雪 · 重阳宫外鹤归来"],
+        34: ["阳明洞春 · 龙场草青读《易》声", "何陋夏荫 · 君子亭凉竹风冷", "龙冈秋静 · 良知一悟天地清", "黔中冬寒 · 阳明洞中独立思"]
     };
 
     function getSeasonIdx() {
@@ -373,12 +381,14 @@
         { key: "wuyue",    label: "五岳 · 远望", desc: "封禅之地,凭书远眺" },
         { key: "hidden",   label: "隐山 · 访",   desc: "黄雁武峨终,五方气性" },
         { key: "textbook", label: "诗山 · 课本", desc: "课本所选,皆可亲行" },
-        { key: "red",      label: "红色山志",   desc: "近百年立,长征所至" }
+        { key: "red",      label: "红色山志",   desc: "近百年立,长征所至" },
+        { key: "xingren",  label: "行人志",     desc: "以人观山,知行合一" }
     ];
 
     function categoryOf(route) {
         if (route.region === "wuyue") return "wuyue";
         if (route.region === "hidden") {
+            if (route.id >= 34) return "xingren";
             if (route.id >= 28 && route.id <= 33) return "red";
             if (route.id >= 20 && route.id <= 27) return "textbook";
             if (route.id >= 15 && route.id <= 19) return "hidden";
