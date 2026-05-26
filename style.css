@@ -6531,4 +6531,35 @@ body.admin-on { padding-top: 56px; }
     background: radial-gradient(circle at 35% 35%, #6a5840, #4a3820 60%, #2a2010);
 }
 
+/* ============================================================
+   阳明三山行 · 舆图朱砂串线
+   ============================================================ */
+.ym-trail-line {
+    animation: ymTrailWalk 12s linear infinite;
+}
+@keyframes ymTrailWalk {
+    from { stroke-dashoffset: 0; }
+    to   { stroke-dashoffset: -110; }
+}
+.ym-seal {
+    cursor: default;
+    transition: transform 0.3s ease;
+    transform-origin: center;
+    transform-box: fill-box;
+}
+.ym-seal:hover {
+    transform: translateY(-2px) scale(1.06);
+}
+[data-theme="dark"] .ym-trail path[stroke="#fff5e0"] {
+    stroke: #2a2218;
+    opacity: 0.7;
+}
+[data-theme="dark"] .ym-trail-line {
+    stroke: #f0a878;
+}
+[data-theme="dark"] .ym-seal rect:first-of-type {
+    fill: #c0613a;
+    stroke: #6a1208;
+}
+
 

@@ -386,6 +386,92 @@
     }
 
     /* ============================================================
+       阳明三山行 · 朱砂串线
+       - 仅在「行人志」卷钮亮起时绘制
+       - 阳明洞(1502 浙) → 龙冈(1508 黔) → 白鹿洞(1521 赣)
+       - 二段贝塞尔曲线相连,弧度向南突出,如墨笔自然行走
+       - 沿线落 1502 / 1508 / 1521 三枚朱印,各题「立名 · 立道 · 立学」
+       - 线置于山头之下,不挡图标
+       ============================================================ */
+    function buildYangmingTrail(peaks) {
+        if (currentFilter !== "xingren") return "";
+
+        // id 35 阳明洞 / 34 龙冈 / 36 白鹿洞 — 按时序
+        const sequence = [
+            { id: 35, year: "1502", pith: "立名" },
+            { id: 34, year: "1508", pith: "立道" },
+            { id: 36, year: "1521", pith: "立学" }
+        ];
+
+        const points = sequence.map(s => {
+            const node = peaks.find(p => p.route.id === s.id);
+            if (!node) return null;
+            return Object.assign({}, s, { x: node.sx, y: node.sy });
+        }).filter(Boolean);
+
+        if (points.length < 2) return "";
+
+        // 用平滑二段曲线串三点,弧凸向南(纸面下方)
+        let pathD = "";
+        for (let i = 0; i < points.length - 1; i++) {
+            const a = points[i], b = points[i + 1];
+            const mx = (a.x + b.x) / 2;
+            const my = (a.y + b.y) / 2;
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const len = Math.hypot(dx, dy) || 1;
+            // 法向量(向南偏 — 屏幕 y 增加方向)
+            const nx = -dy / len, ny = dx / len;
+            const bow = len * 0.18;
+            const cx = mx + nx * (ny > 0 ? bow : -bow);
+            const cy = my + ny * (ny > 0 ? bow : -bow) + bow * 0.4;
+            if (i === 0) pathD += `M ${a.x.toFixed(1)} ${a.y.toFixed(1)} `;
+            pathD += `Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)} `;
+        }
+
+        // 三枚朱印 · 沿线方向略偏外侧
+        const sealHtml = points.map((p, i) => {
+            // 偏移方向:首末向外(由相邻点决定),中间向南偏
+            let ox = 0, oy = -38;
+            if (i === 0) {
+                const next = points[i + 1];
+                const dx = next.x - p.x, dy = next.y - p.y;
+                const len = Math.hypot(dx, dy) || 1;
+                ox = -dy / len * 36; oy = dx / len * 36;
+                if (oy > 0) { ox = -ox; oy = -oy; }
+            } else if (i === points.length - 1) {
+                const prev = points[i - 1];
+                const dx = p.x - prev.x, dy = p.y - prev.y;
+                const len = Math.hypot(dx, dy) || 1;
+                ox = -dy / len * 36; oy = dx / len * 36;
+                if (oy > 0) { ox = -ox; oy = -oy; }
+            } else {
+                ox = 0; oy = -42;
+            }
+            const sx = p.x + ox, sy = p.y + oy;
+            return `
+            <g class="ym-seal" transform="translate(${sx.toFixed(1)} ${sy.toFixed(1)})">
+                <line x1="0" y1="0" x2="${(-ox).toFixed(1)}" y2="${(-oy).toFixed(1)}" stroke="#8a2818" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.55"/>
+                <rect x="-16" y="-15" width="32" height="30" fill="#8a2818" stroke="#5a1208" stroke-width="0.8" rx="2"/>
+                <rect x="-14" y="-13" width="28" height="26" fill="none" stroke="#fff5e0" stroke-width="0.5" opacity="0.5"/>
+                <text y="-3" text-anchor="middle" font-size="10" fill="#fff5e0" font-family="LXGW WenKai Screen, serif" letter-spacing="1">${p.year}</text>
+                <text y="10" text-anchor="middle" font-size="9" fill="#fff5e0" font-family="LXGW WenKai Screen, serif" letter-spacing="2">${p.pith}</text>
+            </g>`;
+        }).join("");
+
+        return `
+        <g class="ym-trail" aria-label="阳明三山行 · 时序串线">
+            <!-- 底层素描:浅墨晕染,使红线更显 -->
+            <path d="${pathD}" fill="none" stroke="#fff5e0" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+            <!-- 朱砂虚线 · 主串骨 -->
+            <path class="ym-trail-line" d="${pathD}" fill="none" stroke="#c9402a" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="6 5" opacity="0.92"/>
+            <!-- 端点小红圆,锚定起讫 -->
+            ${points.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.2" fill="#c9402a" stroke="#fff5e0" stroke-width="1.2" opacity="0.95"/>`).join("")}
+            <!-- 三枚朱印 -->
+            ${sealHtml}
+        </g>`;
+    }
+
+    /* ============================================================
        山系分卷:按 region / id 段归属
        ============================================================ */
     const FILTERS = [
@@ -498,6 +584,9 @@
         }).join("");
 
         const seaWaves = buildSeaWaves();
+
+        // 阳明三山行 · 朱砂串线(仅「行人志」卷钮亮时显)
+        const yangmingTrailHtml = buildYangmingTrail(peaks);
 
         const peakNodes = peaks.map((node) => {
             const r = node.route;
@@ -646,6 +735,9 @@
                                 <text y="11" text-anchor="middle" font-size="11" fill="#fff5e0" font-family="LXGW WenKai Screen, serif">${ganzhi[1]}</text>
                             </g>
                         </g>
+
+                        <!-- 阳明三山行串线(仅「行人志」卷钮亮时,置于山头之下) -->
+                        ${yangmingTrailHtml}
 
                         <!-- 山头 -->
                         <g class="atlas-peaks">${peakNodes}</g>
