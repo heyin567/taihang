@@ -509,15 +509,17 @@ function buildPoemScroll(poem, epithet, routeId) {
             <span class="tbs-line2">曾入课本</span>
         </button>` : "";
     return `<div class="poem-scroll">
-        <div class="poem-meta">
-            <div class="title">《${poem.title}》</div>
-            <div class="author">${poem.dynasty} · ${poem.author}</div>
+        <div class="poem-scroll-stage">
+            <button class="recite-btn" id="reciteBtn" style="position:absolute;left:18px;top:14px;margin:0;">🔊 听诗</button>
+            ${textbookSeal}
+            <div class="poem-meta">
+                <div class="title">《${poem.title}》</div>
+                <div class="author">${poem.dynasty} · ${poem.author}</div>
+            </div>
+            <div class="poem-lines">${lines}</div>
+            <div class="poem-seal">${sealHtml}</div>
         </div>
-        <div class="poem-lines">${lines}</div>
-        <div class="poem-seal">${sealHtml}</div>
-        ${textbookSeal}
-        <button class="recite-btn" id="reciteBtn" style="position:absolute;left:18px;top:14px;">🔊 听诗</button>
-        ${poem.note ? `<div class="poem-note" style="position:absolute;left:0;right:0;bottom:-32px;">${poem.note}</div>` : ""}
+        ${poem.note ? `<div class="poem-note">${poem.note}</div>` : ""}
     </div>`;
 }
 

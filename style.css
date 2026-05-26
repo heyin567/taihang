@@ -1508,7 +1508,7 @@ footer .footer-poem {
 
 /* ============ 诗轴 · 立轴竖排古意 ============ */
 .poem-scroll {
-    margin: 24px 0 18px;
+    margin: 24px 0 28px;
     background:
         linear-gradient(180deg, rgba(245,236,217,0.96) 0%, rgba(232,216,184,0.92) 100%),
         repeating-linear-gradient(0deg, transparent 0, transparent 18px, rgba(180,150,100,0.04) 18px, rgba(180,150,100,0.04) 19px);
@@ -1520,11 +1520,19 @@ footer .footer-poem {
     border-radius: 4px;
     position: relative;
     display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    box-shadow: inset 0 0 40px rgba(180, 150, 100, 0.18), 0 4px 12px rgba(80, 60, 30, 0.06);
+}
+
+.poem-scroll-stage {
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 32px;
     min-height: 240px;
-    box-shadow: inset 0 0 40px rgba(180, 150, 100, 0.18), 0 4px 12px rgba(80, 60, 30, 0.06);
+    position: relative;
 }
 
 [data-theme="dark"] .poem-scroll {
@@ -1612,18 +1620,22 @@ footer .footer-poem {
 }
 
 .poem-note {
-    margin-top: 12px;
+    margin: 4px 0 0;
     font-family: var(--font-poem);
     color: var(--text-soft);
-    font-size: 0.88rem;
-    text-align: center;
-    letter-spacing: 0.15em;
-    font-style: italic;
-    padding: 0 16px;
+    font-size: 0.84rem;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    letter-spacing: 0.08em;
+    line-height: 1.85;
+    padding: 14px 18px 0;
+    border-top: 1px dashed rgba(140,40,24,0.28);
+    font-style: normal;
+    text-indent: 2em;
 }
 
-.poem-note::before { content: '「 '; color: var(--seal-red); }
-.poem-note::after { content: ' 」'; color: var(--seal-red); }
+.poem-note::before,
+.poem-note::after { content: none; }
 
 /* ============ 山门雅号 + 卡片诗签 ============ */
 .epithet {
@@ -1738,7 +1750,8 @@ footer .footer-poem {
 }
 
 @media (max-width: 540px) {
-    .poem-scroll { padding: 20px 16px; min-height: 200px; gap: 16px; }
+    .poem-scroll { padding: 20px 16px; gap: 14px; }
+    .poem-scroll-stage { min-height: 200px; gap: 16px; }
     .poem-line { font-size: 1.05rem; }
     .poem-seal { width: 42px; height: 42px; font-size: 0.75rem; right: 18px; bottom: 16px; }
     .hero-seal { width: 52px; height: 52px; font-size: 2rem; }
