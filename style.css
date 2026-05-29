@@ -6239,6 +6239,53 @@ body.admin-on { padding-top: 56px; }
 .xingren-scroll::before { top: -10px; }
 .xingren-scroll::after  { bottom: -10px; }
 
+.xs-stack-head {
+    text-align: center;
+    margin: -6px 0 22px;
+    padding-bottom: 16px;
+    border-bottom: 2px double rgba(140,40,24,0.4);
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+}
+.xs-stack-title {
+    font-size: 1.32rem;
+    color: #5a1208;
+    letter-spacing: 0.42em;
+    font-weight: 600;
+    text-shadow: 0 1px 0 rgba(255,245,224,0.5);
+}
+.xs-stack-sub {
+    margin-top: 6px;
+    font-size: 0.86rem;
+    color: #6b4a2a;
+    letter-spacing: 0.18em;
+}
+
+.xs-block {
+    padding: 22px 0 8px;
+    border-bottom: 1px dashed rgba(140,40,24,0.28);
+}
+.xs-block:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.xs-block-xiake {
+    /* 霞客卷:赭石主色,与阳明朱砂区分 */
+}
+.xs-role {
+    display: inline-block;
+    font-family: var(--font-poem, "LXGW WenKai Screen", serif);
+    font-size: 0.72rem;
+    color: #fff5e0;
+    background: #8a2818;
+    padding: 2px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.3em;
+    margin-bottom: 8px;
+}
+.xs-block-xiake .xs-role {
+    background: #8b5a2b;
+}
+
 .xs-stage {
     display: flex;
     gap: 32px;
@@ -6355,6 +6402,15 @@ body.admin-on { padding-top: 56px; }
     margin-right: 4px;
 }
 
+/* 霞客卷 · 赭石主色 */
+.xs-block-xiake .xs-kernel    { color: #6b3a18; }
+.xs-block-xiake .xs-epithet   { color: #6b3a18; border-color: rgba(139,90,43,0.4); }
+.xs-block-xiake .xs-prose strong { color: #6b3a18; }
+.xs-block-xiake .xs-pith      { color: #6b3a18; }
+.xs-block-xiake .xs-go        { color: #6b3a18; }
+.xs-block-xiake .xs-head      { border-bottom-color: rgba(139,90,43,0.45); }
+.xs-block-xiake .xs-side      { border-right-color: rgba(139,90,43,0.32); }
+
 .xs-stations {
     list-style: none;
     margin: 6px 0 0;
@@ -6408,6 +6464,10 @@ body.admin-on { padding-top: 56px; }
     z-index: 2;
     margin: 0 auto;
 }
+.xs-bead-xiake {
+    background: radial-gradient(circle at 35% 35%, #fff5e0, #8b5a2b 60%, #3a2410);
+    box-shadow: 0 0 0 2px rgba(255,245,224,0.6), 0 2px 4px rgba(40,24,8,0.4);
+}
 .xs-station.is-missing .xs-bead {
     background: radial-gradient(circle at 35% 35%, #e0d4b0, #8a8060 60%, #5a4a30);
 }
@@ -6420,6 +6480,9 @@ body.admin-on { padding-top: 56px; }
     height: 1px;
     background: repeating-linear-gradient(90deg, rgba(140,40,24,0.6) 0 4px, transparent 4px 8px);
     z-index: 1;
+}
+.xs-line-xiake {
+    background: repeating-linear-gradient(90deg, rgba(139,90,43,0.6) 0 5px, transparent 5px 9px);
 }
 .xs-card {
     margin-top: 12px;
@@ -6530,6 +6593,25 @@ body.admin-on { padding-top: 56px; }
 [data-theme="dark"] .xs-station.is-missing .xs-bead {
     background: radial-gradient(circle at 35% 35%, #6a5840, #4a3820 60%, #2a2010);
 }
+[data-theme="dark"] .xs-stack-title { color: #f0a878; text-shadow: 0 1px 0 rgba(0,0,0,0.4); }
+[data-theme="dark"] .xs-stack-sub   { color: #c0a070; }
+[data-theme="dark"] .xs-stack-head  { border-bottom-color: rgba(232,136,96,0.4); }
+[data-theme="dark"] .xs-block       { border-bottom-color: rgba(212,160,23,0.18); }
+[data-theme="dark"] .xs-role        { background: #8a2818; color: #fff5e0; }
+[data-theme="dark"] .xs-block-xiake .xs-role { background: #8b5a2b; }
+[data-theme="dark"] .xs-block-xiake .xs-kernel    { color: #d4a878; }
+[data-theme="dark"] .xs-block-xiake .xs-epithet   { color: #d4a878; border-color: rgba(212,168,120,0.32); }
+[data-theme="dark"] .xs-block-xiake .xs-prose strong { color: #d4a878; }
+[data-theme="dark"] .xs-block-xiake .xs-pith      { color: #d4a878; }
+[data-theme="dark"] .xs-block-xiake .xs-go        { color: #d4a878; }
+[data-theme="dark"] .xs-block-xiake .xs-head      { border-bottom-color: rgba(212,168,120,0.4); }
+[data-theme="dark"] .xs-block-xiake .xs-side      { border-right-color: rgba(212,168,120,0.3); }
+[data-theme="dark"] .xs-bead-xiake {
+    background: radial-gradient(circle at 35% 35%, #f0e0c0, #b08a5a 60%, #4a3420);
+}
+[data-theme="dark"] .xs-line-xiake {
+    background: repeating-linear-gradient(90deg, rgba(212,168,120,0.55) 0 5px, transparent 5px 9px);
+}
 
 /* ============================================================
    阳明三山行 · 舆图朱砂串线
@@ -6560,6 +6642,30 @@ body.admin-on { padding-top: 56px; }
 [data-theme="dark"] .ym-seal rect:first-of-type {
     fill: #c0613a;
     stroke: #6a1208;
+}
+
+/* ============================================================
+   霞客行卷 · 舆图赭石串线(西南绝笔万里行)
+   - 赭石较朱砂更暖更沉,与阳明朱砂并列不冲
+   - 行迹自桂入滇,五段步频略疾,周期 11s
+   ============================================================ */
+.xk-trail-line {
+    animation: xkTrailWalk 11s linear infinite;
+}
+@keyframes xkTrailWalk {
+    from { stroke-dashoffset: 0; }
+    to   { stroke-dashoffset: -120; }
+}
+[data-theme="dark"] .xk-trail path[stroke="#fff5e0"] {
+    stroke: #2a2218;
+    opacity: 0.7;
+}
+[data-theme="dark"] .xk-trail-line {
+    stroke: #d4a878;
+}
+[data-theme="dark"] .xk-trail .ym-seal rect:first-of-type {
+    fill: #8a6038;
+    stroke: #3a2410;
 }
 
 

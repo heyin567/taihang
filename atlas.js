@@ -301,6 +301,40 @@
             <rect x="-7" y="-2" width="14" height="6" fill="#d4a017" stroke="${sc}" stroke-width="0.5" opacity="0.92"/>
             <path d="M -8 -2 L 8 -2 L 6 -4 L -6 -4 Z" fill="#8a2818" stroke="${sc}" stroke-width="0.5"/>
             <text x="0" y="-7" text-anchor="middle" font-size="3.6" fill="${sc}" font-family="LXGW WenKai Screen, serif">鹿</text>`,
+        // 桂林漓江 · 峰林如笋 + 漓江碧水
+        37: (fc, sc) => `
+            <path d="M -15 8 L -12 -2 L -10 -10 L -8 -2 L -5 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -5 8 L -3 -3 L -1 -12 L 1 -3 L 3 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M 3 8 L 6 -2 L 9 -8 L 12 -2 L 15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -15 8 q 4 -2 8 0 q 4 -2 8 0 q 4 -2 8 0 q 3 -2 6 0" stroke="#5a8ab0" stroke-width="0.7" fill="none" opacity="0.8"/>`,
+        // 黄果树 · 大瀑垂空 + 飞洒满空
+        38: (fc, sc) => `
+            <path d="M -14 8 L -10 -3 L -6 -10 L 6 -10 L 10 -3 L 14 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -5 -10 L -5 8 M -3 -10 L -3 8 M -1 -10 L -1 8 M 1 -10 L 1 8 M 3 -10 L 3 8 M 5 -10 L 5 8" stroke="#dde8f0" stroke-width="0.6" opacity="0.9"/>
+            <path d="M -7 6 q 3 -2 7 0 q 3 -2 7 0" stroke="#a8c8e0" stroke-width="0.7" fill="none"/>
+            <circle cx="-3" cy="9" r="0.6" fill="#a8c8e0"/>
+            <circle cx="2" cy="10" r="0.5" fill="#a8c8e0"/>`,
+        // 苍山洱海 · 十九峰一痕 + 月湖
+        39: (fc, sc) => `
+            <path d="M -15 4 L -11 -4 L -7 0 L -3 -8 L 1 -2 L 5 -10 L 9 -3 L 13 4 L 15 8 L -15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -3 -8 L -1 -10 L 1 -8 M 5 -10 L 7 -12 L 9 -10" fill="#fff5e0" stroke="${sc}" stroke-width="0.4"/>
+            <path d="M -14 8 q 14 4 28 0" stroke="#3d6e8a" stroke-width="0.8" fill="none" opacity="0.7"/>
+            <circle cx="-9" cy="6" r="1.4" fill="#fff5e0" opacity="0.85"/>`,
+        // 腾冲火山 · 锥口 + 烟柱
+        40: (fc, sc) => `
+            <path d="M -14 8 L -8 -8 L -3 -10 L 3 -10 L 8 -8 L 14 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -3 -10 Q 0 -8 3 -10" fill="#5a1208" stroke="${sc}" stroke-width="0.5"/>
+            <circle cx="-1" cy="-9" r="0.7" fill="#d4a017"/>
+            <circle cx="2" cy="-9" r="0.5" fill="#c9402a"/>
+            <path d="M 0 -10 q -2 -5 0 -8 q 2 -3 0 -6 q -2 -3 0 -5" stroke="#a89060" stroke-width="0.8" fill="none" opacity="0.65"/>
+            <path d="M -2 -12 q 1 -2 2 -3 M 2 -12 q -1 -2 -2 -3" stroke="#a89060" stroke-width="0.6" fill="none" opacity="0.55"/>`,
+        // 鸡足山 · 立志卷眼 · 三峰似鸡冠 + 山顶塔(《鸡足山志》)
+        41: (fc, sc) => `
+            <path d="M -14 8 L -10 -2 L -7 -8 L -4 -2 L -1 -10 L 2 -2 L 5 -10 L 8 -2 L 14 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <rect x="-1.6" y="-15" width="3.2" height="6" fill="#d4a017" stroke="${sc}" stroke-width="0.4"/>
+            <path d="M -2.4 -15 L 2.4 -15 L 1.6 -17 L -1.6 -17 Z" fill="#d4a017" stroke="${sc}" stroke-width="0.4"/>
+            <rect x="-1" y="-19" width="2" height="2" fill="#d4a017" stroke="${sc}" stroke-width="0.3"/>
+            <text x="0" y="-5" text-anchor="middle" font-size="3.4" fill="${sc}" font-family="LXGW WenKai Screen, serif">志</text>`,
         default: (fc, sc) => `
             <path d="M -10 8 L 0 -12 L 10 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>`
     };
@@ -330,7 +364,12 @@
         19: ["终南桃林 · 翠华春深花满涧", "辋川夏风 · 摩诘旧居山水清", "终南秋云 · 行到水穷坐看时", "南五台雪 · 重阳宫外鹤归来"],
         34: ["阳明洞春 · 龙场草青读《易》声", "何陋夏荫 · 君子亭凉竹风冷", "龙冈秋静 · 良知一悟天地清", "黔中冬寒 · 阳明洞中独立思"],
         35: ["宛委春深 · 阳明洞口紫藤垂", "会稽夏荫 · 飞来石下竹风长", "禹穴秋寒 · 阳明草庐石阶湿", "山阴冬寂 · 龙瑞残碑独自苍"],
-        36: ["书院春讲 · 棂星门外杏花飞", "御书夏凉 · 朱子祠前古柏深", "白鹿秋读 · 阳明诗碑落叶斑", "学规冬厚 · 雪压礼圣殿瓦红"]
+        36: ["书院春讲 · 棂星门外杏花飞", "御书夏凉 · 朱子祠前古柏深", "白鹿秋读 · 阳明诗碑落叶斑", "学规冬厚 · 雪压礼圣殿瓦红"],
+        37: ["漓江春雾 · 独秀峰前烟柳青", "象鼻夏荫 · 七星岩下清风寒", "九马秋光 · 黄布倒影金红铺", "桂峰冬瘦 · 王城残墙独立寒"],
+        38: ["陡坡春融 · 黄果树下雪水奔", "白水夏怒 · 捣珠崩玉飞洒空", "天星秋静 · 水帘洞前枫叶湿", "霜瀑冬挂 · 关岭千仞玉柱寒"],
+        39: ["苍山春云 · 十九峰前杜鹃红", "洱海夏凉 · 风花雪月四绝清", "苍洱秋净 · 蝴蝶泉边落叶飞", "洱月冬寒 · 苍山十九痕银白"],
+        40: ["热海春汤 · 腾冲温泉煮鸡蛋", "火山夏蒸 · 大空山口烟柱长", "和顺秋深 · 银杏村前金叶铺", "腾越冬暖 · 火山口外汤雾浓"],
+        41: ["鸡足春讲 · 山顶悉檀寺钟悠", "迦叶夏荫 · 金顶塔前云海生", "鸡山秋肃 · 霞客绝笔石碑湿", "鸡足冬寂 · 华首门外雪覆志"]
     };
 
     function getSeasonIdx() {
@@ -386,22 +425,22 @@
     }
 
     /* ============================================================
-       阳明三山行 · 朱砂串线
+       行人志 · 时序串线(通用)
        - 仅在「行人志」卷钮亮起时绘制
-       - 阳明洞(1502 浙) → 龙冈(1508 黔) → 白鹿洞(1521 赣)
-       - 二段贝塞尔曲线相连,弧度向南突出,如墨笔自然行走
-       - 沿线落 1502 / 1508 / 1521 三枚朱印,各题「立名 · 立道 · 立学」
-       - 线置于山头之下,不挡图标
+       - 沿 sequence[] 中各山以贝塞尔曲线相连,弧凸向南
+       - 沿线各落一枚朱印,刻纪年与一字宗旨
+       - 支持多人卷叠加(阳明朱砂,霞客赭石)
+       - 卷二十「阳明三山行」与卷二十一「霞客行卷」皆借此一函数
        ============================================================ */
-    function buildYangmingTrail(peaks) {
+    function buildXingrenTrail(peaks, opts) {
         if (currentFilter !== "xingren") return "";
-
-        // id 35 阳明洞 / 34 龙冈 / 36 白鹿洞 — 按时序
-        const sequence = [
-            { id: 35, year: "1502", pith: "立名" },
-            { id: 34, year: "1508", pith: "立道" },
-            { id: 36, year: "1521", pith: "立学" }
-        ];
+        const sequence = opts.sequence;
+        const color    = opts.color    || "#c9402a";
+        const sealFill = opts.sealFill || "#8a2818";
+        const sealEdge = opts.sealEdge || "#5a1208";
+        const dashSpec = opts.dashSpec || "6 5";
+        const anim     = opts.anim     || "";
+        const ariaName = opts.aria     || "行人志 · 时序串线";
 
         const points = sequence.map(s => {
             const node = peaks.find(p => p.route.id === s.id);
@@ -411,7 +450,6 @@
 
         if (points.length < 2) return "";
 
-        // 用平滑二段曲线串三点,弧凸向南(纸面下方)
         let pathD = "";
         for (let i = 0; i < points.length - 1; i++) {
             const a = points[i], b = points[i + 1];
@@ -419,7 +457,6 @@
             const my = (a.y + b.y) / 2;
             const dx = b.x - a.x, dy = b.y - a.y;
             const len = Math.hypot(dx, dy) || 1;
-            // 法向量(向南偏 — 屏幕 y 增加方向)
             const nx = -dy / len, ny = dx / len;
             const bow = len * 0.18;
             const cx = mx + nx * (ny > 0 ? bow : -bow);
@@ -428,9 +465,7 @@
             pathD += `Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)} `;
         }
 
-        // 三枚朱印 · 沿线方向略偏外侧
         const sealHtml = points.map((p, i) => {
-            // 偏移方向:首末向外(由相邻点决定),中间向南偏
             let ox = 0, oy = -38;
             if (i === 0) {
                 const next = points[i + 1];
@@ -450,8 +485,8 @@
             const sx = p.x + ox, sy = p.y + oy;
             return `
             <g class="ym-seal" transform="translate(${sx.toFixed(1)} ${sy.toFixed(1)})">
-                <line x1="0" y1="0" x2="${(-ox).toFixed(1)}" y2="${(-oy).toFixed(1)}" stroke="#8a2818" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.55"/>
-                <rect x="-16" y="-15" width="32" height="30" fill="#8a2818" stroke="#5a1208" stroke-width="0.8" rx="2"/>
+                <line x1="0" y1="0" x2="${(-ox).toFixed(1)}" y2="${(-oy).toFixed(1)}" stroke="${sealEdge}" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.55"/>
+                <rect x="-16" y="-15" width="32" height="30" fill="${sealFill}" stroke="${sealEdge}" stroke-width="0.8" rx="2"/>
                 <rect x="-14" y="-13" width="28" height="26" fill="none" stroke="#fff5e0" stroke-width="0.5" opacity="0.5"/>
                 <text y="-3" text-anchor="middle" font-size="10" fill="#fff5e0" font-family="LXGW WenKai Screen, serif" letter-spacing="1">${p.year}</text>
                 <text y="10" text-anchor="middle" font-size="9" fill="#fff5e0" font-family="LXGW WenKai Screen, serif" letter-spacing="2">${p.pith}</text>
@@ -459,16 +494,55 @@
         }).join("");
 
         return `
-        <g class="ym-trail" aria-label="阳明三山行 · 时序串线">
-            <!-- 底层素描:浅墨晕染,使红线更显 -->
+        <g class="${anim}" aria-label="${ariaName}">
             <path d="${pathD}" fill="none" stroke="#fff5e0" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
-            <!-- 朱砂虚线 · 主串骨 -->
-            <path class="ym-trail-line" d="${pathD}" fill="none" stroke="#c9402a" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="6 5" opacity="0.92"/>
-            <!-- 端点小红圆,锚定起讫 -->
-            ${points.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.2" fill="#c9402a" stroke="#fff5e0" stroke-width="1.2" opacity="0.95"/>`).join("")}
-            <!-- 三枚朱印 -->
+            <path class="${anim}-line" d="${pathD}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="${dashSpec}" opacity="0.92"/>
+            ${points.map(p => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.2" fill="${color}" stroke="#fff5e0" stroke-width="1.2" opacity="0.95"/>`).join("")}
             ${sealHtml}
         </g>`;
+    }
+
+    /* ============================================================
+       阳明三山行 · 朱砂串线(卷二十)
+       阳明洞(1502 浙) → 龙冈(1508 黔) → 白鹿洞(1521 赣)
+       ============================================================ */
+    function buildYangmingTrail(peaks) {
+        return buildXingrenTrail(peaks, {
+            sequence: [
+                { id: 35, year: "1502", pith: "立名" },
+                { id: 34, year: "1508", pith: "立道" },
+                { id: 36, year: "1521", pith: "立学" }
+            ],
+            color:    "#c9402a",
+            sealFill: "#8a2818",
+            sealEdge: "#5a1208",
+            dashSpec: "6 5",
+            anim:     "ym-trail",
+            aria:     "阳明三山行 · 时序串线"
+        });
+    }
+
+    /* ============================================================
+       霞客行卷 · 赭石串线(卷二十一)· 西南绝笔万里行
+       桂林(1637 桂) → 黄果树(1638 黔) → 苍洱(1638 滇) → 腾冲(1639 滇) → 鸡足(1640 滇)
+       色用赭石,与朱砂阳明卷并列不冲;线略宽于阳明卷,以见五段之骨
+       ============================================================ */
+    function buildXiakeTrail(peaks) {
+        return buildXingrenTrail(peaks, {
+            sequence: [
+                { id: 37, year: "1637", pith: "入南" },
+                { id: 38, year: "1638", pith: "量瀑" },
+                { id: 39, year: "1638", pith: "量湖" },
+                { id: 40, year: "1639", pith: "见火" },
+                { id: 41, year: "1640", pith: "立志" }
+            ],
+            color:    "#8b5a2b",
+            sealFill: "#5a3a1a",
+            sealEdge: "#3a2410",
+            dashSpec: "8 4",
+            anim:     "xk-trail",
+            aria:     "霞客行卷 · 西南绝笔万里行"
+        });
     }
 
     /* ============================================================
@@ -585,8 +659,9 @@
 
         const seaWaves = buildSeaWaves();
 
-        // 阳明三山行 · 朱砂串线(仅「行人志」卷钮亮时显)
+        // 行人志 · 两道串线(阳明朱砂 + 霞客赭石,仅「行人志」卷钮亮时显)
         const yangmingTrailHtml = buildYangmingTrail(peaks);
+        const xiakeTrailHtml    = buildXiakeTrail(peaks);
 
         const peakNodes = peaks.map((node) => {
             const r = node.route;
@@ -736,8 +811,9 @@
                             </g>
                         </g>
 
-                        <!-- 阳明三山行串线(仅「行人志」卷钮亮时,置于山头之下) -->
+                        <!-- 行人志串线(仅「行人志」卷钮亮时,置于山头之下) -->
                         ${yangmingTrailHtml}
+                        ${xiakeTrailHtml}
 
                         <!-- 山头 -->
                         <g class="atlas-peaks">${peakNodes}</g>
