@@ -269,37 +269,43 @@ function render() {
         const isFeatured = r.id === featuredId && filtered.length > 1;
         const inSeason = r.seasonTags && r.seasonTags.includes(season.key);
         const isRemote = r.type === "remote";
+        const isTotem = r.type === "totem";
         const poemSnippet = r.poem ? `<div class="card-poem-snippet">${r.poem.lines[r.poem.lines.length - 1]}<span class="author">— ${r.poem.author}</span></div>` : "";
-        return `<div class="route-card ${isFeatured ? "featured" : ""} ${isRemote ? "is-remote" : ""}" data-id="${r.id}"
+        return `<div class="route-card ${isFeatured ? "featured" : ""} ${isRemote ? "is-remote" : ""} ${isTotem ? "is-totem" : ""}" data-id="${r.id}"
                     style="--route-primary: ${r.theme.primary}; --route-soft: ${r.theme.soft};">
             <div class="card-image">
                 ${buildLandscape(r.theme, r.id)}
                 ${r.epithet ? `<span class="epithet">${r.epithet}</span>` : ""}
-                ${inSeason ? `<span class="season-badge">${season.label}正当时</span>` : ""}
+                ${inSeason && !isTotem ? `<span class="season-badge">${season.label}正当时</span>` : ""}
                 ${isRemote ? `<span class="remote-seal" title="文化拜谒,非实地指南">远望志</span>` : ""}
-                <div class="card-badges">
+                ${isTotem ? `<span class="totem-seal" title="不可登而可仰之山">望山</span>` : ""}
+                ${!isTotem ? `<div class="card-badges">
                     <span class="difficulty-badge ${r.difficulty}">${r.difficultyLabel}</span>
                     <span class="tech-grade">${r.techGrade}</span>
-                </div>
-                ${visited ? `<span class="visited-mark">✓ 已徒步</span>` : ""}
+                </div>` : ""}
+                ${visited ? `<span class="visited-mark">✓ ${isTotem ? "已仰望" : "已徒步"}</span>` : ""}
                 <div class="card-radar">${buildRadar(r.ratings, 64, r.theme.primary, false)}</div>
             </div>
             <div class="card-body">
                 <h3 class="card-title">${r.name}</h3>
-                <div class="card-location">📍 ${r.location} · ${r.bestSeason}</div>
-                <div class="card-stats">
+                <div class="card-location">📍 ${r.location}${r.bestSeason ? " · " + r.bestSeason : ""}</div>
+                ${isTotem ? `<div class="card-stats card-stats-totem">
+                    <span>🏔️ 不可至</span>
+                    <span>📜 凭古文望</span>
+                    <span>🕯️ 山见${(r.shanjian || []).length} 城</span>
+                </div>` : `<div class="card-stats">
                     <span>🚶 ${r.distance}</span>
                     <span>⛰️ ${r.elevation}</span>
                     <span>⏱️ ${r.durationLabel}</span>
-                </div>
+                </div>`}
                 <div class="card-desc">${r.description}</div>
                 ${poemSnippet}
-                <div class="card-actions" onclick="event.stopPropagation()">
+                ${!isTotem ? `<div class="card-actions" onclick="event.stopPropagation()">
                     <button class="compare-toggle ${state.compare.has(r.id) ? "checked" : ""}" data-cmp="${r.id}">
                         ${state.compare.has(r.id) ? "✓" : ""}
                     </button>
                     <span class="compare-label">加入对比</span>
-                </div>
+                </div>` : ""}
             </div>
         </div>`;
     }).join("");
@@ -494,6 +500,34 @@ function buildChronicleScroll(chronicle, mountainName) {
 }
 
 /* ============================================================
+   山见 · 山所见的人间(已消失的古城/古国/驿馆)
+   体例:引(纪事) / 录(古文原录,不改) / 笺(出处与字词小注)
+   ============================================================ */
+function buildShanjianScroll(shanjian, mountainName) {
+    if (!shanjian || shanjian.length === 0) return "";
+    const items = shanjian.map((s, i) => `
+        <div class="shanjian-item" style="--sj-i:${i}">
+            <div class="shanjian-head">
+                <span class="shanjian-mark">山见</span>
+                <span class="shanjian-name">${s.name || ""}</span>
+                ${s.era ? `<span class="shanjian-era">${s.era}</span>` : ""}
+            </div>
+            ${s.intro ? `<div class="shanjian-intro">${s.intro}</div>` : ""}
+            ${s.quote ? `<blockquote class="shanjian-quote">${s.quote}${s.source ? `<cite>—— ${s.source}</cite>` : ""}</blockquote>` : ""}
+            ${s.note ? `<div class="shanjian-note">${s.note}</div>` : ""}
+        </div>
+    `).join("");
+    return `
+    <div class="shanjian-scroll">
+        <div class="shanjian-title-row">
+            <span class="shanjian-title">山见</span>
+            <span class="shanjian-sub">${mountainName || "此山"}所见的人间 · 城已没,山犹在</span>
+        </div>
+        ${items}
+    </div>`;
+}
+
+/* ============================================================
    诗轴(立轴竖排,落朱印)
    ============================================================ */
 function buildPoemScroll(poem, epithet, routeId) {
@@ -527,6 +561,10 @@ function openModal(id) {
     const r = routes.find(x => x.id === id);
     if (!r) return;
 
+    if (r.type === "totem") {
+        return openTotemModal(r);
+    }
+
     const features = (r.features || []).map(f => `<li>${f}</li>`).join("");
     const hidden = (r.hiddenSpots || []).map(h => `<li>${h}</li>`).join("");
 
@@ -559,6 +597,8 @@ function openModal(id) {
             ${buildPoemScroll(r.poem, r.epithet, r.id)}
 
             ${r.chronicle && r.chronicle.length ? buildChronicleScroll(r.chronicle, r.name) : ""}
+
+            ${r.shanjian && r.shanjian.length ? buildShanjianScroll(r.shanjian, r.name) : ""}
 
             <div class="radar-block">
                 <div>${buildRadar(r.ratings, 200, r.theme.primary, true)}</div>
@@ -729,6 +769,113 @@ function openModal(id) {
     // 礼仪按钮
     document.querySelectorAll(".rite-btn").forEach(b =>
         b.addEventListener("click", () => openRite(b.dataset.rite, r)));
+}
+
+/* ============================================================
+   望山(type=totem)· 不可登而可仰之山
+   只渲染:诗 / 登临谱 / 山见 / 图腾题词 / 远观谱
+   不渲染:路点、餐饮、装备、应急、缆车、声景、约伴、日记
+   ============================================================ */
+function openTotemModal(r) {
+    const isVisited = state.visited.has(r.id);
+
+    document.querySelector(".modal-content").style.setProperty("--route-primary", r.theme.primary);
+    document.querySelector(".modal-content").style.setProperty("--route-soft", r.theme.soft);
+
+    const totemQuote = r.totem ? `
+        <div class="totem-quote">
+            <div class="totem-quote-mark">望</div>
+            <blockquote class="totem-quote-text">${r.totem.text}${r.totem.source ? `<cite>—— ${r.totem.source}</cite>` : ""}</blockquote>
+            ${r.totem.gloss ? `<div class="totem-quote-gloss">${r.totem.gloss}</div>` : ""}
+        </div>` : "";
+
+    const farViews = r.farViews && r.farViews.length ? `
+        <div class="totem-farviews">
+            <div class="totem-section-title">远观谱 · 不至而望</div>
+            ${r.farViews.map(v => `
+                <div class="totem-farview-item">
+                    <div class="fv-from"><span class="fv-era">${v.era || ""}</span><span class="fv-who">${v.from || ""}</span></div>
+                    <div class="fv-line">${v.line || ""}</div>
+                    ${v.source ? `<div class="fv-source">${v.source}</div>` : ""}
+                </div>
+            `).join("")}
+        </div>` : "";
+
+    modalBody.innerHTML = `
+        <div class="modal-header totem-header">
+            ${buildLandscape(r.theme, r.id)}
+            <div class="modal-title-block">
+                <div class="totem-mark">望山</div>
+                ${r.epithet ? `<div class="epithet-inline">· ${r.epithet} ·</div>` : ""}
+                <h2>${r.name}</h2>
+                <div class="meta totem-meta">📍 ${r.location}${r.bestSeason ? " · " + r.bestSeason : ""}</div>
+            </div>
+        </div>
+        <div class="modal-body totem-body">
+            ${totemQuote}
+
+            ${buildPoemScroll(r.poem, r.epithet, r.id)}
+
+            ${r.description ? `<p class="totem-desc">${r.description}</p>` : ""}
+
+            ${r.chronicle && r.chronicle.length ? buildChronicleScroll(r.chronicle, r.name) : ""}
+
+            ${r.shanjian && r.shanjian.length ? buildShanjianScroll(r.shanjian, r.name) : ""}
+
+            ${farViews}
+
+            ${r.tips ? `<div class="tip-box totem-tips"><strong>⚠️ 望山者识:</strong> ${r.tips}</div>` : ""}
+            ${r.lastUpdated ? `<div class="last-updated">📅 信息更新:${r.lastUpdated}</div>` : ""}
+
+            <button class="toggle-visited ${isVisited ? "is-visited" : ""}" id="visitedBtn">
+                ${isVisited ? "✓ 已仰望此山 — 取消标记" : "标记为已仰望(自动收录护照)"}
+            </button>
+
+            <div class="share-bar">
+                <button class="share-btn" id="shareCopy">🔗 复制此山链接</button>
+                <button class="share-btn" id="shareText">📋 复制望山文本</button>
+            </div>
+        </div>`;
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+    history.replaceState(null, "", `#route-${r.id}`);
+
+    $("visitedBtn").addEventListener("click", () => {
+        const wasVisited = state.visited.has(r.id);
+        if (wasVisited) {
+            state.visited.delete(r.id);
+            toast("已取消仰望标记");
+        } else {
+            state.visited.add(r.id);
+            STORE.addVisitLog(r.id, { date: todayStr(), note: "望" });
+            toast("已记此一望");
+            checkAchievement();
+        }
+        persistVisited();
+        render();
+        openTotemModal(r);
+    });
+
+    $("shareCopy").addEventListener("click", () => {
+        const url = `${location.origin}${location.pathname}#route-${r.id}`;
+        navigator.clipboard.writeText(url).then(() => toast("链接已复制"))
+            .catch(() => prompt("复制下方链接:", url));
+    });
+    $("shareText").addEventListener("click", () => {
+        const lines = [];
+        lines.push(`🏔️ 望山 · ${r.name}${r.epithet ? "(" + r.epithet + ")" : ""}`);
+        lines.push(`📍 ${r.location}`);
+        if (r.totem) lines.push(`\n【图腾】${r.totem.text}${r.totem.source ? "  —— " + r.totem.source : ""}`);
+        if (r.shanjian && r.shanjian.length) {
+            lines.push(`\n【山见】此山所见的人间:`);
+            r.shanjian.forEach(s => lines.push(`· ${s.name}${s.era ? "(" + s.era + ")" : ""}`));
+        }
+        lines.push(`\n—— 行山志 · 望山卷`);
+        const text = lines.join("\n");
+        navigator.clipboard.writeText(text).then(() => toast("望山文本已复制"))
+            .catch(() => prompt("复制下方文本:", text));
+    });
 }
 
 function openTextbookCard(routeId) {

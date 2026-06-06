@@ -283,6 +283,25 @@
             <path d="M -15 8 Q -10 -2 -6 -4 Q -2 -9 0 -6 Q 2 -10 6 -4 Q 10 -2 15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
             <path d="M -12 -1 q 4 -3 8 -1 q 4 -3 8 -1 q 4 -2 8 -1" fill="none" stroke="#fff5e0" stroke-width="1.4" opacity="0.85"/>
             <path d="M -10 3 q 4 -2 8 0 q 4 -2 8 0" fill="none" stroke="#fff5e0" stroke-width="1" opacity="0.7"/>`,
+        // 六盘山 · 长征「不到长城非好汉」 · 关山叠嶂 + 红旗
+        29: (fc, sc) => `
+            <path d="M -15 8 L -10 -2 L -5 -7 L 0 -3 L 5 -8 L 10 -2 L 15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -14 4 q 4 -3 8 0 q 4 -3 8 0 q 4 -2 8 0" stroke="${sc}" stroke-width="0.5" fill="none" opacity="0.55"/>
+            <rect x="0.4" y="-15" width="0.8" height="9" fill="${sc}"/>
+            <path d="M 1.2 -15 L 8 -13 L 1.2 -11 Z" fill="#b81d22" stroke="${sc}" stroke-width="0.4"/>
+            <path d="M 2.6 -13.6 L 3.8 -13.4 M 3 -12.8 L 4.2 -12.6" stroke="#d4a017" stroke-width="0.3"/>`,
+        // 乌蒙山 · 长征「乌蒙磅礴走泥丸」 · 磅礴叠嶂 + 红五角星
+        30: (fc, sc) => `
+            <path d="M -15 8 L -12 -1 L -8 -6 L -4 -2 L 0 -8 L 4 -2 L 8 -6 L 12 -1 L 15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -12 5 q 4 -2 8 0 q 4 -2 8 0 q 4 -2 8 0" stroke="${sc}" stroke-width="0.5" fill="none" opacity="0.55"/>
+            <path d="M 0 -15 L 1.6 -11.4 L 5.4 -11 L 2.6 -8.6 L 3.6 -5 L 0 -7 L -3.6 -5 L -2.6 -8.6 L -5.4 -11 L -1.6 -11.4 Z" fill="#b81d22" stroke="${sc}" stroke-width="0.4"/>`,
+        // 岷山 · 长征「更喜岷山千里雪」 · 千雪银峰 + 雪光
+        31: (fc, sc) => `
+            <path d="M -15 8 L -10 -4 L -6 -3 L -2 -12 L 2 -3 L 6 -10 L 10 -4 L 15 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
+            <path d="M -10 -4 L -6 -3 L -2 -8 L 2 -5 L 6 -10 L 10 -4" fill="#fff5e0" stroke="${sc}" stroke-width="0.5" opacity="0.92"/>
+            <path d="M -3 -10 L -1 -12 L 1 -10 M 4 -8 L 6 -10 L 8 -8" stroke="${sc}" stroke-width="0.4" fill="none" opacity="0.6"/>
+            <circle cx="-1" cy="-14" r="0.7" fill="#fff5e0" opacity="0.8"/>
+            <circle cx="6" cy="-12" r="0.5" fill="#fff5e0" opacity="0.7"/>`,
         // 龙冈 · 阳明洞 · 一山一洞一卷书
         34: (fc, sc) => `
             <path d="M -14 8 L -8 -3 L -2 -8 L 2 -8 L 8 -3 L 14 8 Z" fill="${fc}" stroke="${sc}" stroke-width="0.9" stroke-linejoin="round"/>
@@ -362,6 +381,9 @@
         17: ["武当桃源 · 太子坡前杏花开", "紫霄夏荫 · 道院蝉鸣松风冷", "金顶秋光 · 七十二峰朝大顶", "玄岳雪封 · 金殿一点夕阳红"],
         18: ["峨眉杜鹃 · 万年寺前花海春", "清音消暑 · 双桥流水洗尘心", "峨眉红叶 · 报国寺秋满千林", "金顶佛光 · 云海冬阳现圆轮"],
         19: ["终南桃林 · 翠华春深花满涧", "辋川夏风 · 摩诘旧居山水清", "终南秋云 · 行到水穷坐看时", "南五台雪 · 重阳宫外鹤归来"],
+        29: ["六盘春融 · 长城残墙杏花开", "六盘夏荫 · 关山驿道松涛凉", "六盘秋霜 · 红旗漫卷西风金", "六盘冬雪 · 不到长城非好汉"],
+        30: ["乌蒙春云 · 磅礴山间杜鹃红", "乌蒙夏雷 · 走泥丸处万山青", "乌蒙秋肃 · 磅礴叠嶂染金红", "乌蒙冬寒 · 千峰白雪走泥丸"],
+        31: ["岷山春融 · 千里雪化草甸青", "岷山夏凉 · 红军翻越雪峰青", "岷山秋净 · 更喜千雪映金光", "岷山冬寂 · 千里雪山三军过"],
         34: ["阳明洞春 · 龙场草青读《易》声", "何陋夏荫 · 君子亭凉竹风冷", "龙冈秋静 · 良知一悟天地清", "黔中冬寒 · 阳明洞中独立思"],
         35: ["宛委春深 · 阳明洞口紫藤垂", "会稽夏荫 · 飞来石下竹风长", "禹穴秋寒 · 阳明草庐石阶湿", "山阴冬寂 · 龙瑞残碑独自苍"],
         36: ["书院春讲 · 棂星门外杏花飞", "御书夏凉 · 朱子祠前古柏深", "白鹿秋读 · 阳明诗碑落叶斑", "学规冬厚 · 雪压礼圣殿瓦红"],
@@ -434,6 +456,8 @@
        ============================================================ */
     function buildXingrenTrail(peaks, opts) {
         if (currentFilter !== "xingren") return "";
+        const personKey = opts.personKey;
+        if (personKey && currentXingren !== "all" && currentXingren !== personKey) return "";
         const sequence = opts.sequence;
         const color    = opts.color    || "#c9402a";
         const sealFill = opts.sealFill || "#8a2818";
@@ -508,6 +532,7 @@
        ============================================================ */
     function buildYangmingTrail(peaks) {
         return buildXingrenTrail(peaks, {
+            personKey: "yangming",
             sequence: [
                 { id: 35, year: "1502", pith: "立名" },
                 { id: 34, year: "1508", pith: "立道" },
@@ -529,6 +554,7 @@
        ============================================================ */
     function buildXiakeTrail(peaks) {
         return buildXingrenTrail(peaks, {
+            personKey: "xiake",
             sequence: [
                 { id: 37, year: "1637", pith: "入南" },
                 { id: 38, year: "1638", pith: "量瀑" },
@@ -546,6 +572,28 @@
     }
 
     /* ============================================================
+       红色长征 · 党红串线(卷二十二)· 三山一万里
+       乌蒙(1935 春,云贵)→ 岷山(1935 秋,甘川)→ 六盘(1935 秋末,宁夏)
+       色用党红,与朱砂阳明、赭石霞客并立而不冲;dashSpec 短而紧,以见军行之骨
+       ============================================================ */
+    function buildMaoTrail(peaks) {
+        return buildXingrenTrail(peaks, {
+            personKey: "mao",
+            sequence: [
+                { id: 30, year: "1935", pith: "磅礴" },
+                { id: 31, year: "1935", pith: "千雪" },
+                { id: 29, year: "1935", pith: "长缨" }
+            ],
+            color:    "#b81d22",
+            sealFill: "#5a0a08",
+            sealEdge: "#2a0404",
+            dashSpec: "5 4",
+            anim:     "mh-trail",
+            aria:     "红色长征 · 三山一万里"
+        });
+    }
+
+    /* ============================================================
        山系分卷:按 region / id 段归属
        ============================================================ */
     const FILTERS = [
@@ -555,10 +603,12 @@
         { key: "hidden",   label: "隐山 · 访",   desc: "黄雁武峨终,五方气性" },
         { key: "textbook", label: "诗山 · 课本", desc: "课本所选,皆可亲行" },
         { key: "red",      label: "红色山志",   desc: "近百年立,长征所至" },
-        { key: "xingren",  label: "行人志",     desc: "以人观山,知行合一" }
+        { key: "xingren",  label: "行人志",     desc: "以人观山,知行合一" },
+        { key: "wangshan", label: "望山 · 仰",   desc: "城已没,山犹在,凭古文远望" }
     ];
 
     function categoryOf(route) {
+        if (route.region === "wangshan" || route.type === "totem") return "wangshan";
         if (route.region === "wuyue") return "wuyue";
         if (route.region === "hidden") {
             if (route.id >= 34) return "xingren";
@@ -571,6 +621,13 @@
     }
 
     let currentFilter = "all";
+    let currentXingren = "all";
+
+    window.setAtlasXingren = function (k) {
+        if (k === currentXingren) return;
+        currentXingren = k;
+        renderAtlas();
+    };
 
     /* ============================================================
        简化的力学避让
@@ -609,17 +666,39 @@
         if (!host) return;
 
         const list = (typeof routes !== "undefined" && Array.isArray(routes)) ? routes : [];
+        const xingrenAllIds = (window.XINGREN_ALL_IDS && window.XINGREN_ALL_IDS.length)
+            ? new Set(window.XINGREN_ALL_IDS) : null;
         const totalCounts = list.reduce((acc, r) => {
             if (!r.coords || typeof r.coords.lon !== "number") return acc;
             acc.all++;
             const c = categoryOf(r);
             acc[c] = (acc[c] || 0) + 1;
+            // 行人志卷计数:跨卷并入(长征三山虽属红色山,但行人志卷亦取之)
+            if (xingrenAllIds && xingrenAllIds.has(r.id) && c !== "xingren") {
+                acc.xingren = (acc.xingren || 0) + 1;
+            }
             return acc;
         }, { all: 0 });
 
-        const filteredList = currentFilter === "all"
-            ? list
-            : list.filter(r => categoryOf(r) === currentFilter);
+        let filteredList;
+        if (currentFilter === "all") {
+            filteredList = list;
+        } else if (currentFilter === "xingren") {
+            // 行人志卷:跨卷取山 — 长征三山(乌蒙/岷山/六盘)虽属红色山志,但行人志舆图须并见
+            const allXingrenIds = (window.XINGREN_ALL_IDS && window.XINGREN_ALL_IDS.length)
+                ? new Set(window.XINGREN_ALL_IDS) : null;
+            filteredList = list.filter(r => {
+                if (categoryOf(r) === "xingren") return true;
+                return allXingrenIds && allXingrenIds.has(r.id);
+            });
+            // 子分卷过滤:点了某一人卷钮则只见该人之山
+            if (currentXingren !== "all" && window.XINGREN_PERSON_IDS) {
+                const personIds = new Set(window.XINGREN_PERSON_IDS[currentXingren] || []);
+                filteredList = filteredList.filter(r => personIds.has(r.id));
+            }
+        } else {
+            filteredList = list.filter(r => categoryOf(r) === currentFilter);
+        }
 
         const peaks = filteredList
             .filter(r => r.coords && typeof r.coords.lon === "number" && typeof r.coords.lat === "number")
@@ -659,9 +738,10 @@
 
         const seaWaves = buildSeaWaves();
 
-        // 行人志 · 两道串线(阳明朱砂 + 霞客赭石,仅「行人志」卷钮亮时显)
+        // 行人志 · 三道串线(阳明朱砂 + 霞客赭石 + 毛党红,仅「行人志」卷钮亮时显)
         const yangmingTrailHtml = buildYangmingTrail(peaks);
         const xiakeTrailHtml    = buildXiakeTrail(peaks);
+        const maoTrailHtml      = buildMaoTrail(peaks);
 
         const peakNodes = peaks.map((node) => {
             const r = node.route;
@@ -814,6 +894,7 @@
                         <!-- 行人志串线(仅「行人志」卷钮亮时,置于山头之下) -->
                         ${yangmingTrailHtml}
                         ${xiakeTrailHtml}
+                        ${maoTrailHtml}
 
                         <!-- 山头 -->
                         <g class="atlas-peaks">${peakNodes}</g>
@@ -894,7 +975,7 @@
         // 行人志卷轴钩子:由 xingrenscroll.js 监听并注入横轴
         try {
             window.dispatchEvent(new CustomEvent("atlas:rendered", {
-                detail: { filter: currentFilter, list }
+                detail: { filter: currentFilter, xingren: currentXingren, list }
             }));
         } catch (_) {}
     }

@@ -138,8 +138,79 @@
                     line: "立《鸡足山志》四卷 · 中国第一部山志"
                 }
             ]
+        },
+        {
+            key: "mao",
+            name: "毛泽东",
+            fullName: "毛润之 · 字咏芝 · 号子任",
+            life: "1893 — 1976",
+            epithet: "万水千山 · 只等闲",
+            kernel: "红色长征 · 三山一万里",
+            role: "志主",
+            kernelSub: "一万二千里足下之路 · 立一国之志",
+            poem: {
+                title: "立卷诗",
+                lines: [
+                    "红军不怕远征难",
+                    "万水千山只等闲",
+                    "五岭逶迤腾细浪",
+                    "乌蒙磅礴走泥丸"
+                ],
+                author: "毛泽东 · 《七律 · 长征》"
+            },
+            prose: [
+                "**立人**:毛润之,1893 生于湖南湘潭韶山冲。1927 秋立井冈山红军;1934 十月,红军一方面军八万六千人自江西瑞金启程西行,二万五千里之长征始。1935 年遵义会议立其领,自此率红军翻山越岭、跨江过河、西征北上,1936 十月红军三大主力陕北会师,长征终。",
+                "**立志**:1935 二月,越乌蒙,「乌蒙磅礴走泥丸」 — 长征中段越南方屏障;1935 九月,入岷山,「更喜岷山千里雪」 — 红军第一座大雪山三军过尽;1935 十月,翻六盘,「不到长城非好汉,屈指行程二万」 — 长征收官,赤旗终至陕北。三山贯长征中后段一万里,皆润之亲历亲咏:七律·长征、忆秦娥·娄山关、清平乐·六盘山,皆诗皆志,皆山皆步。",
+                "**立行**:志主之于长征,非以书斋立志,亦非以山志校经,乃以**一万二千里足下之路立一国之志**。神主阳明立心学之心、形主霞客量大地之足、志主毛泽东立一国之志 — 心 / 形 / 志三主合,行人志「以足量大地、以心量山河、以志量天下」之骨自此而备。山志至此,卷二十二红色长征行卷立焉。"
+            ],
+            stations: [
+                {
+                    id: 30,
+                    yearNum: 1935,
+                    yearLabel: "1935 · 春",
+                    age: "四十二岁",
+                    place: "云贵 · 乌蒙山",
+                    pith: "磅礴",
+                    line: "乌蒙磅礴走泥丸 · 长征南段越屏障"
+                },
+                {
+                    id: 31,
+                    yearNum: 1935,
+                    yearLabel: "1935 · 秋",
+                    age: "四十二岁",
+                    place: "甘川 · 岷山",
+                    pith: "千雪",
+                    line: "更喜岷山千里雪 · 三军过后尽开颜"
+                },
+                {
+                    id: 29,
+                    yearNum: 1935,
+                    yearLabel: "1935 · 秋末",
+                    age: "四十二岁",
+                    place: "宁夏 · 六盘山",
+                    pith: "长缨",
+                    line: "今日长缨在手 · 何时缚住苍龙"
+                }
+            ]
         }
     ];
+
+    /* ------------------------------------------------------------
+       行人 ↔ 山号映射(供 atlas.js 跨卷取山 + 子分卷过滤)
+       ------------------------------------------------------------ */
+    const XINGREN_PERSON_IDS = (function () {
+        const map = {};
+        // 由上方 XINGREN_LIST 静态生成 — 每次 list 改动皆自动更新
+        // 但 XINGREN_LIST 在此函数前已立,可直接读
+        return map;
+    })();
+    // 立即填充(因 XINGREN_LIST 已在上方定义)
+    XINGREN_LIST.forEach(r => {
+        XINGREN_PERSON_IDS[r.key] = r.stations.map(s => s.id);
+    });
+    const XINGREN_ALL_IDS = Object.values(XINGREN_PERSON_IDS).flat();
+    window.XINGREN_PERSON_IDS = XINGREN_PERSON_IDS;
+    window.XINGREN_ALL_IDS    = XINGREN_ALL_IDS;
 
     /* ------------------------------------------------------------
        王阳明 · 古风线描立像(SVG 内联)
@@ -350,8 +421,134 @@
     }
 
     function buildPortrait(key) {
-        if (key === "xiake")    return buildXiakePortrait();
+        if (key === "xiake") return buildXiakePortrait();
+        if (key === "mao")   return buildMaoPortrait();
         return buildYangmingPortrait();
+    }
+
+    /* ------------------------------------------------------------
+       毛泽东 · 古风线描立像(SVG 内联)· 长征装
+       八角帽红星 · 灰布军装 · 左手叉腰 · 右手指远 · 远山雪峰为背
+       与阳明「静而立学」、霞客「动而行其形」对照 —— 毛「立而望远」
+       ------------------------------------------------------------ */
+    function buildMaoPortrait() {
+        return `
+        <svg class="xingren-portrait" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg" aria-label="毛泽东 长征立像">
+            <defs>
+                <linearGradient id="xrMaoUniform" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#7d8a8e"/>
+                    <stop offset="50%" stop-color="#5a6a72"/>
+                    <stop offset="100%" stop-color="#3a4850"/>
+                </linearGradient>
+                <radialGradient id="xrMaoHalo" cx="0.5" cy="0.5" r="0.55">
+                    <stop offset="0%" stop-color="#fff5e0" stop-opacity="0.55"/>
+                    <stop offset="100%" stop-color="#fff5e0" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="xrMaoSky" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#d4a87a" stop-opacity="0.55"/>
+                    <stop offset="100%" stop-color="#8a3a1a" stop-opacity="0.18"/>
+                </linearGradient>
+            </defs>
+
+            <!-- 后景:朝霞远山雪峰(长征所历) -->
+            <rect x="0" y="160" width="200" height="80" fill="url(#xrMaoSky)" opacity="0.6"/>
+            <path d="M 0 222 L 24 188 L 46 210 L 72 180 L 100 214 L 130 178 L 158 208 L 184 184 L 200 200 L 200 280 L 0 280 Z" fill="#5a6a72" opacity="0.22"/>
+            <!-- 雪峰一痕(岷山千里雪) -->
+            <path d="M 60 198 L 78 176 L 92 196 L 76 198 Z" fill="#fff5e0" opacity="0.7"/>
+            <path d="M 130 200 L 148 178 L 162 202 L 144 204 Z" fill="#fff5e0" opacity="0.6"/>
+            <!-- 远红旗一抹 -->
+            <path d="M 168 168 L 184 164 L 184 174 L 168 178 Z" fill="#b81d22" opacity="0.55"/>
+            <line x1="168" y1="166" x2="168" y2="200" stroke="#3a2818" stroke-width="0.7" opacity="0.55"/>
+
+            <!-- 头部光晕 -->
+            <circle cx="98" cy="68" r="40" fill="url(#xrMaoHalo)"/>
+
+            <!-- 八角帽(红军帽) + 红星 -->
+            <path d="M 70 50 L 126 50 L 130 60 L 124 64 L 72 64 L 66 60 Z" fill="#5a6a72" stroke="#1a1208" stroke-width="0.9"/>
+            <!-- 帽顶八角形 -->
+            <path d="M 76 50 L 78 42 L 86 38 L 96 36 L 106 38 L 114 42 L 116 50 Z" fill="#5a6a72" stroke="#1a1208" stroke-width="0.9"/>
+            <!-- 帽檐 -->
+            <path d="M 66 60 Q 96 70 130 60 L 128 66 Q 96 74 68 66 Z" fill="#3a4850" stroke="#1a1208" stroke-width="0.7"/>
+            <!-- 红五角星 -->
+            <g transform="translate(96 47)">
+                <path d="M 0 -6 L 1.5 -2 L 5.5 -2 L 2.3 0.5 L 3.5 4.5 L 0 2 L -3.5 4.5 L -2.3 0.5 L -5.5 -2 L -1.5 -2 Z" fill="#b81d22" stroke="#5a0a08" stroke-width="0.4"/>
+            </g>
+
+            <!-- 面部 · 微微抬头望远 -->
+            <path d="M 78 64 Q 76 92 84 110 Q 92 122 98 124 Q 104 122 112 110 Q 120 92 118 64 Z" fill="#e8c8a0" stroke="#3a2818" stroke-width="0.9"/>
+
+            <!-- 眉(略浓有力) -->
+            <path d="M 82 76 q 5 -3 11 0" stroke="#1a1208" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+            <path d="M 104 76 q 5 -3 11 0" stroke="#1a1208" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+
+            <!-- 目(眼向远) -->
+            <ellipse cx="87" cy="83" rx="1.6" ry="1.1" fill="#1a1208"/>
+            <ellipse cx="109" cy="83" rx="1.6" ry="1.1" fill="#1a1208"/>
+
+            <!-- 鼻 -->
+            <path d="M 98 83 Q 97 96 94 102 Q 98 105 102 102 Q 99 96 98 83" fill="none" stroke="#3a2818" stroke-width="0.7"/>
+
+            <!-- 唇(微抿,有定见) -->
+            <path d="M 92 110 Q 98 113 104 110" stroke="#5a2818" stroke-width="0.9" fill="none" stroke-linecap="round"/>
+
+            <!-- 颌下痣(右下,润之之识) -->
+            <circle cx="105" cy="116" r="0.9" fill="#3a2818"/>
+
+            <!-- 肩颈 -->
+            <path d="M 84 122 Q 90 132 98 134 Q 108 132 114 122" fill="#e8c8a0" stroke="#3a2818" stroke-width="0.8"/>
+
+            <!-- 中山领(立领,长征军装) -->
+            <path d="M 74 152 L 78 142 Q 98 140 118 142 L 122 152 L 98 156 Z" fill="#5a6a72" stroke="#1a1208" stroke-width="0.9"/>
+            <line x1="98" y1="142" x2="98" y2="172" stroke="#1a1208" stroke-width="0.7"/>
+            <!-- 双胸袋 -->
+            <rect x="78" y="172" width="14" height="12" fill="none" stroke="#1a1208" stroke-width="0.6"/>
+            <rect x="104" y="172" width="14" height="12" fill="none" stroke="#1a1208" stroke-width="0.6"/>
+            <!-- 袋扣 -->
+            <circle cx="85" cy="172" r="0.8" fill="#1a1208"/>
+            <circle cx="111" cy="172" r="0.8" fill="#1a1208"/>
+
+            <!-- 衣身(灰布军装) -->
+            <path d="M 64 168 Q 58 220 58 268 L 138 268 Q 138 220 132 168 Q 124 158 114 156 L 82 156 Q 72 158 64 168 Z" fill="url(#xrMaoUniform)" stroke="#1a1208" stroke-width="1"/>
+
+            <!-- 衣纹 -->
+            <path d="M 78 196 Q 80 230 76 264" stroke="#1a1208" stroke-width="0.7" fill="none" opacity="0.55"/>
+            <path d="M 98 168 Q 98 220 98 268" stroke="#1a1208" stroke-width="0.6" fill="none" opacity="0.5"/>
+            <path d="M 118 196 Q 116 230 120 264" stroke="#1a1208" stroke-width="0.7" fill="none" opacity="0.55"/>
+
+            <!-- 武装带(长征军装显著识别) -->
+            <rect x="60" y="206" width="80" height="4" fill="#3a2818" stroke="#1a1208" stroke-width="0.6"/>
+            <rect x="96" y="204" width="6" height="8" fill="#a89060" stroke="#1a1208" stroke-width="0.5"/>
+            <!-- 斜挎武装带过左肩 -->
+            <path d="M 60 168 L 138 210" stroke="#3a2818" stroke-width="2.4" opacity="0.78"/>
+            <path d="M 60 168 L 138 210" stroke="#a89060" stroke-width="0.6" opacity="0.6"/>
+
+            <!-- 左袖(自然下垂,手叉腰) -->
+            <path d="M 64 168 Q 50 200 48 240 Q 54 246 64 240 Q 64 210 72 188 Z" fill="url(#xrMaoUniform)" stroke="#1a1208" stroke-width="0.8"/>
+            <ellipse cx="56" cy="240" rx="6" ry="5" fill="#e8c8a0" stroke="#3a2818" stroke-width="0.7"/>
+
+            <!-- 右袖(向前略举,持军报/七律) -->
+            <path d="M 138 168 Q 158 196 162 226 Q 156 234 144 230 Q 142 200 130 184 Z" fill="url(#xrMaoUniform)" stroke="#1a1208" stroke-width="0.8"/>
+            <ellipse cx="152" cy="228" rx="6" ry="5" fill="#e8c8a0" stroke="#3a2818" stroke-width="0.7"/>
+            <!-- 军报《七律 · 长征》纸卷 -->
+            <rect x="146" y="222" width="14" height="14" fill="#fff5e0" stroke="#5a3a1a" stroke-width="0.7"/>
+            <path d="M 148 226 L 158 226 M 148 229 L 158 229 M 148 232 L 156 232" stroke="#5a3a1a" stroke-width="0.4"/>
+            <rect x="146" y="222" width="14" height="2" fill="#b81d22" stroke="#5a3a1a" stroke-width="0.5"/>
+
+            <!-- 红印于胸前 · 一颗五角星(立志) -->
+            <g transform="translate(98 192)" opacity="0.78">
+                <rect x="-9" y="-9" width="18" height="18" fill="#b81d22" stroke="#fff5e0" stroke-width="0.6" rx="1"/>
+                <path d="M 0 -5.5 L 1.4 -1.8 L 5 -1.8 L 2.1 0.6 L 3.2 4.2 L 0 1.9 L -3.2 4.2 L -2.1 0.6 L -5 -1.8 L -1.4 -1.8 Z" fill="#fff5e0"/>
+            </g>
+
+            <!-- 草鞋(长征军中草鞋) -->
+            <ellipse cx="80" cy="280" rx="13" ry="3" fill="#5a3a1a" stroke="#1a1208" stroke-width="0.6"/>
+            <ellipse cx="118" cy="280" rx="13" ry="3" fill="#5a3a1a" stroke="#1a1208" stroke-width="0.6"/>
+            <path d="M 70 280 L 90 280 M 110 280 L 128 280" stroke="#3a2818" stroke-width="0.4"/>
+            <path d="M 73 278 L 89 278 M 109 278 L 127 278" stroke="#a89060" stroke-width="0.4" opacity="0.6"/>
+
+            <!-- 立地 -->
+            <ellipse cx="98" cy="290" rx="48" ry="3" fill="#1a1208" opacity="0.4"/>
+        </svg>`;
     }
 
     /* ------------------------------------------------------------
@@ -382,7 +579,28 @@
     }
 
     /* ------------------------------------------------------------
-       渲染主函数 · 注入卷轴到舆图上方(支持多人叠卷)
+       行人志子分卷状态(全部 / 阳明 / 霞客 / 志主)
+       ------------------------------------------------------------ */
+    let currentXingren = "all";
+
+    function buildSubTabs() {
+        const tabs = [
+            { key: "all",       label: "全部",   sub: "三主并立" },
+            { key: "yangming",  label: "阳明",   sub: "神主 · 立心" },
+            { key: "xiake",     label: "霞客",   sub: "形主 · 立形" },
+            { key: "mao",       label: "志主",   sub: "毛 · 立志" }
+        ];
+        return `<div class="xs-subtabs" role="tablist" aria-label="行人志子分卷">
+            ${tabs.map(t => `
+            <button type="button" class="xs-subtab xs-subtab-${t.key} ${currentXingren === t.key ? "is-active" : ""}" data-subtab="${t.key}" role="tab" aria-selected="${currentXingren === t.key}">
+                <span class="xst-label">${t.label}</span>
+                <span class="xst-sub">${t.sub}</span>
+            </button>`).join("")}
+        </div>`;
+    }
+
+    /* ------------------------------------------------------------
+       渲染主函数 · 注入卷轴到舆图上方(支持多人叠卷 + 子分卷)
        ------------------------------------------------------------ */
     function renderXingrenScroll(detail) {
         const sec = document.getElementById("atlasSection");
@@ -400,15 +618,27 @@
         wrap.id = "xingrenScroll";
         wrap.className = "xingren-scroll xingren-stack";
 
-        // 总骨题首
+        const subTitleMap = {
+            all:      "三主并立 · 心 / 形 / 志合骨",
+            yangming: "神主 · 阳明卷 · 一山一悟",
+            xiake:    "形主 · 霞客卷 · 西南绝笔",
+            mao:      "志主 · 长征卷 · 一万二千里"
+        };
+
         wrap.innerHTML = `
             <div class="xs-stack-head">
-                <div class="xs-stack-title">行人志 · 二卷并立</div>
-                <div class="xs-stack-sub">形主霞客以足登山 · 神主阳明以心登山 — 一身而二魂,知行合一</div>
+                <div class="xs-stack-title">行人志 · 三卷并立</div>
+                <div class="xs-stack-sub">心主阳明 · 形主霞客 · 志主毛 — 一身而三魂,知行合一</div>
             </div>
+            ${buildSubTabs()}
+            <div class="xs-current-sub">${subTitleMap[currentXingren] || subTitleMap.all}</div>
         `;
 
-        XINGREN_LIST.forEach(ren => {
+        const visibleList = currentXingren === "all"
+            ? XINGREN_LIST
+            : XINGREN_LIST.filter(r => r.key === currentXingren);
+
+        visibleList.forEach(ren => {
             const portrait = buildPortrait(ren.key);
             const dots = buildStationDots(ren.stations, routes, ren.key);
             const proseHtml = ren.prose.map(p => `<p>${p.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")}</p>`).join("");
@@ -451,6 +681,21 @@
             sec.appendChild(wrap);
         }
 
+        // 子分卷钮:点之即换 currentXingren,通知 atlas 重画并联动
+        wrap.querySelectorAll(".xs-subtab").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const k = btn.getAttribute("data-subtab");
+                if (k === currentXingren) return;
+                currentXingren = k;
+                if (typeof window.setAtlasXingren === "function") {
+                    window.setAtlasXingren(k);
+                } else if (typeof window.renderAtlas === "function") {
+                    window.renderAtlas();
+                }
+            });
+        });
+
+        // 珠链跳转
         wrap.querySelectorAll(".xs-station").forEach(li => {
             const id = parseInt(li.getAttribute("data-id"), 10);
             const exists = routes.some(r => r.id === id);
@@ -465,6 +710,9 @@
             });
         });
     }
+
+    // 暴露给 atlas.js 读取(舆图也据此过滤山头与串线)
+    window.getXingrenSubFilter = function () { return currentXingren; };
 
     window.addEventListener("atlas:rendered", e => {
         renderXingrenScroll(e.detail || {});

@@ -429,7 +429,7 @@ const YANZHAO_SPIRIT_BY_ROUTE = {
     4: { name: "磅礴", icon: "雄", refPerson: "乐毅",    line: "下齐七十二城",         desc: "丹崖三栈,有大将之气。" },
     5: { name: "遗韵", icon: "怀", refPerson: "崇祯",    line: "君王死社稷",           desc: "明末行宫遗址,皇家气息依存,亦有亡国之托。" },
     6: { name: "包容", icon: "和", refPerson: "蔺相如", line: "将相和",               desc: "五岳并立,如廉颇蔺相如,各有其位而不争。" },
-    7: { name: "担当", icon: "担", refPerson: "毛主席", line: "敢教日月换新天",       desc: "新中国从此处出发,运筹之意延续千年。" },
+    7: { name: "担当", icon: "担", refPerson: "毛润之", line: "敢教日月换新天",       desc: "新中国从此处出发,运筹之意延续千年。" },
     8: { name: "快意", icon: "义", refPerson: "聂政",   line: "士为知己者死",         desc: "藤龙飞拉达,有刺秦之快。" },
     9: { name: "孤勇", icon: "独", refPerson: "豫让",   line: "国士遇我,国士报之",   desc: "野山独行,无人共往,正合燕赵孤勇之风。" }
 };
