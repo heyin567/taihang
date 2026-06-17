@@ -6,7 +6,7 @@
    - 版本号变更即触发更新
    ============================================================ */
 
-const VERSION = "th-v2.6.0";
+const VERSION = "th-v2.7.0";
 const CORE_CACHE = `${VERSION}-core`;
 const FONT_CACHE = `${VERSION}-font`;
 
@@ -27,6 +27,7 @@ const CORE_ASSETS = [
     "./yearscroll.js",
     "./textbook.js",
     "./admin.js",
+    "./banshan.js",
     "./manifest.json"
 ];
 
