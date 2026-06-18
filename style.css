@@ -7244,6 +7244,8 @@ body.admin-on { padding-top: 56px; }
 .shanju-cloud { will-change: transform; }
 .shanju-cloud.sc1 { animation: shanju-cloud-drift 540s linear infinite; }
 .shanju-cloud.sc2 { animation: shanju-cloud-drift 780s linear infinite reverse; }
+.shanju-cloud.sc3 { animation: shanju-cloud-drift 360s linear infinite; }
+.shanju-cloud.sc4 { animation: shanju-cloud-drift 480s linear infinite reverse; }
 
 .shanju-banner {
     position: absolute;
@@ -7314,11 +7316,54 @@ body.shanju-on .modal[style*="display:block"] .modal-content {
     font-family: "FangSong","STFangsong","KaiTi",serif;
 }
 .shanju-figure {
-    width: 110px;
+    width: 150px;
     height: auto;
     flex-shrink: 0;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.45));
 }
+
+/* 高士微动:衣袂、长须、头巾飘带、烟云、约 90 秒抬头一次 */
+@keyframes shanju-body-sway {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50%      { transform: translate(0.5px, -0.4px) rotate(0.3deg); }
+}
+@keyframes shanju-beard-drift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50%      { transform: translate(1.2px, 0.4px) rotate(1.2deg); }
+}
+@keyframes shanju-ribbon-drift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50%      { transform: translate(-1.5px, 0.6px) rotate(-1.6deg); }
+}
+@keyframes shanju-rsleeve-drift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50%      { transform: translate(0.6px, 0.3px) rotate(0.5deg); }
+}
+@keyframes shanju-lsleeve-drift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50%      { transform: translate(-0.8px, 0.3px) rotate(-0.5deg); }
+}
+@keyframes shanju-head-glance {
+    0%, 88%, 100% { transform: translate(0, 0) rotate(0deg); }
+    92%           { transform: translate(0.5px, -1.5px) rotate(-1.8deg); }
+    96%           { transform: translate(0.4px, -1.2px) rotate(-1.4deg); }
+}
+@keyframes shanju-fig-mist {
+    0%   { transform: translate(0, 0); opacity: 0.45; }
+    50%  { transform: translate(8px, -6px); opacity: 0.75; }
+    100% { transform: translate(16px, -12px); opacity: 0; }
+}
+
+.shanju-fig-body    { animation: shanju-body-sway 8.5s ease-in-out infinite; transform-origin: center bottom; }
+.shanju-fig-beard   { animation: shanju-beard-drift 6s ease-in-out infinite; transform-origin: 146px 148px; }
+.shanju-fig-ribbon  { animation: shanju-ribbon-drift 7s ease-in-out infinite; transform-origin: 116px 108px; }
+.shanju-fig-rsleeve { animation: shanju-rsleeve-drift 9s ease-in-out infinite; transform-origin: 160px 184px; }
+.shanju-fig-lsleeve { animation: shanju-lsleeve-drift 10s ease-in-out infinite; transform-origin: 96px 196px; }
+.shanju-fig-head    { animation: shanju-head-glance 90s ease-in-out infinite; transform-origin: 132px 156px; }
+.qm                 { animation: shanju-fig-mist 11s ease-out infinite; transform-origin: center; }
+.qm.qm2             { animation-delay: 3.5s; }
+.qm.qm3             { animation-delay: 7s; }
+
 .shanju-persona-info {
     flex: 1;
     min-width: 0;

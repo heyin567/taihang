@@ -12,8 +12,8 @@
         zhongnan: {
             id: "zhongnan",
             name: "终南",
-            sky: { from: "#d8c08a", mid: "#b89a6a", to: "#5a4c34" },
-            mountainColors: { far: "#8a7c5a", mid: "#5a4e36", near: "#2a2418" },
+            sky: { from: "#cec4ac", mid: "#a89a82", to: "#3a3428" },
+            mountainColors: { far: "#9aa0a4", mid: "#54544a", near: "#1c1c14" },
             mountainPaths: {
                 far:  "M0 290 Q 100 240 220 260 T 460 255 T 700 265 T 940 250 T 1200 260 L 1200 480 L 0 480 Z",
                 mid:  "M0 360 Q 140 310 280 330 T 580 325 T 880 335 T 1200 330 L 1200 480 L 0 480 Z",
@@ -60,37 +60,101 @@
 
     function figureWangwei() {
         return `
-        <svg class="shanju-figure" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <g stroke="#3a2a18" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M 26 248 Q 100 240 174 248 L 174 272 L 26 272 Z" fill="#a89070"/>
-                <path d="M 50 252 Q 100 248 150 252" stroke-width="0.8"/>
-                <path d="M 36 258 Q 100 254 164 258" stroke-width="0.6"/>
+        <svg class="shanju-figure" viewBox="0 0 240 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+                <radialGradient id="qiyun" cx="0.5" cy="0.5" r="0.5">
+                    <stop offset="0%" stop-color="#f5ecd9" stop-opacity="0.55"/>
+                    <stop offset="100%" stop-color="#f5ecd9" stop-opacity="0"/>
+                </radialGradient>
+            </defs>
 
-                <path d="M 76 60 Q 100 28 124 60 Q 132 70 124 82 L 76 82 Q 68 70 76 60 Z" fill="#2a2418" stroke-width="1.2"/>
-                <path d="M 84 50 Q 100 42 116 50" stroke-width="0.8"/>
-                <path d="M 100 28 Q 100 18 110 12" stroke-width="0.8"/>
+            <!-- 身侧烟云,从地表升起 -->
+            <g class="shanju-figmist">
+                <ellipse class="qm qm1" cx="40" cy="262" rx="48" ry="10" fill="url(#qiyun)"/>
+                <ellipse class="qm qm2" cx="200" cy="270" rx="56" ry="12" fill="url(#qiyun)"/>
+                <ellipse class="qm qm3" cx="120" cy="278" rx="78" ry="9"  fill="url(#qiyun)"/>
+            </g>
 
-                <path d="M 80 82 Q 78 96 86 112 Q 100 124 114 112 Q 122 96 120 82" fill="#f0d8b0" stroke-width="1.2"/>
-                <path d="M 89 96 Q 91 97 93 96" stroke-width="0.9"/>
-                <path d="M 107 96 Q 109 97 111 96" stroke-width="0.9"/>
-                <path d="M 100 102 L 100 108" stroke-width="0.7"/>
-                <path d="M 94 113 Q 100 116 106 113" stroke-width="0.7"/>
-                <path d="M 90 116 Q 92 124 90 132" stroke-width="0.7" stroke="#5a4838"/>
-                <path d="M 110 116 Q 108 124 110 132" stroke-width="0.7" stroke="#5a4838"/>
+            <g stroke="#1a1408" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <!-- 坐石:三笔大写意,墨色不匀 -->
+                <path d="M 60 280 Q 80 244 130 240 Q 184 238 200 268 Q 196 290 60 290 Z" fill="#5a5246" stroke="#2a2418" stroke-width="1.6"/>
+                <path d="M 76 268 Q 100 256 130 254" stroke="#1a1408" stroke-width="0.7" fill="none"/>
+                <path d="M 150 252 Q 168 256 188 268" stroke="#1a1408" stroke-width="0.7" fill="none"/>
+                <path d="M 110 282 L 128 282" stroke="#1a1408" stroke-width="0.6" fill="none"/>
 
-                <path d="M 58 112 Q 46 134 52 184 Q 46 218 64 248 L 136 248 Q 154 218 148 184 Q 154 134 142 112 Q 122 100 100 100 Q 78 100 58 112 Z" fill="#e8d8b8" stroke-width="1.4"/>
+                <!-- 整体:头/身/袖/裾,3/4 侧身朝右(向山)。group 整体随风微摆 -->
+                <g class="shanju-fig-body">
 
-                <path d="M 70 142 Q 100 148 130 142" stroke-width="0.8" stroke="#8a7858"/>
-                <path d="M 65 178 Q 100 184 135 178" stroke-width="0.8" stroke="#8a7858"/>
-                <path d="M 70 214 Q 100 220 130 214" stroke-width="0.8" stroke="#8a7858"/>
-                <path d="M 86 120 L 92 240" stroke-width="0.6" stroke="#a8957a"/>
-                <path d="M 114 120 L 108 240" stroke-width="0.6" stroke="#a8957a"/>
+                    <!-- 长袍裾摆,从坐石向左铺开 -->
+                    <g class="shanju-fig-robe">
+                        <path d="M 76 256 Q 60 244 56 220 Q 60 200 80 188 Q 96 178 116 178 L 156 178 Q 174 184 184 200 Q 192 220 188 244 Q 184 258 174 264 L 76 264 Z"
+                              fill="#e8dcc0" stroke="#1a1408" stroke-width="1.4"/>
+                        <!-- 袍上墨纹:衣折数笔 -->
+                        <path d="M 96 192 Q 90 220 88 252" stroke="#5a4838" stroke-width="0.8" fill="none"/>
+                        <path d="M 124 184 Q 124 220 122 256" stroke="#5a4838" stroke-width="0.8" fill="none"/>
+                        <path d="M 156 184 Q 158 220 162 256" stroke="#5a4838" stroke-width="0.8" fill="none"/>
+                        <!-- 衣领斜纹:右领压左领 -->
+                        <path d="M 116 178 Q 130 188 142 178 L 156 178 L 152 196 L 130 198 L 122 188 Z" fill="#3a2a18" stroke="#1a1408" stroke-width="1.0"/>
+                        <!-- 腰带 -->
+                        <path d="M 80 218 Q 130 222 184 218" stroke="#3a2a18" stroke-width="2.5" fill="none"/>
+                        <path d="M 140 222 Q 150 240 144 256" stroke="#3a2a18" stroke-width="1.2" fill="none"/>
+                    </g>
 
-                <path d="M 56 132 L 42 150 L 54 168 L 72 154 Z" fill="#d8c098" stroke-width="1.2"/>
-                <path d="M 144 132 L 158 150 L 146 168 L 128 154 Z" fill="#d8c098" stroke-width="1.2"/>
+                    <!-- 右袖与右手,前伸略下垂 -->
+                    <g class="shanju-fig-rsleeve">
+                        <path d="M 160 184 Q 196 192 218 212 Q 220 226 210 232 Q 196 238 188 226 Q 172 208 160 196 Z"
+                              fill="#e8dcc0" stroke="#1a1408" stroke-width="1.4"/>
+                        <path d="M 178 196 Q 196 210 210 224" stroke="#5a4838" stroke-width="0.7" fill="none"/>
+                        <!-- 露出的手:撑石 -->
+                        <path d="M 210 232 Q 218 234 222 240 L 218 248 L 210 244 Z" fill="#f0d8b0" stroke="#1a1408" stroke-width="0.9"/>
+                    </g>
 
-                <path d="M 70 222 Q 76 232 84 232 L 96 228" stroke-width="1.2" fill="#f0d8b0"/>
-                <path d="M 130 222 Q 124 232 116 232 L 104 228" stroke-width="1.2" fill="#f0d8b0"/>
+                    <!-- 左袖搭膝,袖口往内卷 -->
+                    <g class="shanju-fig-lsleeve">
+                        <path d="M 96 196 Q 80 220 70 250 Q 80 256 92 250 Q 104 232 110 208 Z"
+                              fill="#e8dcc0" stroke="#1a1408" stroke-width="1.4"/>
+                        <path d="M 90 210 Q 84 232 78 246" stroke="#5a4838" stroke-width="0.7" fill="none"/>
+                    </g>
+
+                    <!-- 头部:3/4 侧身,面朝右上(望山方向) -->
+                    <g class="shanju-fig-head">
+                        <!-- 颈 -->
+                        <path d="M 124 168 Q 128 178 132 184" stroke="#1a1408" stroke-width="1.2" fill="none"/>
+                        <!-- 头形:3/4 侧 -->
+                        <path d="M 110 130 Q 110 100 128 92 Q 152 88 160 110 Q 162 138 152 150 Q 138 160 124 156 Q 114 148 110 130 Z"
+                              fill="#f0d8b0" stroke="#1a1408" stroke-width="1.3"/>
+
+                        <!-- 五官:侧脸所见 -->
+                        <!-- 眉 -->
+                        <path d="M 134 116 Q 140 113 146 116" stroke="#1a1408" stroke-width="1.0" fill="none"/>
+                        <!-- 眼:微闭,长一笔 -->
+                        <path d="M 134 122 Q 140 121 146 124" stroke="#1a1408" stroke-width="0.9" fill="none"/>
+                        <!-- 鼻:侧面外缘 -->
+                        <path d="M 152 120 Q 158 128 154 136" stroke="#1a1408" stroke-width="0.9" fill="none"/>
+                        <!-- 嘴:微抿 -->
+                        <path d="M 142 142 Q 146 144 150 142" stroke="#1a1408" stroke-width="0.8" fill="none"/>
+                        <!-- 耳 -->
+                        <path d="M 116 130 Q 112 134 116 142" stroke="#1a1408" stroke-width="0.8" fill="none"/>
+
+                        <!-- 长须:垂至胸前,会随风动 -->
+                        <g class="shanju-fig-beard">
+                            <path d="M 142 148 Q 138 162 134 178 Q 132 188 134 196" stroke="#3a2a18" stroke-width="1.0" fill="none"/>
+                            <path d="M 146 148 Q 146 168 144 188 Q 144 198 146 204" stroke="#3a2a18" stroke-width="1.0" fill="none"/>
+                            <path d="M 150 150 Q 152 168 152 184" stroke="#3a2a18" stroke-width="0.9" fill="none"/>
+                        </g>
+
+                        <!-- 头巾:东坡巾式,顶有一折 -->
+                        <path d="M 108 100 Q 110 78 132 70 Q 156 70 166 90 Q 168 104 160 116 Q 158 100 152 94 L 138 92 Q 124 92 116 98 Q 110 106 110 116 Q 106 112 108 100 Z"
+                              fill="#2a2418" stroke="#1a1408" stroke-width="1.2"/>
+                        <path d="M 132 70 L 140 64 L 148 70" stroke="#1a1408" stroke-width="0.9" fill="#1a1408"/>
+
+                        <!-- 头巾飘带,从脑后垂下 -->
+                        <g class="shanju-fig-ribbon">
+                            <path d="M 116 108 Q 102 118 96 138 Q 94 156 100 166" stroke="#1a1408" stroke-width="1.0" fill="none"/>
+                            <path d="M 114 112 Q 100 122 94 142 Q 92 160 98 170" stroke="#3a2a18" stroke-width="0.7" fill="none"/>
+                        </g>
+                    </g>
+                </g>
             </g>
         </svg>`;
     }
@@ -128,6 +192,10 @@
                     <path class="shanju-cloud sc2" d="M -200 280 Q 100 260 400 280 T 1000 280 T 1500 280 L 1500 305 L -200 305 Z" fill="#ffffff" opacity="0.10"/>
                 </g>
                 <g opacity="0.78"><path d="${data.mountainPaths.far}"  fill="${data.mountainColors.far}"/></g>
+                <g class="shanju-yunhai">
+                    <path class="shanju-cloud sc3" d="M -200 320 Q 80 296 280 312 T 600 308 T 920 314 T 1240 308 T 1500 312 L 1500 345 L -200 345 Z" fill="#f0e8d4" opacity="0.42"/>
+                    <path class="shanju-cloud sc4" d="M -200 340 Q 120 318 320 334 T 700 328 T 1080 336 T 1500 332 L 1500 360 L -200 360 Z" fill="#e8e0c8" opacity="0.28"/>
+                </g>
                 <g opacity="0.92"><path d="${data.mountainPaths.mid}"  fill="${data.mountainColors.mid}"/></g>
                 <g><path d="${data.mountainPaths.near}" fill="${data.mountainColors.near}"/></g>
                 <g class="shanju-pine" transform="translate(160, 320)" opacity="0.85">
